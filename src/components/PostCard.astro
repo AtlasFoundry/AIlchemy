@@ -1,0 +1,95 @@
+---
+interface Props {
+  title: string;
+  category: 'guide' | 'prompt' | 'demo' | 'pma';
+  summary: string;
+  date: Date;
+  readTime: string;
+  slug: string;
+  dark?: boolean;
+}
+
+const { title, category, summary, date, readTime, slug, dark = false } = Astro.props;
+
+const categoryLabels: Record<string, string> = {
+  guide: 'Guide',
+  prompt: 'Prompt',
+  demo: 'Demo',
+  pma: 'PMA',
+};
+
+const meta = `${categoryLabels[category]} · ${readTime}`;
+---
+
+<a href={`/posts/${slug}`} class:list={['post-card', { dark }]}>
+  <div class="post-meta">{meta}</div>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+</a>
+
+<style>
+  .post-card {
+    display: block;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.8rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .post-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--pink-light);
+  }
+
+  /* Light variant (Library page) */
+  .post-card:not(.dark) {
+    background: white;
+    border: 1px solid rgba(232, 75, 138, 0.08);
+    box-shadow: none;
+  }
+
+  .post-card:not(.dark):hover {
+    background: white;
+    box-shadow: 0 8px 32px rgba(15, 26, 46, 0.06);
+    border-color: rgba(232, 75, 138, 0.2);
+  }
+
+  .post-meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--pink-light);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+
+  .post-card:not(.dark) .post-meta {
+    color: var(--pink);
+  }
+
+  .post-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: white;
+    line-height: 1.35;
+  }
+
+  .post-card:not(.dark) h3 {
+    color: var(--deep);
+  }
+
+  .post-card p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+  }
+
+  .post-card:not(.dark) p {
+    color: var(--text-light);
+  }
+</style>

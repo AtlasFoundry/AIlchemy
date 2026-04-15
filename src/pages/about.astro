@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+---
+
+<BaseLayout
+  title="About Laura | AIlchemy"
+  description="Who Laura is, why she builds, and her perspective on working with AI."
+>
+  <div class="about-page">
+    <div class="about-header">
+      <div class="about-header-inner">
+        <div class="about-tag">About</div>
+        <h1>Built by Laura.</h1>
+      </div>
+    </div>
+
+    <div class="about-body">
+      <div class="about-content">
+        <p class="lead">
+          I'm a Scottish founder and strategist. I build AI-powered tools for financial services
+          and help organisations understand what they're actually solving for before they build
+          anything.
+        </p>
+
+        <p>
+          For the last couple of years, I've been deep in the AI world — not as a spectator, but
+          as someone who builds with it every day. The learning curve has been steep and sometimes
+          absurd. AIlchemy is where I share what I've figured out.
+        </p>
+
+        <p>
+          The name is a wordplay on AI + Alchemy. Turning curiosity into capability. Turning
+          complex problems into working solutions. Turning raw AI into practical tools that do
+          something useful for real people.
+        </p>
+
+        <h2>Why AIlchemy?</h2>
+
+        <p>
+          I noticed that a lot of the conversation around AI sits at two extremes: breathless hype
+          or technical gatekeeping. Neither is useful if you're trying to actually build something.
+        </p>
+
+        <p>
+          AIlchemy is the middle ground. Practical, honest, and generous with the detail. If I've
+          figured something out, I share it. Not because I have all the answers, but because
+          sharing is how we all get better faster.
+        </p>
+
+        <h2>What I build</h2>
+
+        <p>
+          Alongside AIlchemy, I'm building two standalone products: <strong>Bothy</strong>, which
+          gives plain-language guidance to adults navigating complex financial forms, and
+          <strong>The Atlas</strong>, which turns scattered evidence into a usable map so people
+          stop building solutions to problems they can't see.
+        </p>
+
+        <p>
+          Both came from real problems I encountered. Both use AI in ways that feel genuinely
+          useful rather than novelty for novelty's sake.
+        </p>
+
+        <h2>Get in touch</h2>
+        <p>
+          The best way to stay connected is through the mailing list below. Or find me on LinkedIn.
+        </p>
+
+        <EmailSignup
+          heading="Stay in the loop."
+          subtext="New guides, prompts, and tools — when they're ready, not on a schedule."
+        />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-page {
+    padding-top: 5rem;
+  }
+
+  .about-header {
+    background: var(--deep);
+    padding: 4rem 3rem;
+  }
+
+  .about-header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .about-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--pink-light);
+    margin-bottom: 1rem;
+  }
+
+  .about-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: white;
+  }
+
+  .about-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 3rem 5rem;
+  }
+
+  .about-content .lead {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1.6rem;
+    font-weight: 500;
+  }
+
+  .about-content p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 1.4rem;
+  }
+
+  .about-content h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--deep);
+    margin: 2.5rem 0 0.8rem;
+  }
+
+  .about-content strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .about-header {
+      padding: 3rem 1.5rem;
+    }
+
+    .about-body {
+      padding: 2.5rem 1.5rem 4rem;
+    }
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="You're in | AIlchemy"
+  description="Thanks for subscribing to AIlchemy."
+>
+  <div class="thankyou-page">
+    <div class="thankyou-inner">
+      <div class="thankyou-icon">✦</div>
+      <h1>You're in.</h1>
+      <p>
+        Good decision. You'll hear from me when there's something worth reading — not before.
+      </p>
+      <div class="thankyou-links">
+        <a href="/library" class="btn-primary">Browse the library</a>
+        <a href="/" class="btn-secondary">Back home</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .thankyou-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 3rem;
+    text-align: center;
+  }
+
+  .thankyou-inner {
+    max-width: 500px;
+  }
+
+  .thankyou-icon {
+    font-size: 2rem;
+    color: var(--pink);
+    margin-bottom: 1.5rem;
+  }
+
+  .thankyou-inner h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 1rem;
+  }
+
+  .thankyou-inner p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+  }
+
+  .thankyou-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

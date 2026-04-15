@@ -1,0 +1,95 @@
+---
+interface Props {
+  heading?: string;
+  subtext?: string;
+}
+
+const {
+  heading = "Worth reading? There's more where that came from.",
+  subtext = "New guides, prompts, and tools — straight to your inbox, no noise.",
+} = Astro.props;
+---
+
+<div class="signup-wrap">
+  <h3>{heading}</h3>
+  <p>{subtext}</p>
+  <form name="email-signup" method="POST" data-netlify="true" action="/thank-you">
+    <input type="hidden" name="form-name" value="email-signup" />
+    <div class="signup-row">
+      <input
+        type="email"
+        name="email"
+        placeholder="your@email.com"
+        required
+        aria-label="Email address"
+      />
+      <button type="submit" class="btn-primary">Subscribe</button>
+    </div>
+    <p class="signup-note">No spam. Unsubscribe anytime.</p>
+  </form>
+</div>
+
+<style>
+  .signup-wrap {
+    background: var(--pink-soft);
+    border: 1px solid rgba(232, 75, 138, 0.15);
+    border-radius: 14px;
+    padding: 2.5rem;
+    margin: 3rem 0 0;
+    text-align: center;
+  }
+
+  .signup-wrap h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .signup-wrap > p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .signup-row {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .signup-row input {
+    flex: 1;
+    padding: 0.85rem 1.1rem;
+    border: 1.5px solid rgba(232, 75, 138, 0.25);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: white;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .signup-row input:focus {
+    border-color: var(--pink);
+  }
+
+  .signup-note {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 600px) {
+    .signup-row {
+      flex-direction: column;
+    }
+
+    .signup-wrap {
+      padding: 1.8rem 1.2rem;
+    }
+  }
+</style>

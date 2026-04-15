@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+---
+
+<BaseLayout
+  title="Subscribe | AIlchemy"
+  description="Get new guides, prompts, and tools from Laura, straight to your inbox."
+>
+  <div class="subscribe-page">
+    <div class="subscribe-inner">
+      <div class="subscribe-tag">Newsletter</div>
+      <h1>Worth staying for.</h1>
+      <p class="lead">
+        New guides, prompts, demos, and honest reflections — when they're ready. No noise, no
+        schedule, no content for content's sake.
+      </p>
+      <p>
+        If you've found something useful on AIlchemy, this is the best way to get more of it. I
+        write when I have something worth saying.
+      </p>
+
+      <EmailSignup
+        heading="Join the list."
+        subtext="Free. Unsubscribe whenever. No spam, ever."
+      />
+
+      <div class="what-to-expect">
+        <h2>What to expect</h2>
+        <ul>
+          <li>Practical guides on building with AI — not theory, actual builds</li>
+          <li>Copy-and-use prompts that actually work</li>
+          <li>Behind-the-scenes on Bothy and The Atlas as they grow</li>
+          <li>The occasional honest reflection on what's hard about all of this</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .subscribe-page {
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .subscribe-inner {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .subscribe-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--pink);
+    margin-bottom: 1rem;
+  }
+
+  .subscribe-inner h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 1.2rem;
+  }
+
+  .lead {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  .subscribe-inner > p:not(.lead) {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-light);
+    margin-bottom: 0;
+  }
+
+  .what-to-expect {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(232, 75, 138, 0.1);
+  }
+
+  .what-to-expect h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--deep);
+    margin-bottom: 1rem;
+  }
+
+  .what-to-expect ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .what-to-expect li {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    padding: 0.5rem 0;
+    padding-left: 1.4rem;
+    position: relative;
+    border-bottom: 1px solid rgba(232, 75, 138, 0.06);
+  }
+
+  .what-to-expect li:last-child {
+    border-bottom: none;
+  }
+
+  .what-to-expect li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--pink);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 600px) {
+    .subscribe-inner {
+      padding: 0 1.5rem;
+    }
+
+    .subscribe-page {
+      padding-top: 6rem;
+      align-items: flex-start;
+    }
+  }
+</style>

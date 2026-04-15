@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const latestPosts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag">Guides · Prompts · Demos · Tools</div>
+      <h1>Turning curiosity into <em>capability</em></h1>
+      <p>
+        Hey! I'm Laura, and I've spent the last couple of years figuring out how to keep up with
+        all the shiny new tools in the AI world. It's been a ride. I work on the principle that
+        sharing is caring — so this is where I share the learnings, the tools, the kits, the wins,
+        and the losses.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#latest" class="btn-primary">Start learning</a>
+        <a href="/about" class="btn-secondary">Who's Laura?</a>
+      </div>
+    </div>
+
+    <!-- Floating cards (decorative) -->
+    <div class="hero-visual">
+      <div class="float-card card-1">
+        <div class="card-icon guide">📖</div>
+        <h4>How I used Claude Code to set up this very page</h4>
+        <p>Step-by-step: from blank screen to live site</p>
+        <span class="card-tag tag-guide">Guide</span>
+      </div>
+      <div class="float-card card-2">
+        <div class="card-icon prompt">✦</div>
+        <h4>Templates to learn the language of love between you and your AI pal</h4>
+        <p>The prompts I actually use, day in, day out</p>
+        <span class="card-tag tag-prompt">Prompt</span>
+      </div>
+      <div class="float-card card-3">
+        <div class="card-icon video">▶</div>
+        <h4>The Atlas: find shared challenges from reports in seconds</h4>
+        <p>3 min demo of the pipeline in action</p>
+        <span class="card-tag tag-video">Demo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ART OF USING AI -->
+  <section class="section" id="library">
+    <div class="section-header">
+      <h2>The Art of Using AI</h2>
+      <p>Two years of building, tested and organised so you don't have to dig.</p>
+    </div>
+    <div class="content-grid">
+      <div class="content-card">
+        <div class="cc-icon">📖</div>
+        <h3>Can you break it down for me?</h3>
+        <p>
+          Step-by-step walkthroughs of how I build tools, products, and frameworks. From first idea
+          to working thing.
+        </p>
+      </div>
+      <div class="content-card">
+        <div class="cc-icon">✦</div>
+        <h3>Talk to AI like you mean it</h3>
+        <p>
+          Copy-and-use prompts I've found useful in building a relationship with my AI models.
+          Tried, tested, shared.
+        </p>
+      </div>
+      <div class="content-card">
+        <div class="cc-icon">▶</div>
+        <h3>Tools in action</h3>
+        <p>
+          Screen recordings and short videos of tools doing their thing. See it working, then build
+          your own.
+        </p>
+      </div>
+      <div class="content-card">
+        <div class="cc-icon">🧠</div>
+        <h3>PMA — Positive Mental Attitude</h3>
+        <p>
+          Mostly excerpts from my pivot moments — wins, losses, and what I've learned about myself
+          along the way.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST -->
+  <section class="section" id="latest">
+    <div class="latest-bg">
+      <div class="section-header">
+        <h2>Latest</h2>
+        <p>Going the extra mile, so you don't have to.</p>
+      </div>
+      <div class="latest-grid">
+        {
+          latestPosts.map((post) => (
+            <PostCard
+              title={post.data.title}
+              category={post.data.category}
+              summary={post.data.summary}
+              date={post.data.date}
+              readTime={post.data.readTime}
+              slug={post.id}
+              dark={true}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section" id="tools">
+    <div class="section-header">
+      <h2>Look what I made</h2>
+      <p>Each one came from a shared problem, and each one offers the opportunity to make someone's life easier.</p>
+    </div>
+    <div class="products-strip">
+      <div class="product-row">
+        <div class="product-name">Bothy</div>
+        <div class="product-desc">
+          Plain-language guidance for adults navigating complex financial forms. Currently focused
+          on pension transfers.
+        </div>
+        <a href="#" class="product-link">Learn more</a>
+      </div>
+      <div class="product-row">
+        <div class="product-name">The Atlas</div>
+        <div class="product-desc">
+          Atlas turns scattered evidence into a usable map, so people stop building solutions to
+          problems they can't see.
+        </div>
+        <a href="#" class="product-link">Learn more</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 70%;
+    height: 120%;
+    background: radial-gradient(ellipse at center, var(--pink-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.04;
+    background: var(--pink);
+  }
+
+  .hero-shape:nth-child(1) {
+    width: 400px;
+    height: 400px;
+    top: 10%;
+    right: 5%;
+    animation: floatSlow 18s ease-in-out infinite;
+  }
+
+  .hero-shape:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    bottom: 15%;
+    right: 25%;
+    animation: floatSlow 14s ease-in-out infinite 3s;
+  }
+
+  .hero-shape:nth-child(3) {
+    width: 120px;
+    height: 120px;
+    top: 30%;
+    right: 35%;
+    animation: floatSlow 10s ease-in-out infinite 1s;
+  }
+
+  @keyframes floatSlow {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-15px, -20px) scale(1.05);
+    }
+  }
+
+  .hero-content {
+    max-width: 660px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--pink);
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 1rem;
+    border: 1.5px solid var(--pink);
+    border-radius: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--deep);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--pink);
+    font-weight: 300;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+    max-width: 560px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 480px;
+  }
+
+  .float-card {
+    position: absolute;
+    background: white;
+    border-radius: 14px;
+    padding: 1.4rem;
+    box-shadow: 0 8px 40px rgba(15, 26, 46, 0.08);
+    border: 1px solid rgba(232, 75, 138, 0.1);
+    transition: transform 0.4s ease;
+  }
+
+  .float-card:hover {
+    transform: translateY(-4px) !important;
+  }
+
+  .card-1 {
+    top: 0;
+    right: 0;
+    width: 270px;
+    animation: floatUp 6s ease-in-out infinite;
+  }
+
+  .card-2 {
+    top: 170px;
+    right: 150px;
+    width: 250px;
+    animation: floatUp 8s ease-in-out infinite 1s;
+  }
+
+  .card-3 {
+    top: 340px;
+    right: 10px;
+    width: 260px;
+    animation: floatUp 7s ease-in-out infinite 2s;
+  }
+
+  @keyframes floatUp {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .card-icon.guide {
+    background: rgba(232, 75, 138, 0.1);
+  }
+
+  .card-icon.prompt {
+    background: rgba(26, 39, 68, 0.08);
+  }
+
+  .card-icon.video {
+    background: rgba(244, 162, 97, 0.12);
+  }
+
+  .float-card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: var(--text);
+  }
+
+  .float-card p {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  .tag-guide {
+    background: rgba(232, 75, 138, 0.1);
+    color: var(--pink);
+  }
+
+  .tag-prompt {
+    background: rgba(26, 39, 68, 0.08);
+    color: var(--navy);
+  }
+
+  .tag-video {
+    background: rgba(244, 162, 97, 0.12);
+    color: #c77a3a;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 5rem 3rem;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-header p {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* CONTENT GRID */
+  .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .content-card {
+    background: white;
+    border-radius: 14px;
+    padding: 1.8rem;
+    border: 1px solid rgba(232, 75, 138, 0.08);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .content-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .content-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .content-card:hover {
+    box-shadow: 0 12px 40px rgba(15, 26, 46, 0.06);
+  }
+
+  .cc-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    background: var(--pink-soft);
+  }
+
+  .content-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+    color: var(--deep);
+  }
+
+  .content-card p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.65;
+  }
+
+  /* LATEST */
+  .latest-bg {
+    background: var(--deep);
+    color: white;
+    border-radius: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem;
+  }
+
+  .latest-bg .section-header h2 {
+    color: white;
+  }
+
+  .latest-bg .section-header p {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .latest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* PRODUCTS */
+  .products-strip {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .product-row {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(232, 75, 138, 0.1);
+  }
+
+  .product-row:last-child {
+    border-bottom: none;
+  }
+
+  .product-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    min-width: 140px;
+    color: var(--deep);
+  }
+
+  .product-desc {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .product-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--pink);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.3s;
+  }
+
+  .product-link:hover {
+    color: var(--deep);
+  }
+
+  .product-link::after {
+    content: ' →';
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-visual {
+      display: none;
+    }
+
+    .hero {
+      padding: 7rem 1.5rem 3rem;
+    }
+
+    .section {
+      padding: 3rem 1.5rem;
+    }
+
+    .latest-bg {
+      padding: 2.5rem 1.5rem;
+      border-radius: 12px;
+    }
+
+    .product-row {
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .latest-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

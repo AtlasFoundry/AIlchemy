@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Icon: flask (pink) + spark (navy) — scaled down to fit 80px tall -->
+
+  <!-- Flask (pink) — slim neck, round bottom -->
+  <path d="
+    M 18 8
+    H 32
+    V 36
+    C 46 41, 54 52, 54 64
+    C 54 75, 47 80, 25 80
+    C 3 80, -4 75, -4 64
+    C -4 52, 4 41, 18 36
+    Z
+  " fill="#e84b8a"/>
+
+  <!-- Spark ✦ (navy) — larger -->
+  <path d="
+    M 56 2
+    L 60 14
+    L 72 18
+    L 60 22
+    L 56 34
+    L 52 22
+    L 40 18
+    L 52 14
+    Z
+  " fill="#0f1a2e"/>
+
+  <!-- Wordmark: "AI" in pink, "lchemy" in navy, Fraunces serif -->
+  <text y="56" font-family="Fraunces, Georgia, serif" font-weight="700" font-size="48">
+    <tspan x="80" fill="#e84b8a">AI</tspan><tspan fill="#0f1a2e">lchemy</tspan>
+  </text>
+</svg>

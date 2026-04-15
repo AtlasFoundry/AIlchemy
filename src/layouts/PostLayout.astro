@@ -1,0 +1,248 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+
+interface Props {
+  title: string;
+  category: 'guide' | 'prompt' | 'demo' | 'pma';
+  summary: string;
+  date: Date;
+  readTime: string;
+}
+
+const { title, category, summary, date, readTime } = Astro.props;
+
+const categoryLabels: Record<string, string> = {
+  guide: 'Guide',
+  prompt: 'Prompt',
+  demo: 'Demo',
+  pma: 'PMA',
+};
+
+const formattedDate = date.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} | AIlchemy`} description={summary}>
+  <article class="post-page">
+    <div class="post-header">
+      <div class="post-header-inner">
+        <div class="post-breadcrumb">
+          <a href="/library">← Library</a>
+        </div>
+        <div class="post-meta-line">
+          <span class="category-badge" data-category={category}>{categoryLabels[category]}</span>
+          <span class="post-date">{formattedDate}</span>
+          <span class="post-read-time">{readTime}</span>
+        </div>
+        <h1>{title}</h1>
+        <p class="post-summary">{summary}</p>
+      </div>
+    </div>
+
+    <div class="post-body">
+      <div class="prose">
+        <slot />
+      </div>
+      <EmailSignup />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-page {
+    padding-top: 5rem;
+  }
+
+  .post-header {
+    background: var(--deep);
+    padding: 4rem 3rem;
+  }
+
+  .post-header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .post-breadcrumb {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-breadcrumb a {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .post-breadcrumb a:hover {
+    color: var(--pink-light);
+  }
+
+  .post-meta-line {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .category-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    background: rgba(232, 75, 138, 0.2);
+    color: var(--pink-light);
+  }
+
+  .category-badge[data-category='prompt'] {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .category-badge[data-category='demo'] {
+    background: rgba(244, 162, 97, 0.15);
+    color: #f4a261;
+  }
+
+  .category-badge[data-category='pma'] {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .post-date,
+  .post-read-time {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .post-date::before,
+  .post-read-time::before {
+    content: '·';
+    margin-right: 0.8rem;
+  }
+
+  .post-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .post-summary {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .post-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3.5rem 3rem 5rem;
+  }
+
+  /* Prose styles */
+  .prose :global(h2) {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--deep);
+    margin: 2.5rem 0 0.8rem;
+    line-height: 1.3;
+  }
+
+  .prose :global(h3) {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--deep);
+    margin: 2rem 0 0.6rem;
+  }
+
+  .prose :global(p) {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1.4rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 1.4rem 1.4rem;
+  }
+
+  .prose :global(li) {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .prose :global(strong) {
+    font-weight: 600;
+    color: var(--deep);
+  }
+
+  .prose :global(em) {
+    font-style: italic;
+  }
+
+  .prose :global(code) {
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    background: rgba(232, 75, 138, 0.06);
+    border: 1px solid rgba(232, 75, 138, 0.12);
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    color: var(--deep);
+  }
+
+  .prose :global(pre) {
+    background: var(--deep);
+    border-radius: 10px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 0 0 1.4rem;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--pink);
+    padding-left: 1.2rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-light);
+  }
+
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid rgba(232, 75, 138, 0.15);
+    margin: 2.5rem 0;
+  }
+
+  @media (max-width: 900px) {
+    .post-header {
+      padding: 3rem 1.5rem;
+    }
+
+    .post-body {
+      padding: 2.5rem 1.5rem 4rem;
+    }
+  }
+</style>

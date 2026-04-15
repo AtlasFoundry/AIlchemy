@@ -1,0 +1,90 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/logo-wordmark.svg" alt="AIlchemy" height="36" />
+  </a>
+  <div class="nav-links">
+    <a href="/library" class:list={[{ active: currentPath.startsWith('/library') }]}>Library</a>
+    <a href="/#tools">Tools</a>
+    <a href="/about" class:list={[{ active: currentPath === '/about' }]}>About</a>
+    <a href="/subscribe" class="nav-cta">Subscribe</a>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 253, 249, 0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(232, 75, 138, 0.1);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-logo img {
+    height: 36px;
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--pink);
+  }
+
+  .nav-cta {
+    background: var(--pink) !important;
+    color: white !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--deep) !important;
+  }
+
+  @media (max-width: 900px) {
+    nav {
+      padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links a:not(.nav-cta) {
+      display: none;
+    }
+  }
+</style>

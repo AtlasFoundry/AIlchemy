@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title="Library | AIlchemy"
+  description="All guides, prompts, demos, and reflections — organised and filterable."
+>
+  <div class="library-page">
+    <div class="library-header">
+      <div class="library-header-inner">
+        <h1>The Library</h1>
+        <p>Everything in one place. Filter by what you need.</p>
+      </div>
+    </div>
+
+    <div class="library-body">
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="guide">Guides</button>
+        <button class="filter-btn" data-filter="prompt">Prompts</button>
+        <button class="filter-btn" data-filter="demo">Demos</button>
+        <button class="filter-btn" data-filter="pma">PMA</button>
+      </div>
+
+      <div class="posts-grid">
+        {
+          posts.map((post) => (
+            <div class="card-wrapper" data-category={post.data.category}>
+              <PostCard
+                title={post.data.title}
+                category={post.data.category}
+                summary={post.data.summary}
+                date={post.data.date}
+                readTime={post.data.readTime}
+                slug={post.id}
+                dark={false}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <p>Nothing here yet — check back soon.</p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.card-wrapper');
+  const emptyState = document.getElementById('emptyState');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'all';
+
+      // Update active button
+      buttons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter cards
+      let visible = 0;
+      cards.forEach((card) => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.style.display = match ? 'block' : 'none';
+        if (match) visible++;
+      });
+
+      // Empty state
+      if (emptyState) {
+        emptyState.style.display = visible === 0 ? 'block' : 'none';
+      }
+    });
+  });
+</script>
+
+<style>
+  .library-page {
+    padding-top: 5rem;
+  }
+
+  .library-header {
+    background: var(--deep);
+    padding: 4rem 3rem;
+  }
+
+  .library-header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .library-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.6rem;
+  }
+
+  .library-header p {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .library-body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 3rem 5rem;
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.1rem;
+    border-radius: 20px;
+    border: 1.5px solid rgba(232, 75, 138, 0.2);
+    background: transparent;
+    color: var(--text-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--pink);
+    color: var(--pink);
+  }
+
+  .filter-btn.active {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: white;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .library-header {
+      padding: 3rem 1.5rem;
+    }
+
+    .library-body {
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
