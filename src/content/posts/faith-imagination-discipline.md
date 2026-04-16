@@ -1,6 +1,7 @@
 ---
 title: "Why faith, imagination and self-discipline matter when learning new stuff"
-category: pma
+stage: download
+format: reflection
 summary: "What I've learned about keeping going when the shiny wears off and the work gets hard."
 date: 2026-04-05
 readTime: "5 min read"

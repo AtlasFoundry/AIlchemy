@@ -8,33 +8,57 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
 ---
 
 <BaseLayout
-  title="Library | AIlchemy"
-  description="All guides, prompts, demos, and reflections — organised and filterable."
+  title="Library | hideaway."
+  description="All resources in one place — guides, prompts, demos, reflections and packs. Filter by stage or format."
 >
   <div class="library-page">
+
     <div class="library-header">
       <div class="library-header-inner">
-        <h1>The Library</h1>
-        <p>Everything in one place. Filter by what you need.</p>
+        <div class="library-tag">Library</div>
+        <h1>Everything in one place.</h1>
+        <p>Filter by stage or format. Take what you need.</p>
       </div>
     </div>
 
     <div class="library-body">
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="guide">Guides</button>
-        <button class="filter-btn" data-filter="prompt">Prompts</button>
-        <button class="filter-btn" data-filter="demo">Demos</button>
-        <button class="filter-btn" data-filter="pma">PMA</button>
+
+      <div class="filter-section">
+        <div class="filter-group">
+          <span class="filter-label">Stage</span>
+          <div class="filter-row">
+            <button class="filter-btn stage-btn active" data-stage="all">All</button>
+            <button class="filter-btn stage-btn" data-stage="download">Download.</button>
+            <button class="filter-btn stage-btn" data-stage="idea">Idea.</button>
+            <button class="filter-btn stage-btn" data-stage="creation">Creation.</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Format</span>
+          <div class="filter-row">
+            <button class="filter-btn format-btn active" data-format="all">All</button>
+            <button class="filter-btn format-btn" data-format="guide">Guide</button>
+            <button class="filter-btn format-btn" data-format="prompt">Prompt</button>
+            <button class="filter-btn format-btn" data-format="demo">Demo</button>
+            <button class="filter-btn format-btn" data-format="reflection">Reflection</button>
+            <button class="filter-btn format-btn" data-format="pack">Pack</button>
+          </div>
+        </div>
       </div>
 
       <div class="posts-grid">
         {
           posts.map((post) => (
-            <div class="card-wrapper" data-category={post.data.category}>
+            <div
+              class="card-wrapper"
+              data-stage={post.data.stage}
+              data-format={post.data.format}
+            >
               <PostCard
                 title={post.data.title}
-                category={post.data.category}
+                stage={post.data.stage}
+                format={post.data.format}
                 summary={post.data.summary}
                 date={post.data.date}
                 readTime={post.data.readTime}
@@ -49,37 +73,64 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
       <div class="empty-state" id="emptyState" style="display: none;">
         <p>Nothing here yet — check back soon.</p>
       </div>
+
     </div>
   </div>
 </BaseLayout>
 
 <script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const stageButtons = document.querySelectorAll<HTMLButtonElement>('.stage-btn');
+  const formatButtons = document.querySelectorAll<HTMLButtonElement>('.format-btn');
   const cards = document.querySelectorAll<HTMLElement>('.card-wrapper');
   const emptyState = document.getElementById('emptyState');
 
-  buttons.forEach((btn) => {
+  let activeStage = 'all';
+  let activeFormat = 'all';
+
+  function applyFilters() {
+    let visible = 0;
+    cards.forEach((card) => {
+      const stageMatch = activeStage === 'all' || card.dataset.stage === activeStage;
+      const formatMatch = activeFormat === 'all' || card.dataset.format === activeFormat;
+      const show = stageMatch && formatMatch;
+      card.style.display = show ? 'block' : 'none';
+      if (show) visible++;
+    });
+    if (emptyState) {
+      emptyState.style.display = visible === 0 ? 'block' : 'none';
+    }
+  }
+
+  stageButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter ?? 'all';
-
-      // Update active button
-      buttons.forEach((b) => b.classList.remove('active'));
+      activeStage = btn.dataset.stage ?? 'all';
+      stageButtons.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
-
-      // Filter cards
-      let visible = 0;
-      cards.forEach((card) => {
-        const match = filter === 'all' || card.dataset.category === filter;
-        card.style.display = match ? 'block' : 'none';
-        if (match) visible++;
-      });
-
-      // Empty state
-      if (emptyState) {
-        emptyState.style.display = visible === 0 ? 'block' : 'none';
-      }
+      applyFilters();
     });
   });
+
+  formatButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeFormat = btn.dataset.format ?? 'all';
+      formatButtons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+  });
+
+  // Handle ?stage= query param on load
+  const params = new URLSearchParams(window.location.search);
+  const stageParam = params.get('stage');
+  if (stageParam) {
+    const target = document.querySelector<HTMLButtonElement>(`.stage-btn[data-stage="${stageParam}"]`);
+    if (target) {
+      stageButtons.forEach((b) => b.classList.remove('active'));
+      target.classList.add('active');
+      activeStage = stageParam;
+      applyFilters();
+    }
+  }
 </script>
 
 <style>
@@ -88,8 +139,8 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
   }
 
   .library-header {
-    background: var(--deep);
-    padding: 4rem 3rem;
+    background: var(--navy);
+    padding: 4.5rem 3rem 3.5rem;
   }
 
   .library-header-inner {
@@ -97,76 +148,124 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
     margin: 0 auto;
   }
 
+  .library-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
   .library-header h1 {
     font-family: 'Fraunces', serif;
     font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
+    font-weight: 400;
     color: white;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
   }
 
   .library-header p {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: rgba(255, 255, 255, 0.5);
   }
 
   .library-body {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 3rem 3rem 5rem;
+    padding: 3rem 3rem 6rem;
   }
 
-  .filter-bar {
+  /* ── Filters ── */
+  .filter-section {
     display: flex;
-    gap: 0.6rem;
+    flex-direction: column;
+    gap: 0.8rem;
     margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+    min-width: 50px;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 0.4rem;
     flex-wrap: wrap;
   }
 
   .filter-btn {
-    padding: 0.5rem 1.1rem;
+    padding: 0.4rem 0.9rem;
     border-radius: 20px;
-    border: 1.5px solid rgba(232, 75, 138, 0.2);
+    border: 1.5px solid var(--border);
     background: transparent;
     color: var(--text-light);
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.2s;
   }
 
   .filter-btn:hover {
-    border-color: var(--pink);
-    color: var(--pink);
+    border-color: var(--navy);
+    color: var(--navy);
   }
 
-  .filter-btn.active {
-    background: var(--pink);
-    border-color: var(--pink);
+  .stage-btn.active {
+    background: var(--navy);
+    border-color: var(--navy);
     color: white;
   }
 
+  .format-btn.active {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: var(--navy);
+  }
+
+  /* ── Grid ── */
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 
   .empty-state {
     text-align: center;
-    padding: 4rem 0;
+    padding: 5rem 0;
     color: var(--text-light);
     font-style: italic;
+    font-family: 'Fraunces', serif;
   }
 
   @media (max-width: 900px) {
     .library-header {
-      padding: 3rem 1.5rem;
+      padding: 3.5rem 1.5rem 3rem;
     }
 
     .library-body {
       padding: 2rem 1.5rem 4rem;
+    }
+
+    .filter-group {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .posts-grid {

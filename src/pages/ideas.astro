@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Ideas | hideaway."
+  description="Got something you're stuck on? Submit a resource request and it might become the next guide, prompt, or tool in the library."
+>
+  <div class="ideas-page">
+
+    <div class="ideas-header">
+      <div class="ideas-header-inner">
+        <div class="ideas-tag">Ideas.</div>
+        <h1>What would actually help you?</h1>
+        <p>
+          The best resources start with a real question. If there's something you're stuck on,
+          a format you'd find useful, or a gap you keep hitting — tell me about it.
+        </p>
+      </div>
+    </div>
+
+    <div class="ideas-body">
+
+      <div class="ideas-how">
+        <h2>How this works</h2>
+        <p>
+          Submissions go into a queue. When something comes up more than once, or when it matches
+          something I'm already building, it becomes a resource in the library. You'll be able to
+          find it there when it's done.
+        </p>
+        <p>
+          There's no commitment on timing and no guarantee everything gets built — but every
+          submission gets read, and the best ones shape what gets made next.
+        </p>
+      </div>
+
+      <div class="ideas-form-section">
+        <h2>Submit an idea</h2>
+
+        <form class="ideas-form" name="ideas" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="ideas" />
+          <p class="hidden" aria-hidden="true">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <div class="form-field">
+            <label for="idea-type">What kind of resource would help you?</label>
+            <select id="idea-type" name="type" required>
+              <option value="" disabled selected>Choose a format</option>
+              <option value="guide">Guide — step-by-step walkthrough</option>
+              <option value="prompt">Prompt — copy-and-use template</option>
+              <option value="demo">Demo — see it working in practice</option>
+              <option value="reflection">Reflection — thinking through a challenge</option>
+              <option value="pack">Pack — a set of related resources</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="idea-stage">Where are you in the making process?</label>
+            <select id="idea-stage" name="stage" required>
+              <option value="" disabled selected>Choose a stage</option>
+              <option value="download">Download. — I'm noticing and capturing</option>
+              <option value="idea">Idea. — I'm shaping and deciding</option>
+              <option value="creation">Creation. — I'm building and doing</option>
+              <option value="unsure">Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="idea-description">What are you trying to do, or what are you stuck on?</label>
+            <textarea
+              id="idea-description"
+              name="description"
+              rows="5"
+              placeholder="Be as specific as you like. The more concrete the problem, the more useful the resource."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="idea-email">Your email <span class="optional">(optional — only if you want a heads up when it's done)</span></label>
+            <input type="email" id="idea-email" name="email" placeholder="your@email.com" />
+          </div>
+
+          <button type="submit" class="btn-primary">Send it in</button>
+        </form>
+      </div>
+
+      <div class="ideas-recent">
+        <h2>Recent ideas in the queue</h2>
+        <div class="ideas-queue">
+          <div class="queue-item">
+            <span class="queue-tag">Prompt · Creation.</span>
+            <p>A prompt for turning messy meeting notes into a clear action list.</p>
+          </div>
+          <div class="queue-item">
+            <span class="queue-tag">Guide · Creation.</span>
+            <p>How to build a simple knowledge base with Claude Projects.</p>
+          </div>
+          <div class="queue-item">
+            <span class="queue-tag">Reflection · Download.</span>
+            <p>What to do when you have too many ideas and can't pick one.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .ideas-page {
+    padding-top: 5rem;
+  }
+
+  /* ── Header ── */
+  .ideas-header {
+    background: var(--navy);
+    padding: 5rem 3rem 4rem;
+  }
+
+  .ideas-header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .ideas-tag {
+    font-family: 'Fraunces', serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
+  .ideas-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: white;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .ideas-header p {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  /* ── Body ── */
+  .ideas-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 3rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .ideas-how h2,
+  .ideas-form-section h2,
+  .ideas-recent h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ideas-how p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 0.8rem;
+  }
+
+  /* ── Form ── */
+  .ideas-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-field label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .optional {
+    font-weight: 400;
+    color: var(--text-light);
+  }
+
+  .form-field input[type="email"],
+  .form-field select,
+  .form-field textarea {
+    padding: 0.8rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--navy);
+    background: white;
+    outline: none;
+    transition: border-color 0.25s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235E6B82' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--navy);
+  }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder {
+    color: var(--text-light);
+  }
+
+  .form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  /* ── Queue ── */
+  .ideas-queue {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .queue-item {
+    padding: 1.2rem 1.4rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .queue-tag {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+    margin-bottom: 0.4rem;
+  }
+
+  .queue-item p {
+    font-size: 0.9rem;
+    color: var(--navy);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .ideas-header {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .ideas-body {
+      padding: 3rem 1.5rem 4rem;
+    }
+  }
+</style>

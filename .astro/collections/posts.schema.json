@@ -7,13 +7,22 @@
         "title": {
           "type": "string"
         },
-        "category": {
+        "stage": {
+          "type": "string",
+          "enum": [
+            "download",
+            "idea",
+            "creation"
+          ]
+        },
+        "format": {
           "type": "string",
           "enum": [
             "guide",
             "prompt",
             "demo",
-            "pma"
+            "reflection",
+            "pack"
           ]
         },
         "summary": {
@@ -44,7 +53,8 @@
       },
       "required": [
         "title",
-        "category",
+        "stage",
+        "format",
         "summary",
         "date",
         "readTime"

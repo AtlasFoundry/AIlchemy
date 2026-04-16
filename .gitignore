@@ -4,3 +4,6 @@ dist/
 .env
 .env.*
 .claude/
+.astro/data-store.json
+.astro/settings.json
+hideaway/

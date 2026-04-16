@@ -1,39 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import EmailSignup from '../components/EmailSignup.astro';
 ---
 
 <BaseLayout
-  title="Subscribe | AIlchemy"
-  description="Get new guides, prompts, and tools from Laura, straight to your inbox."
+  title="Subscribe | hideaway."
+  description="New resources from Laura, straight to your inbox — when they're ready, not on a schedule."
 >
   <div class="subscribe-page">
     <div class="subscribe-inner">
-      <div class="subscribe-tag">Newsletter</div>
+
+      <div class="subscribe-tag">Stay in the loop</div>
       <h1>Worth staying for.</h1>
       <p class="lead">
         New guides, prompts, demos, and honest reflections — when they're ready. No noise, no
         schedule, no content for content's sake.
       </p>
       <p>
-        If you've found something useful on AIlchemy, this is the best way to get more of it. I
-        write when I have something worth saying.
+        If you've found something useful at hideaway., this is the best way to get more of it.
+        I write when I have something worth saying.
       </p>
 
-      <EmailSignup
-        heading="Join the list."
-        subtext="Free. Unsubscribe whenever. No spam, ever."
-      />
+      <form class="subscribe-form" name="email-signup" method="POST" data-netlify="true" action="/thank-you">
+        <input type="hidden" name="form-name" value="email-signup" />
+        <div class="subscribe-row">
+          <input
+            type="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+            aria-label="Email address"
+          />
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </div>
+        <p class="subscribe-note">Free. Unsubscribe whenever. No spam, ever.</p>
+      </form>
 
       <div class="what-to-expect">
         <h2>What to expect</h2>
         <ul>
           <li>Practical guides on building with AI — not theory, actual builds</li>
           <li>Copy-and-use prompts that actually work</li>
-          <li>Behind-the-scenes on Bothy and The Atlas as they grow</li>
+          <li>Behind-the-scenes on Bothy. and Atlas. as they grow</li>
           <li>The occasional honest reflection on what's hard about all of this</li>
         </ul>
       </div>
+
     </div>
   </div>
 </BaseLayout>
@@ -48,7 +59,7 @@ import EmailSignup from '../components/EmailSignup.astro';
   }
 
   .subscribe-inner {
-    max-width: 620px;
+    max-width: 580px;
     margin: 0 auto;
     padding: 0 3rem;
   }
@@ -58,43 +69,84 @@ import EmailSignup from '../components/EmailSignup.astro';
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--pink);
+    color: var(--sage);
     margin-bottom: 1rem;
   }
 
   .subscribe-inner h1 {
     font-family: 'Fraunces', serif;
     font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    color: var(--deep);
+    font-weight: 400;
+    color: var(--navy);
     margin-bottom: 1.2rem;
+    letter-spacing: -0.01em;
   }
 
   .lead {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.75;
     color: var(--text);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
   }
 
   .subscribe-inner > p:not(.lead) {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.75;
     color: var(--text-light);
     margin-bottom: 0;
   }
 
+  .subscribe-form {
+    margin: 2.5rem 0 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+  }
+
+  .subscribe-row {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .subscribe-row input[type="email"] {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--navy);
+    background: var(--frosted);
+    outline: none;
+    transition: border-color 0.25s;
+  }
+
+  .subscribe-row input[type="email"]:focus {
+    border-color: var(--navy);
+  }
+
+  .subscribe-row input[type="email"]::placeholder {
+    color: var(--text-light);
+  }
+
+  .subscribe-note {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-top: 0.7rem;
+  }
+
   .what-to-expect {
     margin-top: 3rem;
     padding-top: 2.5rem;
-    border-top: 1px solid rgba(232, 75, 138, 0.1);
+    border-top: 1px solid var(--border);
   }
 
   .what-to-expect h2 {
     font-family: 'Fraunces', serif;
     font-size: 1.2rem;
     font-weight: 500;
-    color: var(--deep);
+    color: var(--navy);
     margin-bottom: 1rem;
   }
 
@@ -107,10 +159,9 @@ import EmailSignup from '../components/EmailSignup.astro';
     font-size: 0.95rem;
     color: var(--text-light);
     line-height: 1.7;
-    padding: 0.5rem 0;
-    padding-left: 1.4rem;
+    padding: 0.6rem 0 0.6rem 1.4rem;
     position: relative;
-    border-bottom: 1px solid rgba(232, 75, 138, 0.06);
+    border-bottom: 1px solid var(--border);
   }
 
   .what-to-expect li:last-child {
@@ -121,7 +172,7 @@ import EmailSignup from '../components/EmailSignup.astro';
     content: '→';
     position: absolute;
     left: 0;
-    color: var(--pink);
+    color: var(--sage);
     font-size: 0.85rem;
   }
 
@@ -133,6 +184,10 @@ import EmailSignup from '../components/EmailSignup.astro';
     .subscribe-page {
       padding-top: 6rem;
       align-items: flex-start;
+    }
+
+    .subscribe-row {
+      flex-direction: column;
     }
   }
 </style>

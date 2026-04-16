@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Bothy. | hideaway."
+  description="Plain-language guidance for adults navigating complex financial forms. No jargon, no judgment."
+>
+  <div class="solution-page">
+
+    <div class="solution-header">
+      <div class="solution-header-inner">
+        <div class="solution-tag">Made by Laura</div>
+        <h1>Bothy.</h1>
+        <p class="solution-strapline">
+          Plain-language guidance for adults navigating complex financial decisions.
+        </p>
+      </div>
+    </div>
+
+    <div class="solution-body">
+
+      <section class="solution-section">
+        <h2>The problem it solves</h2>
+        <p>
+          Financial forms are written for people who already understand the system. Pension
+          transfers, beneficiary nominations, fund switches — the language assumes knowledge
+          most people don't have, and the stakes are high enough that getting it wrong matters.
+        </p>
+        <p>
+          People find themselves facing important decisions with no one to ask, no plain explanation,
+          and no way to tell if they're doing the right thing. So they either guess, delay, or pay
+          for advice they can't afford.
+        </p>
+      </section>
+
+      <section class="solution-section">
+        <h2>What Bothy does</h2>
+        <p>
+          Bothy explains financial forms in plain language — without jargon, without judgment, and
+          without selling anything. It meets you at the form you're looking at and walks you through
+          what each section actually means and what you need to do.
+        </p>
+        <p>
+          It doesn't give financial advice. It gives you the understanding you need to make your
+          own decisions confidently.
+        </p>
+      </section>
+
+      <div class="solution-highlight">
+        <blockquote>
+          "I finally understood what I was signing. That hadn't happened before."
+        </blockquote>
+        <cite>— Bothy user, pension transfer review</cite>
+      </div>
+
+      <section class="solution-section">
+        <h2>Where it started</h2>
+        <p>
+          The idea came from watching someone I knew stare at a pension transfer form for twenty
+          minutes and then put it in a drawer. The form wasn't unusually complicated. The problem
+          was that the language assumed they already understood how pensions worked. They didn't.
+          Most people don't.
+        </p>
+        <p>
+          Bothy is currently focused on pension transfers — a decision that affects millions of
+          people and is often made with too little information.
+        </p>
+      </section>
+
+      <section class="solution-section">
+        <h2>What's next</h2>
+        <p>
+          The pension transfer focus is a starting point, not a ceiling. The same problem — forms
+          written for insiders, decisions made by outsiders — shows up across financial services.
+          Bothy is being built to expand.
+        </p>
+      </section>
+
+      <div class="solution-cta">
+        <h3>Interested in Bothy?</h3>
+        <p>
+          If you're working on financial services accessibility, or if you've got a specific use
+          case in mind, get in touch.
+        </p>
+        <a href="/subscribe" class="btn-primary">Stay in the loop</a>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .solution-page {
+    padding-top: 5rem;
+  }
+
+  .solution-header {
+    background: var(--navy);
+    padding: 5rem 3rem 4rem;
+  }
+
+  .solution-header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .solution-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
+  .solution-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    color: #E8F547;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .solution-strapline {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    max-width: 500px;
+  }
+
+  .solution-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 3rem 6rem;
+  }
+
+  .solution-section {
+    margin-bottom: 3rem;
+  }
+
+  .solution-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .solution-section p {
+    font-size: 1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 0.9rem;
+  }
+
+  .solution-highlight {
+    background: var(--stone);
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+    margin: 3rem 0;
+  }
+
+  .solution-highlight blockquote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+
+  .solution-highlight cite {
+    font-size: 0.82rem;
+    color: #6b6254;
+    font-style: normal;
+  }
+
+  .solution-cta {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2.5rem;
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .solution-cta h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .solution-cta p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .solution-header {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .solution-body {
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .solution-highlight {
+      padding: 1.5rem;
+    }
+  }
+</style>

@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = 'AIlchemy | Turning curiosity into capability',
-  description = 'Guides, prompts, demos, and honest reflections on building with AI. By Laura.',
+  title = 'hideaway. | a maker\'s hub',
+  description = 'Practical resources for makers — guides, prompts, demos, and tools. Built by Laura.',
 } = Astro.props;
 ---
 
@@ -24,7 +24,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&family=DM+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -37,17 +37,23 @@ const {
 
 <style is:global>
   :root {
-    --deep: #0f1a2e;
-    --navy: #1a2744;
-    --pink: #e84b8a;
-    --pink-light: #f472a8;
-    --pink-glow: rgba(232, 75, 138, 0.12);
-    --pink-soft: #fdf0f5;
-    --warm: #f4a261;
-    --sand: #faf5f0;
-    --cream: #fffdf9;
-    --text: #1a2230;
-    --text-light: #5a6478;
+    /* hideaway. palette */
+    --frosted:  #F7F6F1;
+    --navy:     #1A2744;
+    --sage:     #9CAF88;
+    --yellow:   #E8F547;
+    --stone:    #D4CFC4;
+
+    /* Functional aliases */
+    --bg:         var(--frosted);
+    --text:       var(--navy);
+    --text-light: #5E6B82;
+    --border:     rgba(26, 39, 68, 0.1);
+
+    /* Stage colours */
+    --stage-download: var(--sage);
+    --stage-idea:     var(--stone);
+    --stage-creation: var(--navy);
   }
 
   *,
@@ -60,7 +66,7 @@ const {
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
+    background: var(--bg);
     color: var(--text);
     overflow-x: hidden;
   }
@@ -68,39 +74,59 @@ const {
   /* Shared button styles */
   .btn-primary {
     display: inline-block;
-    padding: 0.9rem 2rem;
-    background: var(--pink);
-    color: white;
+    padding: 0.85rem 1.8rem;
+    background: var(--navy);
+    color: var(--frosted);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: 'DM Sans', sans-serif;
-    transition: all 0.3s;
-    border: 2px solid var(--pink);
+    transition: all 0.25s;
+    border: 2px solid var(--navy);
     cursor: pointer;
   }
 
   .btn-primary:hover {
-    background: var(--deep);
-    border-color: var(--deep);
+    background: #0f1a30;
+    border-color: #0f1a30;
   }
 
   .btn-secondary {
     display: inline-block;
-    padding: 0.9rem 2rem;
+    padding: 0.85rem 1.8rem;
     background: transparent;
-    color: var(--pink);
+    color: var(--navy);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: 600;
-    font-size: 0.95rem;
-    border: 2px solid var(--pink);
-    transition: all 0.3s;
+    font-size: 0.9rem;
+    border: 2px solid var(--navy);
+    transition: all 0.25s;
   }
 
   .btn-secondary:hover {
-    background: var(--pink);
-    color: white;
+    background: var(--navy);
+    color: var(--frosted);
+  }
+
+  .btn-sage {
+    display: inline-block;
+    padding: 0.85rem 1.8rem;
+    background: var(--sage);
+    color: var(--navy);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.25s;
+    border: 2px solid var(--sage);
+    cursor: pointer;
+  }
+
+  .btn-sage:hover {
+    background: #8a9e77;
+    border-color: #8a9e77;
   }
 </style>

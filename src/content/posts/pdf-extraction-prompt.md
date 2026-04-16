@@ -1,6 +1,7 @@
 ---
 title: "The prompt I use to extract insights from PDFs"
-category: prompt
+stage: creation
+format: prompt
 summary: "The exact prompt that powers The Atlas pipeline. Copy it, adapt it, make it yours."
 date: 2026-04-10
 readTime: "Copy & use"

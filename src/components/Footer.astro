@@ -2,54 +2,146 @@
 ---
 
 <footer>
-  <div class="footer-name">
-    <img src="/logo-wordmark.svg" alt="AIlchemy" height="32" />
+  <div class="footer-inner">
+
+    <div class="footer-bio">
+      <div class="footer-logo"><span class="logo-h">h</span><span class="logo-idea">idea</span><span class="logo-way">way.</span></div>
+      <p>
+        Laura is a Scottish founder, strategist and builder. hideaway. is where she shares
+        the tools, guides, and thinking behind building with intention — so you don't have
+        to start from scratch.
+      </p>
+    </div>
+
+    <div class="footer-nav">
+      <div class="footer-col">
+        <span class="footer-col-label">Hub</span>
+        <a href="/library">Library</a>
+        <a href="/ideas">Ideas</a>
+        <a href="/subscribe">Subscribe</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-label">Made</span>
+        <a href="/bothy">Bothy.</a>
+        <a href="/atlas">Atlas.</a>
+      </div>
+    </div>
+
   </div>
-  <p>Built by Laura.</p>
-  <div class="footer-links">
-    <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="/subscribe">Get in touch</a>
+
+  <div class="footer-base">
+    <span>hideaway. by Laura</span>
+    <div class="footer-base-links">
+      <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </div>
 </footer>
 
 <style>
   footer {
-    padding: 3rem;
-    text-align: center;
-    border-top: 1px solid rgba(232, 75, 138, 0.1);
+    border-top: 1px solid var(--border);
+    background: var(--frosted);
   }
 
-  .footer-name {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 0.5rem;
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3.5rem 3rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: start;
   }
 
-  .footer-name img {
-    height: 32px;
-    width: auto;
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.9rem;
   }
 
-  footer p {
-    font-size: 0.85rem;
+  .logo-h    { color: var(--sage); }
+  .logo-idea { color: #E8F547; }
+  .logo-way  { color: var(--sage); }
+
+  .footer-bio p {
+    font-size: 0.9rem;
     color: var(--text-light);
+    line-height: 1.7;
+    max-width: 400px;
   }
 
-  .footer-links {
-    margin-top: 1rem;
+  .footer-nav {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+    gap: 3rem;
   }
 
-  .footer-links a {
-    font-size: 0.85rem;
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-col-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+  }
+
+  .footer-col a {
+    font-size: 0.88rem;
     color: var(--text-light);
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.25s;
   }
 
-  .footer-links a:hover {
-    color: var(--pink);
+  .footer-col a:hover {
+    color: var(--navy);
+  }
+
+  .footer-base {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-base span {
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  .footer-base-links {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  .footer-base-links a {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .footer-base-links a:hover {
+    color: var(--navy);
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 3rem 1.5rem 2rem;
+    }
+
+    .footer-base {
+      padding: 1.2rem 1.5rem;
+    }
   }
 </style>

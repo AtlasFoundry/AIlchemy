@@ -9,119 +9,95 @@ const latestPosts = allPosts
   .slice(0, 3);
 ---
 
-<BaseLayout>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-shape"></div>
-    <div class="hero-shape"></div>
-    <div class="hero-shape"></div>
+<BaseLayout
+  title="hideaway. | a maker's hub"
+  description="Practical resources for makers — guides, prompts, demos, and tools. Built by Laura."
+>
 
-    <div class="hero-content">
-      <div class="hero-tag">Guides · Prompts · Demos · Tools</div>
-      <h1>Turning curiosity into <em>capability</em></h1>
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-inner">
+      <div class="intro-label">A maker's hub</div>
+      <h1>From first spark<br />to finished thing.</h1>
       <p>
-        Hey! I'm Laura, and I've spent the last couple of years figuring out how to keep up with
-        all the shiny new tools in the AI world. It's been a ride. I work on the principle that
-        sharing is caring — so this is where I share the learnings, the tools, the kits, the wins,
-        and the losses.
+        hideaway. is a hub for people bringing ideas to life. Practical resources — guides,
+        prompts, demos, and tools — organised around how making actually works.
       </p>
-      <div class="hero-cta-group">
-        <a href="#latest" class="btn-primary">Start learning</a>
-        <a href="/about" class="btn-secondary">Who's Laura?</a>
-      </div>
-    </div>
-
-    <!-- Floating cards (decorative) -->
-    <div class="hero-visual">
-      <div class="float-card card-1">
-        <div class="card-icon guide">
-          <svg width="18" height="22" viewBox="-6 6 62 76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M 18 8 H 32 V 36 C 46 41, 54 52, 54 64 C 54 75, 47 80, 25 80 C 3 80, -4 75, -4 64 C -4 52, 4 41, 18 36 Z" fill="#e84b8a"/>
-          </svg>
-        </div>
-        <h4>How I used Claude Code to set up this very page</h4>
-        <p>Step-by-step: from blank screen to live site</p>
-        <span class="card-tag tag-guide">Guide</span>
-      </div>
-      <div class="float-card card-2">
-        <div class="card-icon prompt">✦</div>
-        <h4>Templates to learn the language of love between you and your AI pal</h4>
-        <p>The prompts I actually use, day in, day out</p>
-        <span class="card-tag tag-prompt">Prompt</span>
-      </div>
-      <div class="float-card card-3">
-        <div class="card-icon video">▶</div>
-        <h4>The Atlas: find shared challenges from reports in seconds</h4>
-        <p>3 min demo of the pipeline in action</p>
-        <span class="card-tag tag-video">Demo</span>
+      <div class="intro-cta">
+        <a href="/library" class="btn-primary">Explore the library</a>
+        <a href="/subscribe" class="btn-secondary">Stay in the loop</a>
       </div>
     </div>
   </section>
 
-  <!-- THE ART OF USING AI -->
-  <section class="section" id="library">
-    <div class="section-header">
-      <h2>The Art of Using AI</h2>
-      <p>Two years of building, tested and organised so you don't have to dig.</p>
-    </div>
-    <div class="content-grid">
-      <div class="content-card">
-        <div class="cc-icon">
-          <svg width="22" height="27" viewBox="-6 6 62 76" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M 18 8 H 32 V 36 C 46 41, 54 52, 54 64 C 54 75, 47 80, 25 80 C 3 80, -4 75, -4 64 C -4 52, 4 41, 18 36 Z" fill="#e84b8a"/>
-          </svg>
+  <!-- THE THREE STAGES -->
+  <section class="stages" id="stages">
+    <div class="stages-inner">
+
+      <div class="stage-block download">
+        <div class="stage-number">01</div>
+        <div class="stage-content">
+          <div class="stage-name">Download.</div>
+          <h2>Capture what you notice.</h2>
+          <p>
+            Before an idea has shape, there's a signal. Something you noticed, a problem that keeps
+            coming back, a fragment that won't leave you alone. The Download stage is for that.
+            Resources here help you slow down, capture clearly, and not lose the things worth keeping.
+          </p>
+          <a href="/library?stage=download" class="stage-link">Resources for Download →</a>
         </div>
-        <h3>Can you break it down for me?</h3>
-        <p>
-          Step-by-step walkthroughs of how I build tools, products, and frameworks. From first idea
-          to working thing.
-        </p>
       </div>
-      <div class="content-card">
-        <div class="cc-icon">✦</div>
-        <h3>Talk to AI like you mean it</h3>
-        <p>
-          Copy-and-use prompts I've found useful in building a relationship with my AI models.
-          Tried, tested, shared.
-        </p>
+
+      <div class="stage-block idea">
+        <div class="stage-number">02</div>
+        <div class="stage-content">
+          <div class="stage-name">Idea.</div>
+          <h2>Shape what you've got.</h2>
+          <p>
+            An observation becomes an idea when you test it, poke at it, and decide it's worth
+            pursuing. The Idea stage is where the thinking gets sharper. Resources here help you
+            explore, validate, and move from vague possibility to a clear thing you can build.
+          </p>
+          <a href="/library?stage=idea" class="stage-link">Resources for Idea →</a>
+        </div>
       </div>
-      <div class="content-card">
-        <div class="cc-icon">▶</div>
-        <h3>Tools in action</h3>
-        <p>
-          Screen recordings and short videos of tools doing their thing. See it working, then build
-          your own.
-        </p>
+
+      <div class="stage-block creation">
+        <div class="stage-number">03</div>
+        <div class="stage-content">
+          <div class="stage-name">Creation.</div>
+          <h2>Build the actual thing.</h2>
+          <p>
+            This is where the work happens. Guides, demos, playbooks, and tools for the build phase
+            — practical, specific, and built from doing the thing rather than theorising about it.
+            No filler. Just what you need to move forward.
+          </p>
+          <a href="/library?stage=creation" class="stage-link">Resources for Creation →</a>
+        </div>
       </div>
-      <div class="content-card">
-        <div class="cc-icon">🧠</div>
-        <h3>PMA — Positive Mental Attitude</h3>
-        <p>
-          Mostly excerpts from my pivot moments — wins, losses, and what I've learned about myself
-          along the way.
-        </p>
-      </div>
+
     </div>
   </section>
 
-  <!-- LATEST -->
-  <section class="section" id="latest">
-    <div class="latest-bg">
-      <div class="section-header">
-        <h2>Latest</h2>
-        <p>Going the extra mile, so you don't have to.</p>
+  <!-- LATEST FROM THE LIBRARY -->
+  <section class="latest" id="latest">
+    <div class="latest-inner">
+      <div class="latest-header">
+        <h2>Latest from the library</h2>
+        <a href="/library" class="see-all">See all →</a>
       </div>
       <div class="latest-grid">
         {
           latestPosts.map((post) => (
             <PostCard
               title={post.data.title}
-              category={post.data.category}
+              stage={post.data.stage}
+              format={post.data.format}
               summary={post.data.summary}
               date={post.data.date}
               readTime={post.data.readTime}
               slug={post.id}
-              dark={true}
+              dark={false}
             />
           ))
         }
@@ -129,462 +105,527 @@ const latestPosts = allPosts
     </div>
   </section>
 
-  <!-- PRODUCTS -->
-  <section class="section" id="tools">
-    <div class="section-header">
-      <h2>Look what I made</h2>
-      <p>Each one came from a shared problem, and each one offers the opportunity to make someone's life easier.</p>
-    </div>
-    <div class="products-strip">
-      <div class="product-row">
-        <div class="product-name">Bothy</div>
-        <div class="product-desc">
-          Plain-language guidance for adults navigating complex financial forms. Currently focused
-          on pension transfers.
-        </div>
-        <a href="#" class="product-link">Learn more</a>
+  <!-- LOOK WHAT I MADE -->
+  <section class="made" id="made">
+    <div class="made-inner">
+      <div class="made-header">
+        <div class="section-label">Look what I made.</div>
+        <h2>Ideas that became real things.</h2>
+        <p>
+          Each one started as a problem someone shared with me. Each one is built to make
+          something easier for someone who needs it.
+        </p>
       </div>
-      <div class="product-row">
-        <div class="product-name">The Atlas</div>
-        <div class="product-desc">
-          Atlas turns scattered evidence into a usable map, so people stop building solutions to
-          problems they can't see.
+
+      <div class="made-grid">
+        <div class="made-card">
+          <div class="made-card-tag">Financial guidance</div>
+          <h3>Bothy.</h3>
+          <p>
+            Plain-language guidance for adults navigating complex financial forms. No jargon,
+            no judgment — just clear explanations for real decisions. Currently focused on
+            pension transfers.
+          </p>
+          <a href="/bothy" class="made-link">Read the story →</a>
         </div>
-        <a href="#" class="product-link">Learn more</a>
+
+        <div class="made-card">
+          <div class="made-card-tag">Evidence synthesis</div>
+          <h3>Atlas.</h3>
+          <p>
+            Atlas turns scattered evidence into a usable map. Feed it reports, documents, and
+            data — it finds the patterns and surfaces what matters, so you stop building
+            solutions to problems you can't quite see.
+          </p>
+          <a href="/atlas" class="made-link">Read the story →</a>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- IDEAS -->
+  <section class="ideas-tease" id="ideas">
+    <div class="ideas-tease-inner">
+      <div class="ideas-tease-text">
+        <div class="section-label">Ideas.</div>
+        <h2>What would actually help you?</h2>
+        <p>
+          The resources here are built around real problems. If there's something you're stuck on,
+          a format you'd find useful, or a question that keeps coming back — send it in. The best
+          guides start with someone asking the right thing.
+        </p>
+        <a href="/ideas" class="btn-primary">Submit an idea</a>
+      </div>
+      <div class="ideas-tease-aside">
+        <div class="ideas-example">
+          <span class="ideas-example-label">Recent idea request</span>
+          <p>"A prompt for turning messy meeting notes into a clear action list."</p>
+        </div>
+        <div class="ideas-example">
+          <span class="ideas-example-label">In the queue</span>
+          <p>"A guide to building a simple knowledge base with Claude Projects."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section class="subscribe-strip">
+    <div class="subscribe-strip-inner">
+      <div class="subscribe-strip-text">
+        <h2>Worth staying for.</h2>
+        <p>New resources when they're ready — not on a schedule. No noise.</p>
+      </div>
+      <form class="subscribe-strip-form" action="https://app.convertkit.com/forms/REPLACE_ID/subscriptions" method="post" target="_blank">
+        <input type="email" name="email_address" placeholder="your@email.com" required />
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
 </BaseLayout>
 
 <style>
-  /* HERO */
-  .hero {
-    min-height: 100vh;
+  /* ── INTRO ── */
+  .intro {
+    min-height: 90vh;
     display: flex;
     align-items: center;
-    padding: 8rem 3rem 4rem;
-    position: relative;
-    overflow: hidden;
+    padding: 9rem 3rem 5rem;
   }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 70%;
-    height: 120%;
-    background: radial-gradient(ellipse at center, var(--pink-glow) 0%, transparent 70%);
-    pointer-events: none;
+  .intro-inner {
+    max-width: 680px;
   }
 
-  .hero-shape {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.04;
-    background: var(--pink);
-  }
-
-  .hero-shape:nth-child(1) {
-    width: 400px;
-    height: 400px;
-    top: 10%;
-    right: 5%;
-    animation: floatSlow 18s ease-in-out infinite;
-  }
-
-  .hero-shape:nth-child(2) {
-    width: 200px;
-    height: 200px;
-    bottom: 15%;
-    right: 25%;
-    animation: floatSlow 14s ease-in-out infinite 3s;
-  }
-
-  .hero-shape:nth-child(3) {
-    width: 120px;
-    height: 120px;
-    top: 30%;
-    right: 35%;
-    animation: floatSlow 10s ease-in-out infinite 1s;
-  }
-
-  @keyframes floatSlow {
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-    50% {
-      transform: translate(-15px, -20px) scale(1.05);
-    }
-  }
-
-  .hero-content {
-    max-width: 660px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-tag {
-    display: inline-block;
+  .intro-label {
     font-size: 0.78rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--pink);
+    color: var(--sage);
     margin-bottom: 1.5rem;
-    padding: 0.4rem 1rem;
-    border: 1.5px solid var(--pink);
-    border-radius: 20px;
   }
 
-  .hero h1 {
+  .intro h1 {
     font-family: 'Fraunces', serif;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--deep);
+    font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+    font-weight: 400;
+    line-height: 1.12;
+    color: var(--navy);
     margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
   }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--pink);
-    font-weight: 300;
-  }
-
-  .hero p {
-    font-size: 1.15rem;
+  .intro p {
+    font-size: 1.1rem;
     line-height: 1.75;
     color: var(--text-light);
+    max-width: 520px;
     margin-bottom: 2.5rem;
-    max-width: 560px;
   }
 
-  .hero-cta-group {
+  .intro-cta {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
   }
 
-  /* HERO VISUAL */
-  .hero-visual {
-    position: absolute;
-    right: 3rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 420px;
-    height: 480px;
+  /* ── STAGES ── */
+  .stages {
+    padding: 2rem 0 5rem;
   }
 
-  .float-card {
-    position: absolute;
-    background: white;
-    border-radius: 14px;
-    padding: 1.4rem;
-    box-shadow: 0 8px 40px rgba(15, 26, 46, 0.08);
-    border: 1px solid rgba(232, 75, 138, 0.1);
-    transition: transform 0.4s ease;
-  }
-
-  .float-card:hover {
-    transform: translateY(-4px) !important;
-  }
-
-  .card-1 {
-    top: 0;
-    right: 0;
-    width: 270px;
-    animation: floatUp 6s ease-in-out infinite;
-  }
-
-  .card-2 {
-    top: 170px;
-    right: 150px;
-    width: 250px;
-    animation: floatUp 8s ease-in-out infinite 1s;
-  }
-
-  .card-3 {
-    top: 340px;
-    right: 10px;
-    width: 260px;
-    animation: floatUp 7s ease-in-out infinite 2s;
-  }
-
-  @keyframes floatUp {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-8px);
-    }
-  }
-
-  .card-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
+  .stages-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .card-icon.guide {
-    background: rgba(232, 75, 138, 0.1);
+  .stage-block {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
   }
 
-  .card-icon.prompt {
-    background: rgba(26, 39, 68, 0.08);
+  .stage-block:last-child {
+    border-bottom: 1px solid var(--border);
   }
 
-  .card-icon.video {
-    background: rgba(244, 162, 97, 0.12);
+  .stage-number {
+    font-family: 'Fraunces', serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--stone);
+    padding-top: 0.3rem;
+    font-style: italic;
   }
 
-  .float-card h4 {
+  .stage-content {
+    max-width: 640px;
+  }
+
+  .stage-name {
+    font-family: 'Fraunces', serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+  }
+
+  .stage-block.download .stage-name { color: #4d6e3c; }
+  .stage-block.idea .stage-name      { color: #6b6254; }
+  .stage-block.creation .stage-name  { color: var(--navy); }
+
+  .stage-content h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .stage-content p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+  }
+
+  .stage-link {
     font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 0.3rem;
-    color: var(--text);
-  }
-
-  .float-card p {
-    font-size: 0.78rem;
-    color: var(--text-light);
-    line-height: 1.5;
-  }
-
-  .card-tag {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    margin-top: 0.5rem;
-  }
-
-  .tag-guide {
-    background: rgba(232, 75, 138, 0.1);
-    color: var(--pink);
-  }
-
-  .tag-prompt {
-    background: rgba(26, 39, 68, 0.08);
     color: var(--navy);
+    text-decoration: none;
+    transition: opacity 0.2s;
   }
 
-  .tag-video {
-    background: rgba(244, 162, 97, 0.12);
-    color: #c77a3a;
+  .stage-link:hover {
+    opacity: 0.65;
   }
 
-  /* SECTIONS */
-  .section {
+  /* ── LATEST ── */
+  .latest {
     padding: 5rem 3rem;
+    background: var(--navy);
   }
 
-  .section-header {
-    text-align: center;
-    max-width: 620px;
-    margin: 0 auto 3.5rem;
-  }
-
-  .section-header h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--deep);
-    margin-bottom: 0.6rem;
-  }
-
-  .section-header p {
-    font-size: 1.05rem;
-    color: var(--text-light);
-    line-height: 1.7;
-  }
-
-  /* CONTENT GRID */
-  .content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.6rem;
+  .latest-inner {
     max-width: 1100px;
     margin: 0 auto;
   }
 
-  .content-card {
-    background: white;
-    border-radius: 14px;
-    padding: 1.8rem;
-    border: 1px solid rgba(232, 75, 138, 0.08);
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .content-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--pink);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-
-  .content-card:hover::after {
-    transform: scaleX(1);
-  }
-
-  .content-card:hover {
-    box-shadow: 0 12px 40px rgba(15, 26, 46, 0.06);
-  }
-
-  .cc-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 10px;
+  .latest-header {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    margin-bottom: 1.2rem;
-    background: var(--pink-soft);
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2.5rem;
   }
 
-  .content-card h3 {
+  .latest-header h2 {
     font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
-    font-weight: 500;
-    margin-bottom: 0.6rem;
-    color: var(--deep);
-  }
-
-  .content-card p {
-    font-size: 0.88rem;
-    color: var(--text-light);
-    line-height: 1.65;
-  }
-
-  /* LATEST */
-  .latest-bg {
-    background: var(--deep);
-    color: white;
-    border-radius: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem;
-  }
-
-  .latest-bg .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
     color: white;
   }
 
-  .latest-bg .section-header p {
+  .see-all {
+    font-size: 0.85rem;
+    font-weight: 600;
     color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .see-all:hover {
+    color: white;
   }
 
   .latest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+  }
+
+  /* ── MADE ── */
+  .made {
+    padding: 6rem 3rem;
+  }
+
+  .made-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+    margin-bottom: 0.9rem;
+  }
+
+  .made-header {
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+
+  .made-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.7rem;
+  }
+
+  .made-header p {
+    font-size: 1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  .made-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
   }
 
-  /* PRODUCTS */
-  .products-strip {
-    max-width: 1100px;
-    margin: 0 auto;
+  .made-card {
+    background: var(--navy);
+    border: 1px solid var(--navy);
+    border-radius: 10px;
+    padding: 2rem;
+    transition: all 0.25s;
   }
 
-  .product-row {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    padding: 2rem 0;
-    border-bottom: 1px solid rgba(232, 75, 138, 0.1);
+  .made-card:hover {
+    background: #0f1a30;
+    border-color: #0f1a30;
   }
 
-  .product-row:last-child {
-    border-bottom: none;
+  .made-card-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--sage);
+    margin-bottom: 0.7rem;
   }
 
-  .product-name {
+  .made-card h3 {
     font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 500;
-    min-width: 140px;
-    color: var(--deep);
+    font-size: 2rem;
+    font-weight: 400;
+    color: #E8F547;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
   }
 
-  .product-desc {
-    font-size: 0.95rem;
-    color: var(--text-light);
-    line-height: 1.65;
-    flex: 1;
+  .made-card p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
   }
 
-  .product-link {
+  .made-link {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--pink);
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    white-space: nowrap;
-    transition: color 0.3s;
+    transition: color 0.2s;
   }
 
-  .product-link:hover {
-    color: var(--deep);
+  .made-link:hover {
+    color: white;
   }
 
-  .product-link::after {
-    content: ' →';
+  /* ── IDEAS TEASE ── */
+  .ideas-tease {
+    padding: 5rem 3rem;
+    background: var(--stone);
   }
 
-  /* RESPONSIVE */
+  .ideas-tease-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .ideas-tease-text .section-label {
+    color: #6b6254;
+  }
+
+  .ideas-tease-text h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .ideas-tease-text p {
+    font-size: 0.95rem;
+    color: #6b6254;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .ideas-tease-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ideas-example {
+    background: rgba(247, 246, 241, 0.7);
+    border: 1px solid rgba(26, 39, 68, 0.1);
+    border-radius: 8px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .ideas-example-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a7f70;
+    margin-bottom: 0.5rem;
+  }
+
+  .ideas-example p {
+    font-size: 0.88rem;
+    color: var(--navy);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── SUBSCRIBE STRIP ── */
+  .subscribe-strip {
+    padding: 4rem 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .subscribe-strip-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .subscribe-strip-text h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+
+  .subscribe-strip-text p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+
+  .subscribe-strip-form {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .subscribe-strip-form input[type="email"] {
+    padding: 0.8rem 1.2rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--navy);
+    background: white;
+    min-width: 220px;
+    transition: border-color 0.25s;
+    outline: none;
+  }
+
+  .subscribe-strip-form input[type="email"]:focus {
+    border-color: var(--navy);
+  }
+
+  .subscribe-strip-form input[type="email"]::placeholder {
+    color: var(--text-light);
+  }
+
+  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .hero-visual {
+    .intro {
+      padding: 8rem 1.5rem 4rem;
+    }
+
+    .stages-inner {
+      padding: 0 1.5rem;
+    }
+
+    .stage-block {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .stage-number {
       display: none;
     }
 
-    .hero {
-      padding: 7rem 1.5rem 3rem;
+    .latest {
+      padding: 4rem 1.5rem;
     }
 
-    .section {
+    .made {
+      padding: 4rem 1.5rem;
+    }
+
+    .ideas-tease {
+      padding: 4rem 1.5rem;
+    }
+
+    .ideas-tease-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .subscribe-strip {
       padding: 3rem 1.5rem;
     }
 
-    .latest-bg {
-      padding: 2.5rem 1.5rem;
-      border-radius: 12px;
-    }
-
-    .product-row {
+    .subscribe-strip-inner {
       flex-direction: column;
-      gap: 0.8rem;
       align-items: flex-start;
+      gap: 1.5rem;
     }
   }
 
   @media (max-width: 600px) {
-    .hero h1 {
-      font-size: 2.2rem;
-    }
-
-    .content-grid {
-      grid-template-columns: 1fr;
+    .intro h1 {
+      font-size: 2.4rem;
     }
 
     .latest-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .made-grid {
       grid-template-columns: 1fr;
     }
   }

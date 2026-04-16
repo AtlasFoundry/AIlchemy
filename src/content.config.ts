@@ -5,7 +5,8 @@ const posts = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
   schema: z.object({
     title: z.string(),
-    category: z.enum(['guide', 'prompt', 'demo', 'pma']),
+    stage: z.enum(['download', 'idea', 'creation']),
+    format: z.enum(['guide', 'prompt', 'demo', 'reflection', 'pack']),
     summary: z.string(),
     date: z.coerce.date(),
     readTime: z.string(),

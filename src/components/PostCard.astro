@@ -1,7 +1,8 @@
 ---
 interface Props {
   title: string;
-  category: 'guide' | 'prompt' | 'demo' | 'pma';
+  stage: 'download' | 'idea' | 'creation';
+  format: 'guide' | 'prompt' | 'demo' | 'reflection' | 'pack';
   summary: string;
   date: Date;
   readTime: string;
@@ -9,20 +10,29 @@ interface Props {
   dark?: boolean;
 }
 
-const { title, category, summary, date, readTime, slug, dark = false } = Astro.props;
+const { title, stage, format, summary, date, readTime, slug, dark = false } = Astro.props;
 
-const categoryLabels: Record<string, string> = {
+const stageLabels: Record<string, string> = {
+  download: 'Download.',
+  idea: 'Idea.',
+  creation: 'Creation.',
+};
+
+const formatLabels: Record<string, string> = {
   guide: 'Guide',
   prompt: 'Prompt',
   demo: 'Demo',
-  pma: 'PMA',
+  reflection: 'Reflection',
+  pack: 'Pack',
 };
-
-const meta = `${categoryLabels[category]} · ${readTime}`;
 ---
 
-<a href={`/posts/${slug}`} class:list={['post-card', { dark }]}>
-  <div class="post-meta">{meta}</div>
+<a href={`/posts/${slug}`} class:list={['post-card', { dark }, stage]}>
+  <div class="post-tags">
+    <span class:list={['tag-stage', stage]}>{stageLabels[stage]}</span>
+    <span class="tag-format">{formatLabels[format]}</span>
+    <span class="tag-time">{readTime}</span>
+  </div>
   <h3>{title}</h3>
   <p>{summary}</p>
 </a>
@@ -30,66 +40,122 @@ const meta = `${categoryLabels[category]} · ${readTime}`;
 <style>
   .post-card {
     display: block;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 1.8rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.6rem;
     text-decoration: none;
-    transition: all 0.3s;
-    cursor: pointer;
+    transition: all 0.25s;
   }
 
   .post-card:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--pink-light);
+    box-shadow: 0 6px 24px rgba(26, 39, 68, 0.08);
+    border-color: var(--stone);
   }
 
-  /* Light variant (Library page) */
-  .post-card:not(.dark) {
-    background: white;
-    border: 1px solid rgba(232, 75, 138, 0.08);
+  /* Dark variant (homepage latest) */
+  .post-card.dark {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .post-card.dark:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
     box-shadow: none;
   }
 
-  .post-card:not(.dark):hover {
-    background: white;
-    box-shadow: 0 8px 32px rgba(15, 26, 46, 0.06);
-    border-color: rgba(232, 75, 138, 0.2);
+  .post-tags {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.9rem;
   }
 
-  .post-meta {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--pink-light);
-    margin-bottom: 0.8rem;
+  .tag-stage {
+    font-size: 0.7rem;
     font-weight: 600;
+    font-family: 'Fraunces', serif;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
   }
 
-  .post-card:not(.dark) .post-meta {
-    color: var(--pink);
+  .tag-stage.download {
+    background: rgba(156, 175, 136, 0.18);
+    color: #4d6e3c;
+  }
+
+  .tag-stage.idea {
+    background: rgba(212, 207, 196, 0.5);
+    color: #6b6254;
+  }
+
+  .tag-stage.creation {
+    background: rgba(26, 39, 68, 0.1);
+    color: var(--navy);
+  }
+
+  .tag-format {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-light);
+    padding: 0.2rem 0.55rem;
+    background: rgba(26, 39, 68, 0.05);
+    border-radius: 4px;
+  }
+
+  .tag-time {
+    font-size: 0.7rem;
+    color: var(--text-light);
+    margin-left: auto;
+  }
+
+  /* Dark variant tag overrides */
+  .post-card.dark .tag-stage.download {
+    background: rgba(156, 175, 136, 0.25);
+    color: #a8c492;
+  }
+
+  .post-card.dark .tag-stage.idea {
+    background: rgba(212, 207, 196, 0.2);
+    color: #c5bfb5;
+  }
+
+  .post-card.dark .tag-stage.creation {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .post-card.dark .tag-format {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .post-card.dark .tag-time {
+    color: rgba(255, 255, 255, 0.35);
   }
 
   .post-card h3 {
     font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
+    font-size: 1.08rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
-    color: white;
+    color: var(--navy);
     line-height: 1.35;
   }
 
-  .post-card:not(.dark) h3 {
-    color: var(--deep);
+  .post-card.dark h3 {
+    color: white;
   }
 
   .post-card p {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-light);
     line-height: 1.6;
   }
 
-  .post-card:not(.dark) p {
-    color: var(--text-light);
+  .post-card.dark p {
+    color: rgba(255, 255, 255, 0.5);
   }
 </style>

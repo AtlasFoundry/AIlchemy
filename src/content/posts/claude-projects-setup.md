@@ -1,6 +1,7 @@
 ---
 title: "How I set up Claude Projects for my business"
-category: guide
+stage: creation
+format: guide
 summary: "The system I use to keep AI output consistent across everything I build — voice briefs, prompt templates, and project structure."
 date: 2026-04-15
 readTime: "8 min read"

@@ -1,0 +1,230 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Atlas. | hideaway."
+  description="Atlas turns scattered evidence into a usable map — so you stop building solutions to problems you can't quite see."
+>
+  <div class="solution-page">
+
+    <div class="solution-header">
+      <div class="solution-header-inner">
+        <div class="solution-tag">Made by Laura</div>
+        <h1>Atlas.</h1>
+        <p class="solution-strapline">
+          Turn scattered evidence into a usable map.
+        </p>
+      </div>
+    </div>
+
+    <div class="solution-body">
+
+      <section class="solution-section">
+        <h2>The problem it solves</h2>
+        <p>
+          Organisations commission research. Consultations produce hundreds of responses. Reports
+          pile up. And then — nothing changes, because nobody can see across all of it at once.
+        </p>
+        <p>
+          The insight exists in the data. The problem is synthesis. By the time someone has read
+          fifty documents and tried to find the patterns, the energy to act on them has usually gone.
+          So problems stay invisible, and solutions get built for the wrong things.
+        </p>
+      </section>
+
+      <section class="solution-section">
+        <h2>What Atlas does</h2>
+        <p>
+          Atlas takes a collection of documents — consultation responses, research reports, policy
+          papers, interview transcripts — and extracts insights, not summaries. It finds what
+          the data means, not just what it says.
+        </p>
+        <p>
+          Then it synthesises across documents to surface the patterns: where concerns cluster,
+          where there's unexpected agreement, where the gaps are. The result is a map you can
+          actually use — a starting point for decisions rather than a pile of paper to get through.
+        </p>
+      </section>
+
+      <div class="solution-highlight">
+        <blockquote>
+          "We had 300 consultation responses. Atlas found the three things everyone kept saying
+          that nobody had noticed yet."
+        </blockquote>
+        <cite>— Atlas pilot user, public sector consultation</cite>
+      </div>
+
+      <section class="solution-section">
+        <h2>How it works</h2>
+        <p>
+          The pipeline has two stages. First, individual documents are processed through an
+          extraction prompt that pulls out insights — specific, significant observations, with
+          their source location attached. Not paraphrase. Not summary. What the document actually
+          means.
+        </p>
+        <p>
+          Second, the extracted insights from all documents are synthesised together. Atlas finds
+          the repeating patterns, the contradictions, the things that appear once but matter
+          disproportionately.
+        </p>
+        <p>
+          The result is a structured output you can present, share, or use to brief a team in
+          minutes instead of months.
+        </p>
+      </section>
+
+      <section class="solution-section">
+        <h2>Where it fits</h2>
+        <p>
+          Atlas is most useful wherever evidence is scattered across many documents and decisions
+          need to be made from it — public consultations, user research synthesis, competitive
+          analysis, policy review, due diligence.
+        </p>
+        <p>
+          If your work involves making sense of large volumes of text before you can act, Atlas
+          is built for you.
+        </p>
+      </section>
+
+      <div class="solution-cta">
+        <h3>Interested in Atlas?</h3>
+        <p>
+          If you're working on evidence synthesis, research infrastructure, or have a specific
+          use case in mind, get in touch.
+        </p>
+        <a href="/subscribe" class="btn-primary">Stay in the loop</a>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .solution-page {
+    padding-top: 5rem;
+  }
+
+  .solution-header {
+    background: var(--navy);
+    padding: 5rem 3rem 4rem;
+  }
+
+  .solution-header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .solution-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
+  .solution-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    color: #E8F547;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .solution-strapline {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    max-width: 500px;
+  }
+
+  .solution-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 3rem 6rem;
+  }
+
+  .solution-section {
+    margin-bottom: 3rem;
+  }
+
+  .solution-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .solution-section p {
+    font-size: 1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 0.9rem;
+  }
+
+  .solution-highlight {
+    background: var(--stone);
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+    margin: 3rem 0;
+  }
+
+  .solution-highlight blockquote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+
+  .solution-highlight cite {
+    font-size: 0.82rem;
+    color: #6b6254;
+    font-style: normal;
+  }
+
+  .solution-cta {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2.5rem;
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .solution-cta h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .solution-cta p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .solution-header {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .solution-body {
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .solution-highlight {
+      padding: 1.5rem;
+    }
+  }
+</style>

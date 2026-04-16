@@ -31,9 +31,9 @@ const {
 
 <style>
   .signup-wrap {
-    background: var(--pink-soft);
-    border: 1px solid rgba(232, 75, 138, 0.15);
-    border-radius: 14px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
     padding: 2.5rem;
     margin: 3rem 0 0;
     text-align: center;
@@ -41,40 +41,44 @@ const {
 
   .signup-wrap h3 {
     font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--deep);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--navy);
     margin-bottom: 0.5rem;
   }
 
   .signup-wrap > p {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     color: var(--text-light);
     margin-bottom: 1.5rem;
   }
 
   .signup-row {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.6rem;
     max-width: 440px;
     margin: 0 auto;
   }
 
   .signup-row input {
     flex: 1;
-    padding: 0.85rem 1.1rem;
-    border: 1.5px solid rgba(232, 75, 138, 0.25);
-    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    color: var(--text);
-    background: white;
+    font-size: 0.9rem;
+    color: var(--navy);
+    background: var(--frosted);
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.25s;
   }
 
   .signup-row input:focus {
-    border-color: var(--pink);
+    border-color: var(--navy);
+  }
+
+  .signup-row input::placeholder {
+    color: var(--text-light);
   }
 
   .signup-note {

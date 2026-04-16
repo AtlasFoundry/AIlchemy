@@ -3,14 +3,11 @@ const currentPath = Astro.url.pathname;
 ---
 
 <nav>
-  <a href="/" class="nav-logo">
-    <img src="/logo-wordmark.svg" alt="AIlchemy" height="36" />
-  </a>
+  <a href="/" class="nav-logo"><span class="logo-h">h</span><span class="logo-idea">idea</span><span class="logo-way">way.</span></a>
   <div class="nav-links">
     <a href="/library" class:list={[{ active: currentPath.startsWith('/library') }]}>Library</a>
-    <a href="/#tools">Tools</a>
-    <a href="/about" class:list={[{ active: currentPath === '/about' }]}>About</a>
-    <a href="/subscribe" class="nav-cta">Subscribe</a>
+    <a href="/ideas" class:list={[{ active: currentPath === '/ideas' }]}>Ideas</a>
+    <a href="/subscribe" class:list={['nav-cta', { active: currentPath === '/subscribe' }]}>Subscribe</a>
   </div>
 </nav>
 
@@ -20,25 +17,26 @@ const currentPath = Astro.url.pathname;
     top: 0;
     width: 100%;
     z-index: 100;
-    padding: 1.2rem 3rem;
+    padding: 1.1rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 253, 249, 0.88);
+    background: rgba(26, 39, 68, 0.97);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(232, 75, 138, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .nav-logo {
-    display: flex;
-    align-items: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 500;
     text-decoration: none;
+    letter-spacing: -0.01em;
   }
 
-  .nav-logo img {
-    height: 36px;
-    width: auto;
-  }
+  .logo-h   { color: var(--sage); }
+  .logo-idea { color: #E8F547; }
+  .logo-way  { color: var(--sage); }
 
   .nav-links {
     display: flex;
@@ -48,28 +46,29 @@ const currentPath = Astro.url.pathname;
 
   .nav-links a {
     text-decoration: none;
-    color: var(--text-light);
-    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.88rem;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: color 0.25s;
   }
 
   .nav-links a:hover,
   .nav-links a.active {
-    color: var(--pink);
+    color: white;
   }
 
   .nav-cta {
-    background: var(--pink) !important;
-    color: white !important;
-    padding: 0.6rem 1.4rem;
+    background: #E8F547 !important;
+    color: var(--navy) !important;
+    padding: 0.55rem 1.3rem;
     border-radius: 6px;
-    font-weight: 600 !important;
-    transition: all 0.3s !important;
+    font-weight: 700 !important;
+    transition: background 0.25s !important;
   }
 
   .nav-cta:hover {
-    background: var(--deep) !important;
+    background: #d4e03a !important;
+    color: var(--navy) !important;
   }
 
   @media (max-width: 900px) {
@@ -78,7 +77,7 @@ const currentPath = Astro.url.pathname;
     }
 
     .nav-links {
-      gap: 1rem;
+      gap: 1.2rem;
     }
   }
 

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <rect width="1080" height="1080" fill="#1A2744"/>
+  <text
+    x="540"
+    y="540"
+    font-family="Fraunces, Georgia, serif"
+    font-size="148"
+    font-weight="400"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    fill="#E8F547"
+  >Bothy.</text>
+</svg>
