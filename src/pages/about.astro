@@ -15,9 +15,9 @@ import EmailSignup from '../components/EmailSignup.astro';
           <div class="about-tag">About</div>
           <h1>I'm Laura, and I am a human.</h1>
         </div>
-        <div class="about-photo-col">
-          <img src="/laura.png" alt="Laura" />
-        </div>
+      </div>
+      <div class="about-photo-col">
+        <img src="/laura.png" alt="Laura" />
       </div>
     </div>
 
@@ -85,24 +85,21 @@ import EmailSignup from '../components/EmailSignup.astro';
     padding-top: 5rem;
   }
 
-  /* ── Header — editorial two-col layout ── */
+  /* ── Header ── */
   .about-header {
     background: var(--deep);
-    padding: 4.5rem 3rem 0;
+    padding: 5rem 3rem 0;
     overflow: hidden;
+    position: relative;
+    min-height: 320px;
   }
 
   .about-header-inner {
     max-width: 920px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 260px;
-    gap: 4rem;
-    align-items: end;
-  }
-
-  .about-text-col {
-    padding-bottom: 4rem;
+    /* leave room on the right for the bleeding photo */
+    padding-right: 300px;
+    padding-bottom: 5rem;
   }
 
   .about-tag {
@@ -117,27 +114,34 @@ import EmailSignup from '../components/EmailSignup.astro';
   .about-header h1 {
     font-family: 'Fraunces', serif;
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700;
-    font-style: italic;
+    font-weight: 400;
+    font-style: normal;
     color: white;
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
-  /* Photo — sits flush at the bottom of the dark header */
+  /* Photo — bleeds off the right edge, Option B */
+  .about-photo-col {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+  }
+
   .about-photo-col img {
     width: 100%;
     display: block;
-    border-radius: 10px 10px 0 0;
+    /* Sharp at right + bottom edges (bleeds out), soft radius on top-left only */
+    border-radius: 12px 0 0 0;
     object-fit: cover;
     object-position: top center;
-    aspect-ratio: 3 / 4;
   }
 
   /* ── Body ── */
   .about-body {
     max-width: 760px;
     margin: 0 auto;
-    padding: 4rem 3rem 5rem;
+    padding: 5.5rem 3rem 5rem;
   }
 
   .about-content .lead {
@@ -155,37 +159,53 @@ import EmailSignup from '../components/EmailSignup.astro';
     margin-bottom: 1.4rem;
   }
 
+  /* Section headings — semibold, generous space, pink accent line */
   .about-content h2 {
     font-family: 'Fraunces', serif;
-    font-size: 1.45rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 600;
     color: var(--deep);
-    margin: 2.8rem 0 0.9rem;
+    margin: 3.5rem 0 1.1rem;
+    padding-bottom: 0.7rem;
+    position: relative;
+  }
+
+  .about-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 2rem;
+    height: 2px;
+    background: var(--pink);
+    border-radius: 2px;
   }
 
   /* ── Mobile ── */
   @media (max-width: 720px) {
     .about-header {
-      padding: 3.5rem 1.5rem 0;
+      padding: 4rem 1.5rem 0;
+      min-height: unset;
     }
 
     .about-header-inner {
-      grid-template-columns: 1fr;
-      gap: 2rem;
+      padding-right: 0;
+      padding-bottom: 2rem;
     }
 
-    .about-text-col {
-      padding-bottom: 0;
+    /* On mobile, photo sits below the heading, inline */
+    .about-photo-col {
+      position: static;
+      width: 160px;
+      margin: 1.5rem 0 0;
     }
 
     .about-photo-col img {
-      max-width: 200px;
-      border-radius: 10px;
-      margin-top: 1.5rem;
+      border-radius: 10px 10px 0 0;
     }
 
     .about-body {
-      padding: 2.5rem 1.5rem 4rem;
+      padding: 3rem 1.5rem 4rem;
     }
   }
 </style>
