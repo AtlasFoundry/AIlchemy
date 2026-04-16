@@ -11,30 +11,26 @@ import EmailSignup from '../components/EmailSignup.astro';
 
     <div class="about-header">
       <div class="about-header-inner">
-        <div class="about-tag">About</div>
-        <h1>I'm Laura, and I am a human.</h1>
+        <div class="about-text-col">
+          <div class="about-tag">About</div>
+          <h1>I'm Laura, and I am a human.</h1>
+        </div>
+        <div class="about-photo-col">
+          <img src="/laura.png" alt="Laura" />
+        </div>
       </div>
     </div>
 
     <div class="about-body">
       <div class="about-content">
 
-        <!-- Photo + intro -->
-        <div class="about-intro">
-          <div class="about-photo">
-            <img src="/laura.png" alt="Laura" />
-          </div>
-          <div class="about-intro-text">
-            <p class="lead">
-              If I were to describe myself, I'd say I'm a Scottish founder, strategist and builder.
-              Those are the labels that make sense in work. Underneath them, I'm creative,
-              purpose-driven, and always interested in what becomes possible when the right idea
-              meets the right tools and the right people.
-            </p>
-          </div>
-        </div>
+        <p class="lead">
+          If I were to describe myself, I'd say I'm a Scottish founder, strategist and builder.
+          Those are the labels that make sense in work. Underneath them, I'm creative,
+          purpose-driven, and always interested in what becomes possible when the right idea
+          meets the right tools and the right people.
+        </p>
 
-        <!-- The name -->
         <h2>The name</h2>
         <p>
           The name AIlchemy came from the meeting point between AI and alchemy. Long before the word
@@ -49,7 +45,6 @@ import EmailSignup from '../components/EmailSignup.astro';
           is built into reality.
         </p>
 
-        <!-- Why it matters now -->
         <h2>That feels relevant now</h2>
         <p>
           I see AIlchemy at work every day in the way people learn, build, test, rethink and create
@@ -61,7 +56,6 @@ import EmailSignup from '../components/EmailSignup.astro';
           By doing that work myself, I know what the journey asks of you.
         </p>
 
-        <!-- What this is -->
         <h2>What this is</h2>
         <p>
           This is where I share the recipes, the learnings, and the processes behind that work.
@@ -91,15 +85,24 @@ import EmailSignup from '../components/EmailSignup.astro';
     padding-top: 5rem;
   }
 
-  /* ── Header ── */
+  /* ── Header — editorial two-col layout ── */
   .about-header {
     background: var(--deep);
-    padding: 4rem 3rem;
+    padding: 4.5rem 3rem 0;
+    overflow: hidden;
   }
 
   .about-header-inner {
-    max-width: 760px;
+    max-width: 920px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .about-text-col {
+    padding-bottom: 4rem;
   }
 
   .about-tag {
@@ -108,15 +111,26 @@ import EmailSignup from '../components/EmailSignup.astro';
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--pink-light);
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
   }
 
   .about-header h1 {
     font-family: 'Fraunces', serif;
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
     font-weight: 700;
-    color: white;
     font-style: italic;
+    color: white;
+    line-height: 1.2;
+  }
+
+  /* Photo — sits flush at the bottom of the dark header */
+  .about-photo-col img {
+    width: 100%;
+    display: block;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    object-position: top center;
+    aspect-ratio: 3 / 4;
   }
 
   /* ── Body ── */
@@ -126,34 +140,12 @@ import EmailSignup from '../components/EmailSignup.astro';
     padding: 4rem 3rem 5rem;
   }
 
-  /* ── Photo + intro ── */
-  .about-intro {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 2.5rem;
-    align-items: start;
-    margin-bottom: 3rem;
-  }
-
-  .about-photo img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 12px;
-    display: block;
-  }
-
-  .about-intro-text {
-    padding-top: 0.4rem;
-  }
-
-  /* ── Body text ── */
   .about-content .lead {
     font-size: 1.15rem;
     line-height: 1.85;
     color: var(--text);
-    margin-bottom: 0;
-    font-weight: 500;
+    font-weight: 400;
+    margin-bottom: 2rem;
   }
 
   .about-content p {
@@ -173,22 +165,28 @@ import EmailSignup from '../components/EmailSignup.astro';
   }
 
   /* ── Mobile ── */
-  @media (max-width: 680px) {
+  @media (max-width: 720px) {
     .about-header {
-      padding: 3rem 1.5rem;
+      padding: 3.5rem 1.5rem 0;
+    }
+
+    .about-header-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-text-col {
+      padding-bottom: 0;
+    }
+
+    .about-photo-col img {
+      max-width: 200px;
+      border-radius: 10px;
+      margin-top: 1.5rem;
     }
 
     .about-body {
       padding: 2.5rem 1.5rem 4rem;
-    }
-
-    .about-intro {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .about-photo img {
-      max-width: 180px;
     }
   }
 </style>
