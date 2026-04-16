@@ -24,7 +24,7 @@ const latestPosts = allPosts
         prompts, demos, and tools — organised around how making actually works.
       </p>
       <div class="intro-cta">
-        <a href="/library" class="btn-primary">Explore the library</a>
+        <a href="/library" class="btn-yellow">Explore the library</a>
         <a href="/subscribe" class="btn-secondary">Stay in the loop</a>
       </div>
     </div>
@@ -33,49 +33,45 @@ const latestPosts = allPosts
   <!-- THE THREE STAGES -->
   <section class="stages" id="stages">
     <div class="stages-inner">
+      <div class="stages-grid">
 
-      <div class="stage-block download">
-        <div class="stage-number">01</div>
-        <div class="stage-content">
-          <div class="stage-name">Download.</div>
-          <h2>Capture what you notice.</h2>
-          <p>
-            Before an idea has shape, there's a signal. Something you noticed, a problem that keeps
-            coming back, a fragment that won't leave you alone. The Download stage is for that.
-            Resources here help you slow down, capture clearly, and not lose the things worth keeping.
-          </p>
-          <a href="/library?stage=download" class="stage-link">Resources for Download →</a>
-        </div>
+        <a href="/library?stage=download" class="stage-tile">
+          <div class="tile-header">
+            <span class="tile-number">01</span>
+            <span class="tile-name">Download.</span>
+          </div>
+          <div class="tile-body">
+            <h3>Capture what you notice.</h3>
+            <p>Before an idea has shape, there's a signal worth keeping. Resources here help you slow down and not lose what matters.</p>
+            <span class="tile-link">Resources →</span>
+          </div>
+        </a>
+
+        <a href="/library?stage=idea" class="stage-tile">
+          <div class="tile-header">
+            <span class="tile-number">02</span>
+            <span class="tile-name">Idea.</span>
+          </div>
+          <div class="tile-body">
+            <h3>Shape what you've got.</h3>
+            <p>An observation becomes an idea when you test it. Resources here help you move from vague possibility to something worth building.</p>
+            <span class="tile-link">Resources →</span>
+          </div>
+        </a>
+
+        <a href="/library?stage=creation" class="stage-tile">
+          <div class="tile-header">
+            <span class="tile-number">03</span>
+            <span class="tile-name">Creation.</span>
+          </div>
+          <div class="tile-body">
+            <h3>Build the actual thing.</h3>
+            <p>Guides, demos, and tools for the build phase — practical, specific, no filler. Just what you need to move forward.</p>
+            <span class="tile-link">Resources →</span>
+          </div>
+        </a>
+
       </div>
-
-      <div class="stage-block idea">
-        <div class="stage-number">02</div>
-        <div class="stage-content">
-          <div class="stage-name">Idea.</div>
-          <h2>Shape what you've got.</h2>
-          <p>
-            An observation becomes an idea when you test it, poke at it, and decide it's worth
-            pursuing. The Idea stage is where the thinking gets sharper. Resources here help you
-            explore, validate, and move from vague possibility to a clear thing you can build.
-          </p>
-          <a href="/library?stage=idea" class="stage-link">Resources for Idea →</a>
-        </div>
-      </div>
-
-      <div class="stage-block creation">
-        <div class="stage-number">03</div>
-        <div class="stage-content">
-          <div class="stage-name">Creation.</div>
-          <h2>Build the actual thing.</h2>
-          <p>
-            This is where the work happens. Guides, demos, playbooks, and tools for the build phase
-            — practical, specific, and built from doing the thing rather than theorising about it.
-            No filler. Just what you need to move forward.
-          </p>
-          <a href="/library?stage=creation" class="stage-link">Resources for Creation →</a>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -233,81 +229,100 @@ const latestPosts = allPosts
 
   /* ── STAGES ── */
   .stages {
-    padding: 2rem 0 5rem;
+    padding: 4rem 3rem 5rem;
   }
 
   .stages-inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 3rem;
+  }
+
+  .stages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    align-items: stretch;
+  }
+
+  .stage-tile {
     display: flex;
     flex-direction: column;
-    gap: 0;
-  }
-
-  .stage-block {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 2rem;
-    padding: 3rem 0;
-    border-top: 1px solid var(--border);
-    align-items: start;
-  }
-
-  .stage-block:last-child {
-    border-bottom: 1px solid var(--border);
-  }
-
-  .stage-number {
-    font-family: 'Fraunces', serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: var(--stone);
-    padding-top: 0.3rem;
-    font-style: italic;
-  }
-
-  .stage-content {
-    max-width: 640px;
-  }
-
-  .stage-name {
-    font-family: 'Fraunces', serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-bottom: 0.7rem;
-  }
-
-  .stage-block.download .stage-name { color: #4d6e3c; }
-  .stage-block.idea .stage-name      { color: #6b6254; }
-  .stage-block.creation .stage-name  { color: var(--navy); }
-
-  .stage-content h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.7rem;
-    font-weight: 400;
-    color: var(--navy);
-    margin-bottom: 0.9rem;
-    line-height: 1.25;
-  }
-
-  .stage-content p {
-    font-size: 0.95rem;
-    color: var(--text-light);
-    line-height: 1.75;
-    margin-bottom: 1.2rem;
-  }
-
-  .stage-link {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--navy);
+    border-radius: 12px;
+    border: 1px solid var(--stone);
     text-decoration: none;
-    transition: opacity 0.2s;
+    overflow: hidden;
+    background: white;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
   }
 
-  .stage-link:hover {
-    opacity: 0.65;
+  .stage-tile:hover {
+    border-color: var(--sage);
+    background: rgba(156, 175, 136, 0.05);
+    transform: translateY(-3px);
+  }
+
+  .tile-header {
+    background: var(--navy);
+    padding: 1.4rem 1.8rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .tile-number {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--sage);
+    font-optical-sizing: none;
+  }
+
+  .tile-name {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #E8F547;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .tile-body {
+    padding: 1.6rem 1.8rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tile-body h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 0.65rem;
+    line-height: 1.3;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .tile-body p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 1.4rem;
+  }
+
+  .tile-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--sage);
+    transition: color 0.25s;
+  }
+
+  .stage-tile:hover .tile-link {
+    color: var(--navy);
   }
 
   /* ── LATEST ── */
@@ -575,17 +590,12 @@ const latestPosts = allPosts
       padding: 8rem 1.5rem 4rem;
     }
 
-    .stages-inner {
-      padding: 0 1.5rem;
+    .stages {
+      padding: 3rem 1.5rem 4rem;
     }
 
-    .stage-block {
+    .stages-grid {
       grid-template-columns: 1fr;
-      gap: 0.5rem;
-    }
-
-    .stage-number {
-      display: none;
     }
 
     .latest {
