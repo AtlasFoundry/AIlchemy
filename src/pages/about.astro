@@ -11,13 +11,13 @@ import EmailSignup from '../components/EmailSignup.astro';
 
     <div class="about-header">
       <div class="about-header-inner">
+        <div class="about-photo-col">
+          <img src="/laura.png" alt="Laura" />
+        </div>
         <div class="about-text-col">
           <div class="about-tag">About</div>
-          <h1>I'm Laura, and I am a human.</h1>
+          <h1>I'm Laura,<br />and I am a human.</h1>
         </div>
-      </div>
-      <div class="about-photo-col">
-        <img src="/laura.png" alt="Laura" />
       </div>
     </div>
 
@@ -88,18 +88,26 @@ import EmailSignup from '../components/EmailSignup.astro';
   /* ── Header ── */
   .about-header {
     background: var(--deep);
-    padding: 5rem 3rem 0;
-    overflow: hidden;
-    position: relative;
-    min-height: 320px;
+    padding: 5rem 3rem 4.5rem;
   }
 
   .about-header-inner {
-    max-width: 920px;
+    max-width: 860px;
     margin: 0 auto;
-    /* leave room on the right for the bleeding photo */
-    padding-right: 300px;
-    padding-bottom: 5rem;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  /* Photo — circular crop, left column */
+  .about-photo-col img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 50%;
+    display: block;
   }
 
   .about-tag {
@@ -113,28 +121,11 @@ import EmailSignup from '../components/EmailSignup.astro';
 
   .about-header h1 {
     font-family: 'Fraunces', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
     font-weight: 400;
     font-style: normal;
     color: white;
-    line-height: 1.25;
-  }
-
-  /* Photo — bleeds off the right edge, Option B */
-  .about-photo-col {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 280px;
-  }
-
-  .about-photo-col img {
-    width: 100%;
-    display: block;
-    /* Sharp at right + bottom edges (bleeds out), soft radius on top-left only */
-    border-radius: 12px 0 0 0;
-    object-fit: cover;
-    object-position: top center;
+    line-height: 1.3;
   }
 
   /* ── Body ── */
@@ -182,26 +173,20 @@ import EmailSignup from '../components/EmailSignup.astro';
   }
 
   /* ── Mobile ── */
-  @media (max-width: 720px) {
+  @media (max-width: 680px) {
     .about-header {
-      padding: 4rem 1.5rem 0;
-      min-height: unset;
+      padding: 4rem 1.5rem 3.5rem;
     }
 
     .about-header-inner {
-      padding-right: 0;
-      padding-bottom: 2rem;
-    }
-
-    /* On mobile, photo sits below the heading, inline */
-    .about-photo-col {
-      position: static;
-      width: 160px;
-      margin: 1.5rem 0 0;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
     }
 
     .about-photo-col img {
-      border-radius: 10px 10px 0 0;
+      width: 180px;
+      margin: 0 auto;
     }
 
     .about-body {
