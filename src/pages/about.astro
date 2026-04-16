@@ -5,72 +5,82 @@ import EmailSignup from '../components/EmailSignup.astro';
 
 <BaseLayout
   title="About Laura | AIlchemy"
-  description="Who Laura is, why she builds, and her perspective on working with AI."
+  description="I'm Laura — Scottish founder, strategist, and builder. This is where I share the recipes, learnings, and processes behind building with AI."
 >
   <div class="about-page">
+
     <div class="about-header">
       <div class="about-header-inner">
         <div class="about-tag">About</div>
-        <h1>Built by Laura.</h1>
+        <h1>I'm Laura, and I am a human.</h1>
       </div>
     </div>
 
     <div class="about-body">
       <div class="about-content">
-        <p class="lead">
-          I'm a Scottish founder and strategist. I build AI-powered tools for financial services
-          and help organisations understand what they're actually solving for before they build
-          anything.
+
+        <!-- Photo + intro -->
+        <div class="about-intro">
+          <div class="about-photo">
+            <img src="/laura.png" alt="Laura" />
+          </div>
+          <div class="about-intro-text">
+            <p class="lead">
+              If I were to describe myself, I'd say I'm a Scottish founder, strategist and builder.
+              Those are the labels that make sense in work. Underneath them, I'm creative,
+              purpose-driven, and always interested in what becomes possible when the right idea
+              meets the right tools and the right people.
+            </p>
+          </div>
+        </div>
+
+        <!-- The name -->
+        <h2>The name</h2>
+        <p>
+          The name AIlchemy came from the meeting point between AI and alchemy. Long before the word
+          became shorthand for turning lead into gold, alchemy was a strange and fascinating
+          collision of metalwork, medicine, philosophy and spirituality. It emerged from a view of
+          the world in which matter was not fixed or empty, but alive with meaning. To change a
+          substance was not only a technical act. It was part of a wider belief that nature itself
+          was always in motion, always changing, always becoming.
+        </p>
+        <p>
+          That is what still draws me to the idea. Alchemy began with the belief that transformation
+          is built into reality.
         </p>
 
+        <!-- Why it matters now -->
+        <h2>That feels relevant now</h2>
         <p>
-          For the last couple of years, I've been deep in the AI world — not as a spectator, but
-          as someone who builds with it every day. The learning curve has been steep and sometimes
-          absurd. AIlchemy is where I share what I've figured out.
+          I see AIlchemy at work every day in the way people learn, build, test, rethink and create
+          with new tools. In the moment someone moves from scratching their head to an aha. In the
+          decision to stay open instead of defensive. In the discipline of taking an idea, working it
+          properly, and turning it into something useful.
+        </p>
+        <p>
+          By doing that work myself, I know what the journey asks of you.
         </p>
 
+        <!-- What this is -->
+        <h2>What this is</h2>
         <p>
-          The name is a wordplay on AI + Alchemy. Turning curiosity into capability. Turning
-          complex problems into working solutions. Turning raw AI into practical tools that do
-          something useful for real people.
+          This is where I share the recipes, the learnings, and the processes behind that work.
+          It's a place for ideas in motion, better ways of thinking, and practical ways of building.
+          Some of it will be strategic. Some of it will be creative. Some of it will simply be me
+          showing my workings so that others can find their own way through.
         </p>
-
-        <h2>Why AIlchemy?</h2>
-
         <p>
-          I noticed that a lot of the conversation around AI sits at two extremes: breathless hype
-          or technical gatekeeping. Neither is useful if you're trying to actually build something.
-        </p>
-
-        <p>
-          AIlchemy is the middle ground. Practical, honest, and generous with the detail. If I've
-          figured something out, I share it. Not because I have all the answers, but because
-          sharing is how we all get better faster.
-        </p>
-
-        <h2>What I build</h2>
-
-        <p>
-          Alongside AIlchemy, I'm building two standalone products: <strong>Bothy</strong>, which
-          gives plain-language guidance to adults navigating complex financial forms, and
-          <strong>The Atlas</strong>, which turns scattered evidence into a usable map so people
-          stop building solutions to problems they can't see.
-        </p>
-
-        <p>
-          Both came from real problems I encountered. Both use AI in ways that feel genuinely
-          useful rather than novelty for novelty's sake.
-        </p>
-
-        <h2>Get in touch</h2>
-        <p>
-          The best way to stay connected is through the mailing list below. Or find me on LinkedIn.
+          I thrive in periods of change. I know not everyone does. My hope is that this becomes a
+          place where AI feels less like a threat at the door and more like something you can sit
+          with, understand, and use with intention. A place to learn, to experiment, and to have fun
+          without the fear of missing the AI party.
         </p>
 
         <EmailSignup
           heading="Stay in the loop."
           subtext="New guides, prompts, and tools — when they're ready, not on a schedule."
         />
+
       </div>
     </div>
   </div>
@@ -81,13 +91,14 @@ import EmailSignup from '../components/EmailSignup.astro';
     padding-top: 5rem;
   }
 
+  /* ── Header ── */
   .about-header {
     background: var(--deep);
     padding: 4rem 3rem;
   }
 
   .about-header-inner {
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
   }
 
@@ -102,52 +113,82 @@ import EmailSignup from '../components/EmailSignup.astro';
 
   .about-header h1 {
     font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
     font-weight: 700;
     color: white;
+    font-style: italic;
   }
 
+  /* ── Body ── */
   .about-body {
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
     padding: 4rem 3rem 5rem;
   }
 
+  /* ── Photo + intro ── */
+  .about-intro {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    margin-bottom: 3rem;
+  }
+
+  .about-photo img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .about-intro-text {
+    padding-top: 0.4rem;
+  }
+
+  /* ── Body text ── */
   .about-content .lead {
-    font-size: 1.2rem;
-    line-height: 1.8;
+    font-size: 1.15rem;
+    line-height: 1.85;
     color: var(--text);
-    margin-bottom: 1.6rem;
+    margin-bottom: 0;
     font-weight: 500;
   }
 
   .about-content p {
     font-size: 1.05rem;
-    line-height: 1.8;
+    line-height: 1.85;
     color: var(--text-light);
     margin-bottom: 1.4rem;
   }
 
   .about-content h2 {
     font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     font-weight: 500;
+    font-style: italic;
     color: var(--deep);
-    margin: 2.5rem 0 0.8rem;
+    margin: 2.8rem 0 0.9rem;
   }
 
-  .about-content strong {
-    color: var(--text);
-    font-weight: 600;
-  }
-
-  @media (max-width: 900px) {
+  /* ── Mobile ── */
+  @media (max-width: 680px) {
     .about-header {
       padding: 3rem 1.5rem;
     }
 
     .about-body {
       padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .about-intro {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .about-photo img {
+      max-width: 180px;
     }
   }
 </style>
