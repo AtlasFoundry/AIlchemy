@@ -15,6 +15,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="solution-strapline">
           Plain-language guidance for adults navigating complex financial decisions.
         </p>
+        <div class="demo-cta">
+          <a href="https://bothy-33.netlify.app/demo.html" target="_blank" rel="noopener" class="btn-demo">Try the demo →</a>
+        </div>
       </div>
     </div>
 
@@ -128,6 +131,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.6;
     max-width: 500px;
+  }
+
+  .demo-cta {
+    margin-top: 2rem;
+  }
+
+  .btn-demo {
+    display: inline-block;
+    background: #E8F547;
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 7px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-demo:hover {
+    background: #d4e03a;
   }
 
   .solution-body {
