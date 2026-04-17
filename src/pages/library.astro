@@ -5,6 +5,14 @@ import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('posts');
 const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Expose title+summary for search
+const postData = posts.map((p) => ({
+  title: p.data.title,
+  summary: p.data.summary,
+  stage: p.data.stage,
+  format: p.data.format,
+}));
 ---
 
 <BaseLayout
@@ -23,14 +31,31 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
 
     <div class="library-body">
 
+      <!-- SEARCH -->
+      <div class="search-wrap">
+        <div class="search-inner">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search guides, prompts, demos..."
+            autocomplete="off"
+            aria-label="Search library"
+          />
+        </div>
+      </div>
+
+      <!-- FILTERS -->
       <div class="filter-section">
         <div class="filter-group">
           <span class="filter-label">Stage</span>
           <div class="filter-row">
             <button class="filter-btn stage-btn active" data-stage="all">All</button>
-            <button class="filter-btn stage-btn" data-stage="download">Download.</button>
-            <button class="filter-btn stage-btn" data-stage="idea">Idea.</button>
-            <button class="filter-btn stage-btn" data-stage="creation">Creation.</button>
+            <button class="filter-btn stage-btn" data-stage="download">Download</button>
+            <button class="filter-btn stage-btn" data-stage="idea">Idea</button>
+            <button class="filter-btn stage-btn" data-stage="creation">Creation</button>
           </div>
         </div>
 
@@ -54,6 +79,8 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
               class="card-wrapper"
               data-stage={post.data.stage}
               data-format={post.data.format}
+              data-title={post.data.title.toLowerCase()}
+              data-summary={post.data.summary.toLowerCase()}
             >
               <PostCard
                 title={post.data.title}
@@ -83,16 +110,22 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
   const formatButtons = document.querySelectorAll<HTMLButtonElement>('.format-btn');
   const cards = document.querySelectorAll<HTMLElement>('.card-wrapper');
   const emptyState = document.getElementById('emptyState');
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
 
   let activeStage = 'all';
   let activeFormat = 'all';
+  let searchQuery = '';
 
   function applyFilters() {
     let visible = 0;
     cards.forEach((card) => {
       const stageMatch = activeStage === 'all' || card.dataset.stage === activeStage;
       const formatMatch = activeFormat === 'all' || card.dataset.format === activeFormat;
-      const show = stageMatch && formatMatch;
+      const searchMatch =
+        searchQuery === '' ||
+        (card.dataset.title ?? '').includes(searchQuery) ||
+        (card.dataset.summary ?? '').includes(searchQuery);
+      const show = stageMatch && formatMatch && searchMatch;
       card.style.display = show ? 'block' : 'none';
       if (show) visible++;
     });
@@ -117,6 +150,11 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
       btn.classList.add('active');
       applyFilters();
     });
+  });
+
+  searchInput?.addEventListener('input', () => {
+    searchQuery = searchInput.value.toLowerCase().trim();
+    applyFilters();
   });
 
   // Handle ?stage= query param on load
@@ -176,6 +214,55 @@ const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTim
     margin: 0 auto;
     padding: 3rem 3rem 6rem;
   }
+
+  /* ── Search ── */
+  .search-wrap {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-inner {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--sage);
+    pointer-events: none;
+  }
+
+  #search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    border: 1.5px solid var(--sage);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--navy);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  #search-input::placeholder {
+    color: var(--text-light);
+  }
+
+  #search-input:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.15);
+  }
+
+  /* hide browser's native clear button */
+  #search-input::-webkit-search-cancel-button { display: none; }
 
   /* ── Filters ── */
   .filter-section {
