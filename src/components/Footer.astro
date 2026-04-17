@@ -4,15 +4,6 @@
 <footer>
   <div class="footer-inner">
 
-    <div class="footer-bio">
-      <div class="footer-logo"><span class="logo-h">h</span><span class="logo-idea">idea</span><span class="logo-way">way.</span></div>
-      <p>
-        Laura is a Scottish founder, strategist and builder. hideaway. is where she shares
-        the tools, guides, and thinking behind building with intention — so you don't have
-        to start from scratch.
-      </p>
-    </div>
-
     <div class="footer-nav">
       <div class="footer-col">
         <span class="footer-col-label">Hub</span>
@@ -31,10 +22,7 @@
   </div>
 
   <div class="footer-base">
-    <span>hideaway. by Laura</span>
-    <div class="footer-base-links">
-      <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
+    <span>© hideaway. 2025</span>
   </div>
 </footer>
 
@@ -47,35 +35,9 @@
   .footer-inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 3.5rem 3rem 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  .footer-logo {
-    font-family: 'Fraunces', serif;
-    font-size: 1.7rem;
-    font-weight: 500;
-    margin-bottom: 0.9rem;
-    display: inline-block;
-    background: var(--navy);
-    padding: 0.3rem 0.8rem 0.35rem;
-    border-radius: 6px;
-    font-optical-sizing: none;
-    font-feature-settings: normal;
-  }
-
-  .logo-h    { color: var(--sage); }
-  .logo-idea { color: #E8F547; }
-  .logo-way  { color: var(--sage); }
-
-  .footer-bio p {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    line-height: 1.7;
-    max-width: 400px;
+    padding: 3rem 3rem 2.5rem;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .footer-nav {
@@ -114,9 +76,6 @@
     margin: 0 auto;
     padding: 1.2rem 3rem;
     border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 
   .footer-base span {
@@ -124,27 +83,10 @@
     color: var(--text-light);
   }
 
-  .footer-base-links {
-    display: flex;
-    gap: 1.2rem;
-  }
-
-  .footer-base-links a {
-    font-size: 0.8rem;
-    color: var(--text-light);
-    text-decoration: none;
-    transition: color 0.25s;
-  }
-
-  .footer-base-links a:hover {
-    color: var(--navy);
-  }
-
   @media (max-width: 768px) {
     .footer-inner {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      padding: 3rem 1.5rem 2rem;
+      justify-content: flex-start;
+      padding: 2.5rem 1.5rem 2rem;
     }
 
     .footer-base {
