@@ -1,0 +1,892 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Prompt Lab — hideaway." description="Turn rough prompts into clearer, stronger instructions you can actually use.">
+
+  <!-- Hero -->
+  <section class="lab-hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Tool</div>
+      <h1>Prompt<span class="accent"> Lab.</span></h1>
+      <p class="hero-sub">Turn rough prompts into clearer, stronger instructions you can actually use.</p>
+    </div>
+  </section>
+
+  <!-- Main Tool -->
+  <section class="lab-tool">
+    <div class="tool-inner">
+
+      <!-- Input -->
+      <div class="input-panel">
+        <label for="prompt-input" class="input-label">Your rough prompt</label>
+        <textarea
+          id="prompt-input"
+          placeholder="Paste the prompt you've got, even if it's messy, vague, or unfinished."
+          rows="7"
+        ></textarea>
+        <div class="input-meta">
+          <span class="char-count" id="char-count">0 / 4000</span>
+        </div>
+      </div>
+
+      <!-- Email gate (shown before first use) -->
+      <div class="email-gate" id="email-gate">
+        <div class="gate-inner">
+          <p class="gate-prompt">You get <strong>3 free prompt enhancements</strong>. After that, you'll need to sign up.</p>
+          <form class="gate-form" id="gate-form" name="prompt-lab-signups" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="prompt-lab-signups" />
+            <input type="hidden" name="bot-field" />
+            <input
+              type="email"
+              id="gate-email"
+              name="email"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+            />
+            <button type="submit" class="btn-yellow">Enhance Prompt</button>
+          </form>
+          <p class="gate-note">Already used your 3? <a href="/subscribe">Subscribe for £7/month →</a></p>
+        </div>
+      </div>
+
+      <!-- Enhance button (shown after email captured) -->
+      <div class="enhance-actions" id="enhance-actions" style="display:none;">
+        <button class="btn-yellow btn-enhance" id="enhance-btn">Enhance Prompt</button>
+        <span class="usage-counter" id="usage-counter"></span>
+      </div>
+
+      <!-- Loading state -->
+      <div class="loading-state" id="loading-state" style="display:none;">
+        <div class="loading-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <p>Enhancing…</p>
+      </div>
+
+      <!-- Error / refused / thin-input -->
+      <div class="error-msg" id="error-msg" style="display:none;"></div>
+
+      <!-- Output -->
+      <div class="output-panel" id="output-panel" style="display:none;">
+
+        <div class="output-section enhanced-section">
+          <div class="output-header">
+            <div>
+              <h2>Enhanced Prompt</h2>
+              <p class="output-desc">A sharper version of your original, ready to use.</p>
+            </div>
+            <button class="copy-btn" id="copy-btn" title="Copy to clipboard">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy
+            </button>
+          </div>
+          <div class="enhanced-text" id="enhanced-text"></div>
+        </div>
+
+        <div class="output-grid">
+          <div class="output-section">
+            <h3>What Was Weak</h3>
+            <p class="output-desc">What was missing or unclear in the original.</p>
+            <ul class="insight-list" id="weaknesses-list"></ul>
+          </div>
+          <div class="output-section">
+            <h3>What Was Improved</h3>
+            <p class="output-desc">What was clarified, added, or restructured.</p>
+            <ul class="insight-list" id="improvements-list"></ul>
+          </div>
+        </div>
+
+        <div class="output-section best-when">
+          <h3>Best Used When</h3>
+          <p class="output-desc">Where this version will work best.</p>
+          <p class="best-when-text" id="best-when-text"></p>
+        </div>
+
+        <!-- Assumptions — only shown when present -->
+        <div class="output-section assumptions-section" id="assumptions-section" style="display:none;">
+          <h3>Assumptions Made</h3>
+          <ul class="insight-list" id="assumptions-list"></ul>
+        </div>
+
+        <div class="output-actions">
+          <button class="btn-ghost" id="try-another-btn">Try another prompt</button>
+          <a href="/subscribe" class="btn-yellow-outline">Unlock all modes →</a>
+        </div>
+
+      </div>
+
+      <!-- Limit reached -->
+      <div class="limit-panel" id="limit-panel" style="display:none;">
+        <div class="limit-inner">
+          <h2>You've used your 3 free enhancements.</h2>
+          <p>Subscribe for £7/month — 50 enhancements, advanced modes, and everything else in hideaway.</p>
+          <a href="/subscribe" class="btn-yellow">Subscribe →</a>
+          <p class="limit-note">Already subscribed? <a href="/subscribe">Manage your account →</a></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works">
+    <div class="how-inner">
+      <h2>What Prompt Lab does</h2>
+      <div class="steps-grid">
+        <div class="step">
+          <span class="step-num">01</span>
+          <h3>Diagnoses weaknesses</h3>
+          <p>Spots what's vague, missing, or working against you — context gaps, unclear tasks, no format specified.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <h3>Rewrites with purpose</h3>
+          <p>Returns a sharper version that keeps your intent and adds what was missing — ready to use immediately.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h3>Teaches as it goes</h3>
+          <p>Shows you exactly what changed and why — so every prompt you write from here gets a little better.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .lab-hero {
+    background: var(--navy);
+    padding: 9rem 3rem 4rem;
+  }
+
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.55);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+  }
+
+  .lab-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 500;
+    color: white;
+    line-height: 1.05;
+    margin: 0 0 1.2rem;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .lab-hero h1 .accent {
+    color: #E8F547;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Tool section */
+  .lab-tool {
+    background: var(--frosted);
+    padding: 4rem 3rem 5rem;
+  }
+
+  .tool-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Input */
+  .input-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+  }
+
+  #prompt-input {
+    width: 100%;
+    border: 2px solid var(--stone);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--navy);
+    background: white;
+    resize: vertical;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+
+  #prompt-input:focus {
+    outline: none;
+    border-color: var(--sage);
+  }
+
+  #prompt-input::placeholder {
+    color: rgba(26,39,68,0.35);
+  }
+
+  .input-meta {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.4rem;
+  }
+
+  .char-count {
+    font-size: 0.78rem;
+    color: rgba(26,39,68,0.4);
+  }
+
+  /* Email gate */
+  .email-gate {
+    background: white;
+    border: 2px solid var(--stone);
+    border-radius: 10px;
+    padding: 1.8rem 2rem;
+  }
+
+  .gate-prompt {
+    margin: 0 0 1rem;
+    color: var(--navy);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .gate-form {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .gate-form input[type="email"] {
+    flex: 1;
+    min-width: 200px;
+    border: 2px solid var(--stone);
+    border-radius: 7px;
+    padding: 0.65rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--navy);
+    transition: border-color 0.2s;
+  }
+
+  .gate-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--sage);
+  }
+
+  .gate-note {
+    margin: 1rem 0 0;
+    font-size: 0.82rem;
+    color: rgba(26,39,68,0.5);
+  }
+
+  .gate-note a {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* Enhance actions */
+  .enhance-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .btn-enhance {
+    font-size: 1rem;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    border: none;
+  }
+
+  .usage-counter {
+    font-size: 0.82rem;
+    color: rgba(26,39,68,0.45);
+  }
+
+  /* Buttons */
+  .btn-yellow {
+    display: inline-block;
+    background: #E8F547;
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 7px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-yellow:hover { background: #d4e03a; }
+
+  .btn-ghost {
+    background: transparent;
+    border: 2px solid var(--stone);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.3rem;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--navy); }
+
+  .btn-yellow-outline {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #E8F547;
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.3rem;
+    border-radius: 7px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-yellow-outline:hover { background: #E8F547; }
+
+  /* Loading */
+  .loading-state {
+    text-align: center;
+    padding: 2.5rem;
+    color: rgba(26,39,68,0.5);
+    font-size: 0.95rem;
+  }
+
+  .loading-dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .loading-dots span {
+    width: 8px;
+    height: 8px;
+    background: var(--sage);
+    border-radius: 50%;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+
+  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes pulse {
+    0%, 80%, 100% { opacity: 0.3; transform: scale(0.85); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Error */
+  .error-msg {
+    background: #fff8f0;
+    border: 1px solid rgba(26,39,68,0.15);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    color: var(--navy);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  /* Output panel */
+  .output-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .output-section {
+    background: white;
+    border: 1px solid var(--stone);
+    border-radius: 10px;
+    padding: 1.5rem 1.8rem;
+  }
+
+  .output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .output-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin: 0 0 0.2rem;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .output-section h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(26,39,68,0.45);
+    margin: 0 0 0.3rem;
+  }
+
+  .output-desc {
+    font-size: 0.82rem;
+    color: rgba(26,39,68,0.45);
+    margin: 0 0 0.9rem;
+    line-height: 1.4;
+  }
+
+  .enhanced-text {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--navy);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid var(--stone);
+    color: rgba(26,39,68,0.55);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .copy-btn:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+  }
+
+  .copy-btn.copied {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+  }
+
+  .output-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .insight-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .insight-list li {
+    font-size: 0.9rem;
+    color: var(--navy);
+    line-height: 1.5;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .insight-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--sage);
+    font-weight: 700;
+  }
+
+  .best-when-text {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--navy);
+    line-height: 1.65;
+  }
+
+  .output-actions {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* Limit panel */
+  .limit-panel {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+  }
+
+  .limit-inner h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: white;
+    margin: 0 0 0.8rem;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .limit-inner > p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.95rem;
+    margin: 0 auto 1.5rem;
+    max-width: 420px;
+  }
+
+  .limit-note {
+    margin-top: 1rem !important;
+    font-size: 0.82rem !important;
+  }
+
+  .limit-note a { color: rgba(255,255,255,0.55); }
+
+  /* How it works */
+  .how-it-works {
+    background: var(--navy);
+    padding: 5rem 3rem;
+  }
+
+  .how-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .how-inner h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: white;
+    margin: 0 0 3rem;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .step-num {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #E8F547;
+    margin-bottom: 0.8rem;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .step h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.6rem;
+  }
+
+  .step p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .lab-hero { padding: 8rem 1.5rem 3rem; }
+    .lab-tool { padding: 3rem 1.5rem; }
+    .output-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .how-it-works { padding: 4rem 1.5rem; }
+    .gate-form { flex-direction: column; align-items: stretch; }
+    .gate-form input[type="email"] { min-width: unset; }
+    .email-gate { padding: 1.5rem; }
+    .output-section { padding: 1.2rem 1.3rem; }
+  }
+</style>
+
+<script>
+  const FREE_LIMIT = 3;
+  const STORAGE_KEY = 'hideaway_pl';
+
+  const promptInput = document.getElementById('prompt-input');
+  const charCount = document.getElementById('char-count');
+  const emailGate = document.getElementById('email-gate');
+  const gateForm = document.getElementById('gate-form');
+  const gateEmail = document.getElementById('gate-email');
+  const enhanceActions = document.getElementById('enhance-actions');
+  const enhanceBtn = document.getElementById('enhance-btn');
+  const usageCounter = document.getElementById('usage-counter');
+  const loadingState = document.getElementById('loading-state');
+  const errorMsg = document.getElementById('error-msg');
+  const outputPanel = document.getElementById('output-panel');
+  const limitPanel = document.getElementById('limit-panel');
+  const enhancedText = document.getElementById('enhanced-text');
+  const weaknessesList = document.getElementById('weaknesses-list');
+  const improvementsList = document.getElementById('improvements-list');
+  const bestWhenText = document.getElementById('best-when-text');
+  const assumptionsSection = document.getElementById('assumptions-section');
+  const assumptionsList = document.getElementById('assumptions-list');
+  const copyBtn = document.getElementById('copy-btn');
+  const tryAnotherBtn = document.getElementById('try-another-btn');
+
+  let currentEnhanced = '';
+
+  // Char counter
+  promptInput.addEventListener('input', () => {
+    const len = promptInput.value.length;
+    charCount.textContent = `${len} / 4000`;
+    charCount.style.color = len > 3800 ? '#c0392b' : '';
+  });
+
+  // State helpers
+  function getState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function updateCounter(count) {
+    const remaining = FREE_LIMIT - count;
+    usageCounter.textContent = remaining > 0
+      ? `${remaining} free enhancement${remaining !== 1 ? 's' : ''} remaining`
+      : '';
+  }
+
+  function init() {
+    const state = getState();
+    if (state.email) {
+      emailGate.style.display = 'none';
+      if (state.count >= FREE_LIMIT) {
+        showLimitPanel();
+      } else {
+        enhanceActions.style.display = 'flex';
+        updateCounter(state.count || 0);
+      }
+    }
+  }
+
+  function showLimitPanel() {
+    enhanceActions.style.display = 'none';
+    outputPanel.style.display = 'none';
+    loadingState.style.display = 'none';
+    limitPanel.style.display = 'block';
+  }
+
+  // Email gate
+  gateForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = gateEmail.value.trim();
+    if (!email) return;
+
+    // Submit to Netlify Forms in background
+    try {
+      const fd = new FormData();
+      fd.append('form-name', 'prompt-lab-signups');
+      fd.append('email', email);
+      fetch('/', { method: 'POST', body: fd }).catch(() => {});
+    } catch {}
+
+    const state = getState();
+    state.email = email;
+    state.count = state.count || 0;
+    saveState(state);
+
+    emailGate.style.display = 'none';
+    enhanceActions.style.display = 'flex';
+    updateCounter(state.count);
+
+    if (promptInput.value.trim().length >= 3) {
+      runEnhance();
+    }
+  });
+
+  // Enhance
+  enhanceBtn.addEventListener('click', runEnhance);
+
+  async function runEnhance() {
+    const state = getState();
+    const prompt = promptInput.value.trim();
+
+    if (!prompt || prompt.length < 3) {
+      showError('Add a prompt first — even a rough one is fine.');
+      return;
+    }
+
+    if (state.count >= FREE_LIMIT) {
+      showLimitPanel();
+      return;
+    }
+
+    hideError();
+    outputPanel.style.display = 'none';
+    loadingState.style.display = 'block';
+    enhanceBtn.disabled = true;
+
+    try {
+      const res = await fetch('/.netlify/functions/enhance-prompt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+
+      // Handle refused / thin-input
+      if (data.status === 'refused') {
+        showError(data.message || "I can't help improve that prompt.");
+        return;
+      }
+
+      // Increment usage
+      state.count = (state.count || 0) + 1;
+      saveState(state);
+      updateCounter(state.count);
+
+      displayResult(data);
+
+    } catch (err) {
+      showError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      loadingState.style.display = 'none';
+      enhanceBtn.disabled = false;
+    }
+  }
+
+  function displayResult(data) {
+    currentEnhanced = data.enhanced_prompt || '';
+    enhancedText.textContent = currentEnhanced;
+
+    weaknessesList.innerHTML = (data.what_was_weak || [])
+      .map(w => `<li>${escapeHtml(w)}</li>`).join('');
+
+    improvementsList.innerHTML = (data.what_was_improved || [])
+      .map(i => `<li>${escapeHtml(i)}</li>`).join('');
+
+    bestWhenText.textContent = data.best_used_when || '';
+
+    // Assumptions — only show when present
+    const assumptions = (data.assumptions || []).filter(Boolean);
+    if (assumptions.length > 0) {
+      assumptionsList.innerHTML = assumptions.map(a => `<li>${escapeHtml(a)}</li>`).join('');
+      assumptionsSection.style.display = 'block';
+    } else {
+      assumptionsSection.style.display = 'none';
+    }
+
+    outputPanel.style.display = 'flex';
+    outputPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    const state = getState();
+    if (state.count >= FREE_LIMIT) {
+      enhanceActions.style.display = 'none';
+    }
+  }
+
+  // Copy
+  copyBtn.addEventListener('click', async () => {
+    if (!currentEnhanced) return;
+    try {
+      await navigator.clipboard.writeText(currentEnhanced);
+      copyBtn.textContent = '✓ Copied';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy`;
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    } catch {}
+  });
+
+  // Try another
+  tryAnotherBtn.addEventListener('click', () => {
+    outputPanel.style.display = 'none';
+    assumptionsSection.style.display = 'none';
+    promptInput.value = '';
+    charCount.textContent = '0 / 4000';
+    currentEnhanced = '';
+    promptInput.focus();
+
+    const state = getState();
+    if (state.count < FREE_LIMIT) {
+      enhanceActions.style.display = 'flex';
+    }
+  });
+
+  function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.style.display = 'block';
+  }
+
+  function hideError() {
+    errorMsg.style.display = 'none';
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
+  }
+
+  init();
+</script>
+</BaseLayout>

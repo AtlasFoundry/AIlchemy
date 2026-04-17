@@ -7,3 +7,6 @@ dist/
 .astro/data-store.json
 .astro/settings.json
 hideaway/
+
+# Local Netlify folder
+.netlify

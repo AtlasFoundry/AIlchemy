@@ -4,3 +4,16 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/api/enhance-prompt"
+  to = "/.netlify/functions/enhance-prompt"
+  status = 200
+
+[dev]
+  command = "npm run dev"
+  targetPort = 4321
+  framework = "#custom"
