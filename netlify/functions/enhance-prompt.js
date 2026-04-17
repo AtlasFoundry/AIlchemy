@@ -90,12 +90,16 @@ If the enhanced prompt sounds more sophisticated than the user's intent required
 
 THIN INPUT
 
-If the input is too thin to improve meaningfully — a single word, a vague topic with no task, fewer than 8 words with no discernible intent — do not fabricate a response.
+Only trigger this if the input has no discernible task at all — a single word, a pure topic noun with zero intent, or something so fragmented it cannot be improved without inventing a different prompt entirely.
+
+If there is a task implied — even loosely — proceed and sharpen it. A missing point of view, vague tone, or unspecified angle are weaknesses to diagnose and fix in the output, not reasons to stop and ask.
+
+Only return thin_input when proceeding would require fabricating what the user is actually trying to do.
 
 Return:
 { "status": "thin_input", "message": "..." }
 
-The message should ask for the minimum missing information: typically the task, the intended output, and the audience if relevant. Do not lecture. Do not list five questions. Ask for what you actually need.
+The message should ask for the one thing that is genuinely missing. Do not list multiple questions. Be brief.
 
 ---
 
