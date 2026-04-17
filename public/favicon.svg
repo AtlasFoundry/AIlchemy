@@ -1,8 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Cream background -->
-  <rect width="32" height="32" rx="6" fill="#fffdf9"/>
-  <!-- Flask (pink) — slim neck, round bottom -->
-  <path d="M9 3 H14 V12 C18 14 20 18 20 23 C20 28 17 30 11.5 30 C6 30 3 28 3 23 C3 18 5 14 9 12 Z" fill="#e84b8a"/>
-  <!-- Spark (navy ✦) — bigger 4-pointed star, upper right -->
-  <path d="M24 1.5 L25.6 5.4 L29.5 7 L25.6 8.6 L24 12.5 L22.4 8.6 L18.5 7 L22.4 5.4 Z" fill="#0f1a2e"/>
+  <rect width="32" height="32" rx="7" fill="#1A2744"/>
+  <text x="16" y="23" font-family="Georgia, serif" font-size="20" font-weight="400" text-anchor="middle" fill="#9CAF88">h</text>
 </svg>
