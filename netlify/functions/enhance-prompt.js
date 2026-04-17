@@ -299,7 +299,7 @@ exports.handler = async (event) => {
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'Service not configured.' }) };
   }
 
-  const model = process.env.ANTHROPIC_MODEL || 'claude-haiku-4-5-20251001';
+  const model = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5';
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
