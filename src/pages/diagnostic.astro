@@ -468,14 +468,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     cursor: pointer;
   }
 
-  .q-option-score {
-    margin-left: auto;
-    font-size: 0.72rem;
-    color: rgba(26,39,68,0.3);
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-
   .q-nav {
     width: 100%;
     max-width: 640px;
@@ -1188,7 +1180,6 @@ function renderQuestion(index) {
     <label class="q-option${existing === opt.score ? ' selected' : ''}">
       <input type="radio" name="q-response" value="${opt.score}" ${existing === opt.score ? 'checked' : ''} />
       <span class="q-option-label">${opt.label}</span>
-      <span class="q-option-score">${opt.score}</span>
     </label>
   `).join('');
 
