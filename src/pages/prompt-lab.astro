@@ -90,13 +90,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <div class="output-grid">
           <div class="output-section">
-            <h3>What Was Weak</h3>
-            <p class="output-desc">What was missing or unclear in the original.</p>
+            <h3>Why It Was Weak</h3>
+            <p class="output-desc">What would likely have gone wrong.</p>
             <ul class="insight-list" id="weaknesses-list"></ul>
           </div>
           <div class="output-section">
-            <h3>What Was Improved</h3>
-            <p class="output-desc">What was clarified, added, or restructured.</p>
+            <h3>What Changed</h3>
+            <p class="output-desc">The leverage points — what actually moved the needle.</p>
             <ul class="insight-list" id="improvements-list"></ul>
           </div>
         </div>
@@ -107,9 +107,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <p class="best-when-text" id="best-when-text"></p>
         </div>
 
-        <!-- Assumptions — only shown when present -->
+        <!-- Assumptions — only shown when substantive -->
         <div class="output-section assumptions-section" id="assumptions-section" style="display:none;">
           <h3>Assumptions Made</h3>
+          <p class="output-desc">Material interpretive leaps — you may want to adjust these.</p>
           <ul class="insight-list" id="assumptions-list"></ul>
         </div>
 
@@ -792,7 +793,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
 
       // Handle refused / thin-input
-      if (data.status === 'refused') {
+      if (data.status === 'refused' || data.status === 'thin_input') {
         showError(data.message || "I can't help improve that prompt.");
         return;
       }
@@ -816,10 +817,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     currentEnhanced = data.enhanced_prompt || '';
     enhancedText.textContent = currentEnhanced;
 
-    weaknessesList.innerHTML = (data.what_was_weak || [])
+    weaknessesList.innerHTML = (data.why_it_was_weak || [])
       .map(w => `<li>${escapeHtml(w)}</li>`).join('');
 
-    improvementsList.innerHTML = (data.what_was_improved || [])
+    improvementsList.innerHTML = (data.what_changed || [])
       .map(i => `<li>${escapeHtml(i)}</li>`).join('');
 
     bestWhenText.textContent = data.best_used_when || '';
