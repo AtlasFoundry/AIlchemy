@@ -241,7 +241,7 @@ For successful enhancements:
   "mode": "standard",
   "enhanced_prompt": "string — the sharpened prompt, ready to use",
   "why_it_was_weak": ["string — failure mode, not a missing-fields list. Max 3 items."],
-  "what_changed": ["string — leverage points only, not an edit log. Max 4 items."],
+  "what_changed": ["string — leverage points only, not an edit log. Max 3 items."],
   "best_used_when": "string — one or two sentences on where this prompt works best",
   "assumptions": ["string — only include if assumption materially shaped the output. Empty array if none."]
 }

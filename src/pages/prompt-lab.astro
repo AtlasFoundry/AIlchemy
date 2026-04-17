@@ -20,9 +20,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Input -->
       <div class="input-panel">
         <label for="prompt-input" class="input-label">Your rough prompt</label>
+        <div class="starters">
+          <span class="starters-label">Try:</span>
+          <button class="starter-chip" data-text="Turn these rough notes into a builder brief for Claude">Turn rough notes into a builder brief</button>
+          <button class="starter-chip" data-text="Improve this Claude Code prompt so it gives me a cleaner, more structured output">Sharpen a Claude Code prompt</button>
+          <button class="starter-chip" data-text="Help me structure this idea so an AI tool can actually work with it">Structure an idea for a tool</button>
+        </div>
         <textarea
           id="prompt-input"
-          placeholder="Paste the prompt you've got, even if it's messy, vague, or unfinished."
+          placeholder="Paste what you've got — messy, vague, or half-formed is fine."
           rows="7"
         ></textarea>
         <div class="input-meta">
@@ -33,7 +39,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Email gate (shown before first use) -->
       <div class="email-gate" id="email-gate">
         <div class="gate-inner">
-          <p class="gate-prompt">You get <strong>3 free prompt enhancements</strong>. After that, you'll need to sign up.</p>
+          <p class="gate-prompt">You get <strong>3 free runs</strong>. After that, you'll need to sign up.</p>
           <form class="gate-form" id="gate-form" name="prompt-lab-signups" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="prompt-lab-signups" />
             <input type="hidden" name="bot-field" />
@@ -45,7 +51,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               required
               autocomplete="email"
             />
-            <button type="submit" class="btn-yellow">Enhance Prompt</button>
+            <button type="submit" class="btn-yellow">Run it →</button>
           </form>
           <p class="gate-note">Already used your 3? <a href="/subscribe">Subscribe for £7/month →</a></p>
         </div>
@@ -53,7 +59,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- Enhance button (shown after email captured) -->
       <div class="enhance-actions" id="enhance-actions" style="display:none;">
-        <button class="btn-yellow btn-enhance" id="enhance-btn">Enhance Prompt</button>
+        <button class="btn-yellow btn-enhance" id="enhance-btn">Run it →</button>
         <span class="usage-counter" id="usage-counter"></span>
       </div>
 
@@ -62,7 +68,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="loading-dots">
           <span></span><span></span><span></span>
         </div>
-        <p>Enhancing…</p>
+        <p>Running…</p>
       </div>
 
       <!-- Error / refused / thin-input -->
@@ -74,8 +80,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="output-section enhanced-section">
           <div class="output-header">
             <div>
-              <h2>Enhanced Prompt</h2>
-              <p class="output-desc">A sharper version of your original, ready to use.</p>
+              <h2>Builder-Ready Prompt</h2>
+              <p class="output-desc">Scoped, structured, and ready to run.</p>
             </div>
             <button class="copy-btn" id="copy-btn" title="Copy to clipboard">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -115,7 +121,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="output-actions">
-          <button class="btn-ghost" id="try-another-btn">Try another prompt</button>
+          <button class="btn-ghost" id="try-another-btn">Run another</button>
           <a href="/subscribe" class="btn-yellow-outline">Unlock all modes →</a>
         </div>
 
@@ -124,8 +130,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Limit reached -->
       <div class="limit-panel" id="limit-panel" style="display:none;">
         <div class="limit-inner">
-          <h2>You've used your 3 free enhancements.</h2>
-          <p>Subscribe for £7/month — 50 enhancements, advanced modes, and everything else in hideaway.</p>
+          <h2>You've used your 3 free runs.</h2>
+          <p>Subscribe for £7/month — 50 runs, advanced modes, and everything else in hideaway.</p>
           <a href="/subscribe" class="btn-yellow">Subscribe →</a>
           <p class="limit-note">Already subscribed? <a href="/subscribe">Manage your account →</a></p>
         </div>
@@ -141,18 +147,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="steps-grid">
         <div class="step">
           <span class="step-num">01</span>
-          <h3>Diagnoses weaknesses</h3>
-          <p>Spots what's vague, missing, or working against you — context gaps, unclear tasks, no format specified.</p>
+          <h3>Scopes the job</h3>
+          <p>Identifies what the tool is actually being asked to do — and where the original instruction would have failed or drifted.</p>
         </div>
         <div class="step">
           <span class="step-num">02</span>
-          <h3>Rewrites with purpose</h3>
-          <p>Returns a sharper version that keeps your intent and adds what was missing — ready to use immediately.</p>
+          <h3>Sharpens for the task</h3>
+          <p>Returns a structured, builder-ready version — same intent, cleaner scope, clearer output criteria.</p>
         </div>
         <div class="step">
           <span class="step-num">03</span>
-          <h3>Teaches as it goes</h3>
-          <p>Shows you exactly what changed and why — so every prompt you write from here gets a little better.</p>
+          <h3>Explains the leverage</h3>
+          <p>Shows which 2–3 changes moved the needle, so you build the instinct, not just copy the result.</p>
         </div>
       </div>
     </div>
@@ -220,6 +226,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+  }
+
+  /* Starter chips */
+  .starters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .starters-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(26,39,68,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+
+  .starter-chip {
+    background: white;
+    border: 1px solid var(--stone);
+    color: rgba(26,39,68,0.65);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .starter-chip:hover {
+    border-color: var(--sage);
+    color: var(--navy);
+    background: rgba(156,175,136,0.08);
   }
 
   /* Input */
@@ -685,6 +729,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   let currentEnhanced = '';
 
+  // Starter chips
+  document.querySelectorAll('.starter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      promptInput.value = chip.dataset.text;
+      charCount.textContent = `${chip.dataset.text.length} / 4000`;
+      promptInput.focus();
+    });
+  });
+
   // Char counter
   promptInput.addEventListener('input', () => {
     const len = promptInput.value.length;
@@ -705,7 +758,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   function updateCounter(count) {
     const remaining = FREE_LIMIT - count;
     usageCounter.textContent = remaining > 0
-      ? `${remaining} free enhancement${remaining !== 1 ? 's' : ''} remaining`
+      ? `${remaining} free run${remaining !== 1 ? 's' : ''} remaining`
       : '';
   }
 
