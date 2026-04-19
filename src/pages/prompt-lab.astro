@@ -80,6 +80,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="output-section enhanced-section">
           <div class="output-header">
             <div>
+              <span class="level-badge" id="level-badge" style="display:none;"></span>
               <h2>Builder-Ready Prompt</h2>
               <p class="output-desc">Scoped, structured, and ready to run.</p>
             </div>
@@ -529,6 +530,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     word-break: break-word;
   }
 
+  .level-badge {
+    display: inline-block;
+    background: rgba(156,175,136,0.15);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.6rem;
+    border: 1px solid rgba(156,175,136,0.4);
+  }
+
   .copy-btn {
     display: flex;
     align-items: center;
@@ -719,6 +735,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const outputPanel = document.getElementById('output-panel');
   const limitPanel = document.getElementById('limit-panel');
   const enhancedText = document.getElementById('enhanced-text');
+  const levelBadge = document.getElementById('level-badge');
   const weaknessesList = document.getElementById('weaknesses-list');
   const improvementsList = document.getElementById('improvements-list');
   const bestWhenText = document.getElementById('best-when-text');
@@ -869,6 +886,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   function displayResult(data) {
     currentEnhanced = data.enhanced_prompt || '';
     enhancedText.textContent = currentEnhanced;
+
+    if (data.prompt_level) {
+      levelBadge.textContent = data.prompt_level;
+      levelBadge.style.display = 'inline-block';
+    } else {
+      levelBadge.style.display = 'none';
+    }
 
     weaknessesList.innerHTML = (data.why_it_was_weak || [])
       .map(w => `<li>${escapeHtml(w)}</li>`).join('');
