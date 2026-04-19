@@ -1,0 +1,86 @@
+[
+  {
+    "id": "download_capture_habit",
+    "stage": "Download",
+    "label": "Capture habit",
+    "desc": "What you reach for when something is worth keeping.",
+    "questionIds": ["D01", "D02", "D03"]
+  },
+  {
+    "id": "download_pattern_awareness",
+    "stage": "Download",
+    "label": "Pattern awareness",
+    "desc": "What you notice across what you have gathered.",
+    "questionIds": ["D04", "D05", "D06"]
+  },
+  {
+    "id": "download_organisation",
+    "stage": "Download",
+    "label": "Organisation",
+    "desc": "How easy it is to return to what you have captured.",
+    "questionIds": ["D07", "D08", "D09"]
+  },
+  {
+    "id": "download_selection",
+    "stage": "Download",
+    "label": "Selection",
+    "desc": "How you decide what deserves more of your attention.",
+    "questionIds": ["D10", "D11", "D12"]
+  },
+  {
+    "id": "idea_concept_formation",
+    "stage": "Idea",
+    "label": "Concept formation",
+    "desc": "How you move from a vague thought to something specific.",
+    "questionIds": ["I01", "I02", "I03"]
+  },
+  {
+    "id": "idea_pressure_testing",
+    "stage": "Idea",
+    "label": "Pressure testing",
+    "desc": "How honestly you examine an idea before committing to it.",
+    "questionIds": ["I04", "I05", "I06"]
+  },
+  {
+    "id": "idea_purpose_clarity",
+    "stage": "Idea",
+    "label": "Purpose clarity",
+    "desc": "How well you know what an idea is actually for.",
+    "questionIds": ["I07", "I08", "I09"]
+  },
+  {
+    "id": "idea_decision_making",
+    "stage": "Idea",
+    "label": "Decision making",
+    "desc": "How you choose which idea gets your time.",
+    "questionIds": ["I10", "I11", "I12"]
+  },
+  {
+    "id": "creation_translation_into_action",
+    "stage": "Creation",
+    "label": "Translation into action",
+    "desc": "How you move from concept to a first practical step.",
+    "questionIds": ["C01", "C02", "C03"]
+  },
+  {
+    "id": "creation_tool_fluency",
+    "stage": "Creation",
+    "label": "Tool fluency",
+    "desc": "How well your tools serve the thing you are making.",
+    "questionIds": ["C04", "C05", "C06"]
+  },
+  {
+    "id": "creation_completion_and_release",
+    "stage": "Creation",
+    "label": "Completion and release",
+    "desc": "How consistently you finish and share work.",
+    "questionIds": ["C07", "C08", "C09"]
+  },
+  {
+    "id": "creation_iteration",
+    "stage": "Creation",
+    "label": "Iteration",
+    "desc": "How you build on what you have already made.",
+    "questionIds": ["C10", "C11", "C12"]
+  }
+]

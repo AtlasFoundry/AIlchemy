@@ -1,0 +1,50 @@
+[
+  {
+    "label": "Even Maker",
+    "detectionRule": "H - L <= 15",
+    "meaning": "Your stages are in balance. No single area is dominant and no single area is holding you back. This is the profile of a maker whose practice is coherent across capture, thinking, and making.",
+    "bestNextMove": "Use the Memo to pick the subdomain with the lowest score and sharpen that one area without disrupting the rest."
+  },
+  {
+    "label": "The Collector",
+    "detectionRule": "Download leads by 12+ over median AND 18+ over lowest",
+    "meaning": "You capture and notice more than most. The raw material is there. The gap is what happens after capture — shaping ideas and making things tends to trail what you've gathered.",
+    "bestNextMove": "Move one captured idea all the way through Idea and Creation this month. Not several — one. Prove the pipeline works end to end."
+  },
+  {
+    "label": "The Thinker",
+    "detectionRule": "Idea leads by 12+ over median AND 18+ over lowest",
+    "meaning": "You develop and pressure-test ideas further than most people will. The thinking is strong. The gap is what feeds the thinking (capture) and what happens after it (making).",
+    "bestNextMove": "Pick a current idea and set a hard build date. Stop refining the thinking and start exposing the idea to the real work of making it."
+  },
+  {
+    "label": "The Builder",
+    "detectionRule": "Creation leads by 12+ over median AND 18+ over lowest",
+    "meaning": "You make things. You finish and release where others stall. The risk is that you're building on thin material — not enough capture feeding in, not enough testing of whether the idea is right before you commit.",
+    "bestNextMove": "Before the next build, spend a week in Download and Idea only. Capture widely. Pressure-test the next idea properly. Your building skill deserves better input."
+  },
+  {
+    "label": "Stuck Upstream",
+    "detectionRule": "Creation < 50 AND (Download + Idea) / 2 >= 60",
+    "meaning": "Your capture and thinking are working. Your making is not. Ideas stay ideas. This is the most common maker pattern and also the most fixable — the gap is almost always about first-step-size, not ability.",
+    "bestNextMove": "Pick the smallest possible first version of one idea and release it this week. The goal is to move through Creation once, badly, rather than think your way to a perfect version."
+  },
+  {
+    "label": "Stuck Midstream",
+    "detectionRule": "Idea < 50 AND Download >= 55 AND Creation >= 55",
+    "meaning": "You capture and you build — but the middle is skipped. This often produces work that starts well and then stops making sense, because the thinking wasn't done before the making began.",
+    "bestNextMove": "Before your next build, write a concept note that answers three questions: what is this, who is it for, and what's the real problem underneath it. Then check whether the build still makes sense."
+  },
+  {
+    "label": "Rushed Maker",
+    "detectionRule": "Download < 50 AND Idea >= 55 AND Creation >= 55",
+    "meaning": "You think and you make. What you're missing is raw material. When Download is low, every new idea has to come from somewhere else — usually your own head, under pressure.",
+    "bestNextMove": "Set up one capture channel this week and use it for fifteen days. Don't organise. Don't synthesise. Just catch what you notice. The input will change what you can make."
+  },
+  {
+    "label": "Developing Maker",
+    "detectionRule": "Fallback — uneven profile that doesn't fit a named pattern",
+    "meaning": "Your profile is uneven but not sharply — you have real strengths and real gaps, but none dominant enough to name a single pattern. This is a common phase for someone whose practice is actively shifting.",
+    "bestNextMove": "Read the subdomain scores rather than the stage scores. Your actual next move sits at subdomain level, not stage level."
+  }
+]

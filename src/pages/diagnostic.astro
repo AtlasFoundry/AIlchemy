@@ -1,10 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import rawQuestions from '../content/memo/questions.json';
+import rawSubdomains from '../content/memo/subdomains.json';
+import rawStages from '../content/memo/stages.json';
+import rawPatterns from '../content/memo/patterns.json';
 ---
 
 <BaseLayout
-  title="Makers Diagnostic — hideaway."
-  description="A structured diagnostic to show where you are in your maker journey across Download, Idea, and Creation."
+  title="Makers Memo — hideaway."
+  description="A structured diagnostic across Download, Idea, and Creation. Returns your Makers Memo: your pattern, your strongest moves, the gaps that matter, and where to focus next."
 >
 
 <!-- ─── INTRO ─────────────────────────────────────────────────── -->
@@ -12,15 +16,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="intro-hero">
     <div class="intro-hero-inner">
       <div class="diag-tag">Diagnostic</div>
-      <h1>Makers<span class="accent"> Diagnostic.</span></h1>
-      <p class="intro-sub">This looks at how you currently move through making — across three stages: Download, Idea, and Creation.</p>
-      <p class="intro-sub">The goal is not to judge potential. It is to show the pattern you are in now, so you know what to strengthen next.</p>
+      <h1>Makers<span class="accent"> Memo.</span></h1>
+      <p class="intro-sub">A structured read of how you currently work across three stages — Download, Idea, and Creation.</p>
+      <p class="intro-sub">Not a personality quiz. The output is a Memo: your pattern, your strongest moves, the gaps that matter, and where to focus next.</p>
       <div class="intro-meta">
-        <span>45 questions</span>
+        <span>36 questions</span>
         <span>·</span>
         <span>~10 minutes</span>
         <span>·</span>
-        <span>Your result: a Makers Passport</span>
+        <span>Output: your Makers Memo</span>
       </div>
       <button class="btn-yellow btn-begin" id="btn-begin">Begin the diagnostic →</button>
     </div>
@@ -30,18 +34,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="stage-card">
         <span class="stage-num">01</span>
         <h3>Download.</h3>
-        <p>Capturing, noticing, organising, and selecting. The habit of bringing useful material in.</p>
+        <p>Capturing, noticing, organising, and selecting raw material.</p>
       </div>
       <div class="stage-card">
         <span class="stage-num">02</span>
         <h3>Idea.</h3>
-        <p>Shaping, testing, clarifying, and deciding. The work of turning rough thoughts into something usable.</p>
+        <p>Shaping, testing, clarifying, and deciding what's worth building.</p>
       </div>
       <div class="stage-card">
         <span class="stage-num">03</span>
         <h3>Creation.</h3>
-        <p>Building, finishing, releasing, and iterating. The move from concept to output.</p>
+        <p>Building, finishing, releasing, and iterating on what you've made.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INTERSTITIAL ──────────────────────────────────────────── -->
+<section id="view-interstitial" class="diag-view" style="display:none;">
+  <div class="interstitial-wrapper">
+    <div class="interstitial-inner">
+      <span class="interstitial-badge" id="int-badge"></span>
+      <h2 class="interstitial-heading" id="int-heading"></h2>
+      <p class="interstitial-body" id="int-body"></p>
+      <button class="btn-yellow" id="btn-continue">Continue →</button>
     </div>
   </div>
 </section>
@@ -49,174 +65,107 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <!-- ─── QUESTIONS ─────────────────────────────────────────────── -->
 <section id="view-questions" class="diag-view" style="display:none;">
   <div class="q-chrome">
-    <div class="q-progress-bar">
-      <div class="q-progress-fill" id="q-progress-fill"></div>
-    </div>
-    <div class="q-stage-track" id="q-stage-track">
-      <span class="q-stage-pill" data-stage="download">Download</span>
-      <span class="q-stage-pill" data-stage="idea">Idea</span>
-      <span class="q-stage-pill" data-stage="creation">Creation</span>
+    <div class="q-stage-segments" role="progressbar" aria-label="Diagnostic progress">
+      <div class="q-seg" id="q-seg-download">
+        <div class="q-seg-track"><div class="q-seg-fill" id="q-seg-fill-download"></div></div>
+      </div>
+      <div class="q-seg" id="q-seg-idea">
+        <div class="q-seg-track"><div class="q-seg-fill" id="q-seg-fill-idea"></div></div>
+      </div>
+      <div class="q-seg" id="q-seg-creation">
+        <div class="q-seg-track"><div class="q-seg-fill" id="q-seg-fill-creation"></div></div>
+      </div>
     </div>
   </div>
 
   <div class="q-body">
-    <div class="q-meta">
-      <span class="q-subdomain" id="q-subdomain"></span>
-      <span class="q-counter" id="q-counter"></span>
-    </div>
-    <p class="q-text" id="q-text"></p>
-    <div class="q-options" id="q-options"></div>
-    <div class="q-nav">
-      <button class="btn-ghost" id="btn-back">← Back</button>
-      <button class="btn-yellow" id="btn-next" disabled>Next →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ─── RESULTS ───────────────────────────────────────────────── -->
-<section id="view-results" class="diag-view" style="display:none;">
-  <div class="results-hero">
-    <div class="results-hero-inner">
-      <div class="diag-tag">Your result</div>
-      <h1 id="res-band-heading">—</h1>
-      <p class="res-overall-score" id="res-overall-score"></p>
-      <p class="res-band-desc" id="res-band-desc"></p>
-    </div>
-  </div>
-
-  <div class="results-body">
-    <div class="results-body-inner">
-
-      <div class="results-stages">
-        <div class="results-stage-card" id="res-stage-download">
-          <div class="rsc-header">
-            <span class="rsc-label">Download.</span>
-            <span class="rsc-score" id="rsc-score-download"></span>
-          </div>
-          <div class="rsc-bar-track"><div class="rsc-bar-fill" id="rsc-bar-download"></div></div>
-          <p class="rsc-interp" id="rsc-interp-download"></p>
+    <div class="q-content">
+      <div class="q-meta">
+        <div class="q-meta-left">
+          <span class="q-subdomain" id="q-subdomain"></span>
+          <span class="q-subdomain-desc" id="q-subdomain-desc"></span>
         </div>
-        <div class="results-stage-card" id="res-stage-idea">
-          <div class="rsc-header">
-            <span class="rsc-label">Idea.</span>
-            <span class="rsc-score" id="rsc-score-idea"></span>
-          </div>
-          <div class="rsc-bar-track"><div class="rsc-bar-fill" id="rsc-bar-idea"></div></div>
-          <p class="rsc-interp" id="rsc-interp-idea"></p>
-        </div>
-        <div class="results-stage-card" id="res-stage-creation">
-          <div class="rsc-header">
-            <span class="rsc-label">Creation.</span>
-            <span class="rsc-score" id="rsc-score-creation"></span>
-          </div>
-          <div class="rsc-bar-track"><div class="rsc-bar-fill" id="rsc-bar-creation"></div></div>
-          <p class="rsc-interp" id="rsc-interp-creation"></p>
-        </div>
+        <span class="q-counter" id="q-counter"></span>
       </div>
-
-      <div class="results-pattern">
-        <div class="pattern-card">
-          <span class="pattern-label">Strongest stage</span>
-          <span class="pattern-value" id="res-strongest"></span>
-        </div>
-        <div class="pattern-card">
-          <span class="pattern-label">Main gap</span>
-          <span class="pattern-value" id="res-gap"></span>
-        </div>
-        <div class="pattern-card pattern-card--wide">
-          <span class="pattern-label">Best next move</span>
-          <span class="pattern-value" id="res-next-move"></span>
-        </div>
+      <p class="q-text" id="q-text"></p>
+      <div class="q-options" id="q-options"></div>
+      <div class="q-nav">
+        <button class="btn-ghost" id="btn-back">← Back</button>
+        <button class="btn-next" id="btn-next" disabled>Next →</button>
       </div>
-
-      <div class="results-cta">
-        <button class="btn-yellow" id="btn-view-passport">View your Makers Passport →</button>
-        <button class="btn-ghost" id="btn-retake">Retake</button>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ─── MAKERS PASSPORT ───────────────────────────────────────── -->
-<section id="view-passport" class="diag-view" style="display:none;">
-  <div class="passport-wrapper">
-    <div class="passport" id="passport">
+<!-- ─── MAKERS MEMO ────────────────────────────────────────────── -->
+<section id="view-memo" class="diag-view" style="display:none;">
+  <div class="memo-wrapper">
+    <div class="memo" id="memo">
 
-      <div class="passport-header">
-        <div class="passport-logo"><span class="logo-h">h</span><span class="logo-idea">idea</span><span class="logo-way">way.</span></div>
-        <div class="passport-title-block">
-          <h1>Makers Passport</h1>
-          <p class="passport-date" id="passport-date"></p>
+      <div class="memo-header">
+        <div class="memo-logo"><span class="logo-h">h</span><span class="logo-idea">idea</span><span class="logo-way">way.</span></div>
+        <div class="memo-title-block">
+          <h1>Makers Memo</h1>
+          <p class="memo-date" id="memo-date"></p>
         </div>
       </div>
 
-      <div class="passport-overview">
-        <div class="passport-score-block">
-          <span class="passport-score-label">Overall score</span>
-          <span class="passport-score-value" id="pp-overall-score"></span>
+      <div class="memo-overview">
+        <div class="memo-overview-cell">
+          <span class="memo-label">Overall</span>
+          <span class="memo-score-value" id="memo-overall-score"></span>
         </div>
-        <div class="passport-band-block">
-          <span class="passport-band-name" id="pp-band-name"></span>
-          <span class="passport-band-desc" id="pp-band-desc"></span>
+        <div class="memo-overview-cell">
+          <span class="memo-label">Band</span>
+          <span class="memo-band-value" id="memo-band"></span>
         </div>
-        <div class="passport-profile-block">
-          <span class="passport-profile-label">Profile</span>
-          <span class="passport-profile-name" id="pp-profile-name"></span>
-        </div>
-      </div>
-
-      <div class="passport-stages">
-        <div class="passport-stage">
-          <div class="pst-header">
-            <span class="pst-name">Download.</span>
-            <span class="pst-score" id="pp-score-download"></span>
-          </div>
-          <div class="pst-bar-track"><div class="pst-bar-fill" id="pp-bar-download"></div></div>
-          <p class="pst-meaning" id="pp-meaning-download"></p>
-          <div class="pst-route" id="pp-route-download"></div>
-        </div>
-        <div class="passport-stage">
-          <div class="pst-header">
-            <span class="pst-name">Idea.</span>
-            <span class="pst-score" id="pp-score-idea"></span>
-          </div>
-          <div class="pst-bar-track"><div class="pst-bar-fill" id="pp-bar-idea"></div></div>
-          <p class="pst-meaning" id="pp-meaning-idea"></p>
-          <div class="pst-route" id="pp-route-idea"></div>
-        </div>
-        <div class="passport-stage">
-          <div class="pst-header">
-            <span class="pst-name">Creation.</span>
-            <span class="pst-score" id="pp-score-creation"></span>
-          </div>
-          <div class="pst-bar-track"><div class="pst-bar-fill" id="pp-bar-creation"></div></div>
-          <p class="pst-meaning" id="pp-meaning-creation"></p>
-          <div class="pst-route" id="pp-route-creation"></div>
+        <div class="memo-overview-cell">
+          <span class="memo-label">Pattern</span>
+          <span class="memo-pattern-value" id="memo-pattern-label"></span>
         </div>
       </div>
 
-      <div class="passport-next">
-        <div class="passport-next-inner">
-          <h2>What to work on next</h2>
-          <p class="passport-gap-label">Main gap: <strong id="pp-gap"></strong></p>
-          <p class="passport-next-move" id="pp-next-move"></p>
+      <div class="memo-section memo-pattern-section">
+        <h2>What your pattern means</h2>
+        <p class="memo-pattern-meaning" id="memo-pattern-meaning"></p>
+        <div class="memo-next-move">
+          <span class="memo-next-label">Best next move</span>
+          <p class="memo-next-text" id="memo-pattern-next"></p>
         </div>
+      </div>
+
+      <div class="memo-section memo-stages-section">
+        <h2>Stage scores</h2>
+        <div class="memo-stage-grid" id="memo-stage-grid"></div>
+      </div>
+
+      <div class="memo-section memo-subdomains-section">
+        <h2>Subdomain breakdown</h2>
+        <div class="memo-sub-table" id="memo-sub-table"></div>
+      </div>
+
+      <div class="memo-section memo-resources-section">
+        <h2>Where to go next in hideaway.</h2>
+        <p class="memo-resources-intro">Prioritised by the items where you scored lowest, weighted by question importance.</p>
+        <div class="memo-resource-list" id="memo-resource-list"></div>
+      </div>
+
+      <div class="memo-section memo-retake">
+        <p>Retake this in 3–6 months. Compare subdomain scores rather than the overall number — real change shows up at subdomain level first.</p>
       </div>
 
     </div>
 
-    <div class="passport-actions">
+    <div class="memo-actions">
       <button class="btn-yellow" onclick="window.print()">Print / Save as PDF</button>
-      <button class="btn-ghost" id="btn-back-results">← Back to results</button>
-      <button class="btn-ghost" id="btn-retake-2">Start again</button>
+      <button class="btn-ghost" id="btn-retake-memo">Start again</button>
     </div>
   </div>
 </section>
 
 </BaseLayout>
 
-<style>
+<style is:global>
   /* ── base ─────────────────────────────────── */
   .diag-view { min-height: 100vh; }
 
@@ -239,10 +188,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 9rem 3rem 5rem;
   }
 
-  .intro-hero-inner {
-    max-width: 720px;
-    margin: 0 auto;
-  }
+  .intro-hero-inner { max-width: 720px; margin: 0 auto; }
 
   .intro-hero h1 {
     font-family: 'Fraunces', serif;
@@ -272,11 +218,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 1.5rem 0 2.2rem;
     font-size: 0.82rem;
     color: rgba(255,255,255,0.4);
+    flex-wrap: wrap;
   }
 
   .btn-begin {
     font-size: 1rem;
-    padding: 0.8rem 2rem;
+    padding: 0.85rem 2rem;
     border: none;
     cursor: pointer;
   }
@@ -329,150 +276,237 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
   }
 
+  /* ── interstitial ─────────────────────────── */
+  .interstitial-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(156,175,136,0.14) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(212,207,196,0.22) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(156,175,136,0.06) 0%, rgba(212,207,196,0.10) 100%);
+    padding: 7rem 2rem 5rem;
+  }
+
+  .interstitial-inner {
+    max-width: 540px;
+    text-align: center;
+    position: relative;
+  }
+
+  .interstitial-inner::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--sage);
+    margin: 0 auto 1.4rem;
+    opacity: 0.75;
+  }
+
+  .interstitial-badge {
+    display: inline-block;
+    background: transparent;
+    color: var(--sage);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0;
+    margin-bottom: 1.4rem;
+  }
+
+  .interstitial-heading {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 500;
+    color: var(--navy);
+    margin: 0 0 1.3rem;
+    line-height: 1.15;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .interstitial-body {
+    font-size: 1.05rem;
+    color: rgba(26,39,68,0.62);
+    line-height: 1.7;
+    margin: 0 0 2.4rem;
+  }
+
   /* ── questions ────────────────────────────── */
   .q-chrome {
     background: var(--navy);
-    padding: 4.5rem 3rem 1.5rem;
+    padding: 3.8rem 3rem 1.3rem;
     position: sticky;
     top: 0;
     z-index: 10;
   }
 
-  .q-progress-bar {
+  .q-stage-segments {
+    display: flex;
+    gap: 0.55rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .q-seg {
+    flex: 1;
+    display: block;
+  }
+
+  .q-seg-track {
     height: 3px;
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.09);
     border-radius: 2px;
-    margin-bottom: 1.2rem;
     overflow: hidden;
   }
 
-  .q-progress-fill {
+  .q-seg-fill {
     height: 100%;
-    background: #E8F547;
+    background: rgba(255,255,255,0.25);
     border-radius: 2px;
-    transition: width 0.3s ease;
+    transition: width 0.4s ease, background 0.25s ease;
     width: 0%;
   }
 
-  .q-stage-track {
-    display: flex;
-    gap: 0.6rem;
-  }
-
-  .q-stage-pill {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.3);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.12);
-    transition: all 0.2s;
-  }
-
-  .q-stage-pill.active {
-    color: white;
-    border-color: rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0.08);
-  }
-
-  .q-stage-pill.done {
-    color: var(--sage);
-    border-color: var(--sage);
-    background: rgba(156,175,136,0.1);
-  }
+  .q-seg.seg-active .q-seg-fill { background: var(--sage); }
+  .q-seg.seg-done   .q-seg-fill { background: var(--sage); }
 
   .q-body {
-    background: var(--frosted);
-    min-height: calc(100vh - 120px);
+    position: relative;
+    min-height: calc(100vh - 130px);
     padding: 4rem 3rem 5rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse 55% 60% at 12% 18%, rgba(156,175,136,0.09) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 55% at 90% 82%, rgba(212,207,196,0.18) 0%, transparent 72%),
+      linear-gradient(180deg, rgba(247,246,241,1) 0%, rgba(247,246,241,0.85) 100%);
+  }
+
+  .q-body::before {
+    content: '';
+    position: absolute;
+    top: 4.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(720px, calc(100% - 6rem));
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(156,175,136,0.22) 50%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .q-content {
+    width: 100%;
+    max-width: 720px;
   }
 
   .q-meta {
-    width: 100%;
-    max-width: 640px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 1.5rem;
     margin-bottom: 2rem;
   }
 
+  .q-meta-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   .q-subdomain {
-    font-size: 0.75rem;
+    font-size: 0.74rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     color: var(--sage);
+  }
+
+  .q-subdomain-desc {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(26,39,68,0.68);
+    line-height: 1.45;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
   }
 
   .q-counter {
     font-size: 0.78rem;
     color: rgba(26,39,68,0.4);
+    flex-shrink: 0;
+    padding-top: 0.2rem;
   }
 
   .q-text {
-    width: 100%;
-    max-width: 640px;
     font-family: 'Fraunces', serif;
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-size: clamp(1.35rem, 3vw, 1.85rem);
     font-weight: 400;
     color: var(--navy);
     line-height: 1.4;
-    margin: 0 0 2.5rem;
+    margin: 0 0 2.2rem;
     font-optical-sizing: none;
     font-feature-settings: normal;
   }
 
   .q-options {
-    width: 100%;
-    max-width: 640px;
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
-    margin-bottom: 2.5rem;
+    gap: 0.85rem;
+    margin-bottom: 2.8rem;
   }
 
   .q-option {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.2rem;
+    display: block;
+    position: relative;
+    padding: 1.25rem 1.5rem 1.25rem 1.5rem;
     background: white;
-    border: 2px solid var(--stone);
-    border-radius: 8px;
+    border: 1.5px solid var(--stone);
+    border-left: 4px solid transparent;
+    border-radius: 10px;
     cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.18s ease, background 0.18s ease, transform 0.14s ease, box-shadow 0.18s ease;
+    user-select: none;
   }
 
-  .q-option:hover { border-color: var(--sage); }
+  .q-option:hover {
+    border-color: rgba(156,175,136,0.55);
+    border-left-color: var(--sage);
+    background: rgba(156,175,136,0.05);
+    transform: translateX(2px);
+  }
 
   .q-option.selected {
-    border-color: var(--navy);
-    background: rgba(26,39,68,0.04);
+    border-color: rgba(232,245,71,0.55);
+    border-left-color: #E8F547;
+    background: rgba(232,245,71,0.09);
+    box-shadow: 0 1px 0 rgba(26,39,68,0.04);
   }
 
   .q-option input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--navy);
-    flex-shrink: 0;
-    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
   }
 
   .q-option-label {
-    font-size: 0.95rem;
+    display: block;
+    font-size: 1.02rem;
     color: var(--navy);
-    line-height: 1.4;
+    line-height: 1.55;
     cursor: pointer;
   }
 
   .q-nav {
-    width: 100%;
-    max-width: 640px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 0.8rem;
     align-items: center;
   }
 
@@ -484,7 +518,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
     font-size: 0.92rem;
-    padding: 0.7rem 1.6rem;
+    padding: 0.75rem 1.7rem;
     border-radius: 7px;
     text-decoration: none;
     border: none;
@@ -493,175 +527,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .btn-yellow:hover { background: #d4e03a; }
-  .btn-yellow:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .btn-ghost {
     background: transparent;
-    border: 2px solid var(--stone);
-    color: var(--navy);
+    border: 1.5px solid var(--stone);
+    color: rgba(26,39,68,0.55);
     font-family: 'DM Sans', sans-serif;
     font-weight: 600;
     font-size: 0.88rem;
-    padding: 0.65rem 1.3rem;
+    padding: 0.7rem 1.3rem;
     border-radius: 7px;
     cursor: pointer;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
   }
 
-  .btn-ghost:hover { border-color: var(--navy); }
-
-  /* ── results ──────────────────────────────── */
-  .results-hero {
-    background: var(--navy);
-    padding: 9rem 3rem 4rem;
-  }
-
-  .results-hero-inner {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  .results-hero h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 500;
-    color: #E8F547;
-    margin: 0 0 0.5rem;
-    font-optical-sizing: none;
-    font-feature-settings: normal;
-  }
-
-  .res-overall-score {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.5);
-    margin: 0 0 1rem;
-  }
-
-  .res-band-desc {
-    font-size: 1.05rem;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.6;
-    max-width: 520px;
-    margin: 0;
-  }
-
-  .results-body {
-    background: var(--frosted);
-    padding: 4rem 3rem 5rem;
-  }
-
-  .results-body-inner {
-    max-width: 760px;
-    margin: 0 auto;
-  }
-
-  .results-stages {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .results-stage-card {
-    background: white;
-    border: 1px solid var(--stone);
-    border-radius: 10px;
-    padding: 1.5rem 1.8rem;
-  }
-
-  .rsc-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.8rem;
-  }
-
-  .rsc-label {
-    font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
-    font-weight: 500;
+  .btn-ghost:hover {
+    border-color: rgba(156,175,136,0.6);
     color: var(--navy);
-    font-optical-sizing: none;
-    font-feature-settings: normal;
+    background: rgba(156,175,136,0.05);
   }
 
-  .rsc-score {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--navy);
-  }
-
-  .rsc-bar-track {
-    height: 6px;
-    background: var(--stone);
-    border-radius: 3px;
-    margin-bottom: 0.9rem;
-    overflow: hidden;
-  }
-
-  .rsc-bar-fill {
-    height: 100%;
-    background: var(--sage);
-    border-radius: 3px;
-    transition: width 0.6s ease;
-    width: 0%;
-  }
-
-  .rsc-interp {
-    font-size: 0.9rem;
-    color: rgba(26,39,68,0.65);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .results-pattern {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .pattern-card {
-    background: white;
-    border: 1px solid var(--stone);
-    border-radius: 10px;
-    padding: 1.3rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .pattern-card--wide { grid-column: 1 / -1; }
-
-  .pattern-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+  .btn-next {
+    background: rgba(26,39,68,0.05);
     color: rgba(26,39,68,0.4);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 0.75rem 1.7rem;
+    border-radius: 7px;
+    border: 1.5px solid rgba(26,39,68,0.08);
+    cursor: not-allowed;
+    transform: translateY(0);
+    transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
   }
 
-  .pattern-value {
-    font-size: 0.95rem;
+  .btn-next:not([disabled]) {
+    background: #E8F547;
     color: var(--navy);
-    line-height: 1.5;
+    border-color: #E8F547;
+    font-weight: 700;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 rgba(26,39,68,0.08);
   }
 
-  .results-cta {
-    display: flex;
-    gap: 0.8rem;
-    align-items: center;
-    flex-wrap: wrap;
+  .btn-next:not([disabled]):hover {
+    background: #d4e03a;
+    border-color: #d4e03a;
   }
 
-  /* ── passport ─────────────────────────────── */
-  .passport-wrapper {
+  /* ── memo (output) ────────────────────────── */
+  .memo-wrapper {
     background: var(--frosted);
-    padding: 4rem 3rem 5rem;
+    padding: 7rem 2.5rem 5rem;
   }
 
-  .passport {
-    max-width: 800px;
+  .memo {
+    max-width: 860px;
     margin: 0 auto 2rem;
     background: white;
     border: 1px solid var(--stone);
@@ -669,7 +591,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     overflow: hidden;
   }
 
-  .passport-header {
+  .memo-header {
     background: var(--navy);
     padding: 2rem 2.5rem;
     display: flex;
@@ -677,7 +599,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     align-items: center;
   }
 
-  .passport-logo {
+  .memo-logo {
     font-family: 'Fraunces', serif;
     font-size: 1.5rem;
     font-weight: 500;
@@ -685,13 +607,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-feature-settings: normal;
   }
 
-  .logo-h   { color: var(--sage); }
+  .logo-h    { color: var(--sage); }
   .logo-idea { color: #E8F547; }
   .logo-way  { color: var(--sage); }
 
-  .passport-title-block { text-align: right; }
+  .memo-title-block { text-align: right; }
 
-  .passport-title-block h1 {
+  .memo-title-block h1 {
     font-family: 'Fraunces', serif;
     font-size: 1.5rem;
     font-weight: 400;
@@ -701,15 +623,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-feature-settings: normal;
   }
 
-  .passport-date {
+  .memo-date {
     font-size: 0.78rem;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.45);
     margin: 0;
   }
 
-  .passport-overview {
+  .memo-overview {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr 1fr;
     gap: 2rem;
     padding: 2rem 2.5rem;
     background: rgba(26,39,68,0.03);
@@ -717,25 +639,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     align-items: start;
   }
 
-  .passport-score-block,
-  .passport-profile-block {
+  .memo-overview-cell {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.4rem;
   }
 
-  .passport-score-label,
-  .passport-profile-label {
+  .memo-label {
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: rgba(26,39,68,0.4);
   }
 
-  .passport-score-value {
+  .memo-score-value {
     font-family: 'Fraunces', serif;
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 400;
     color: var(--navy);
     line-height: 1;
@@ -743,134 +663,240 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-feature-settings: normal;
   }
 
-  .passport-band-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .passport-band-name {
+  .memo-band-value,
+  .memo-pattern-value {
     font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 500;
     color: var(--navy);
+    line-height: 1.2;
     font-optical-sizing: none;
     font-feature-settings: normal;
   }
 
-  .passport-band-desc {
-    font-size: 0.88rem;
-    color: rgba(26,39,68,0.6);
-    line-height: 1.5;
-  }
-
-  .passport-profile-name {
-    font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--navy);
-    font-optical-sizing: none;
-    font-feature-settings: normal;
-  }
-
-  .passport-stages {
+  .memo-section {
     padding: 2rem 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
     border-bottom: 1px solid var(--stone);
   }
 
-  .passport-stage { }
+  .memo-section:last-child { border-bottom: none; }
 
-  .pst-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-
-  .pst-name {
+  .memo-section h2 {
     font-family: 'Fraunces', serif;
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 500;
     color: var(--navy);
+    margin: 0 0 1rem;
     font-optical-sizing: none;
     font-feature-settings: normal;
   }
 
-  .pst-score {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--navy);
-  }
-
-  .pst-bar-track {
-    height: 5px;
-    background: var(--stone);
-    border-radius: 3px;
-    margin-bottom: 0.7rem;
-    overflow: hidden;
-  }
-
-  .pst-bar-fill {
-    height: 100%;
-    background: var(--sage);
-    border-radius: 3px;
-    width: 0%;
-  }
-
-  .pst-meaning {
-    font-size: 0.88rem;
-    color: rgba(26,39,68,0.65);
-    line-height: 1.6;
-    margin: 0 0 0.5rem;
-  }
-
-  .pst-route {
-    font-size: 0.78rem;
-    color: var(--sage);
-    font-weight: 600;
-  }
-
-  .pst-route a {
-    color: var(--sage);
-    text-decoration: none;
-    border-bottom: 1px solid var(--sage);
-  }
-
-  .passport-next {
-    padding: 2rem 2.5rem;
-    background: var(--navy);
-  }
-
-  .passport-next h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: white;
-    margin: 0 0 0.8rem;
-    font-optical-sizing: none;
-    font-feature-settings: normal;
-  }
-
-  .passport-gap-label {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.5);
-    margin: 0 0 0.6rem;
-  }
-
-  .passport-gap-label strong { color: rgba(255,255,255,0.8); }
-
-  .passport-next-move {
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.8);
+  .memo-pattern-meaning {
+    font-size: 0.96rem;
+    color: rgba(26,39,68,0.75);
     line-height: 1.65;
+    margin: 0 0 1.2rem;
+  }
+
+  .memo-next-move {
+    background: rgba(156,175,136,0.10);
+    border-left: 3px solid var(--sage);
+    padding: 1rem 1.2rem;
+    border-radius: 4px;
+  }
+
+  .memo-next-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sage);
+    margin-bottom: 0.4rem;
+  }
+
+  .memo-next-text {
+    font-size: 0.95rem;
+    color: var(--navy);
+    line-height: 1.6;
     margin: 0;
   }
 
-  .passport-actions {
-    max-width: 800px;
+  .memo-stage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .memo-stage-card {
+    background: white;
+    border: 1px solid var(--stone);
+    border-radius: 8px;
+    padding: 1.2rem 1.3rem;
+  }
+
+  .memo-stage-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--navy);
+    display: block;
+    margin-bottom: 0.4rem;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .memo-stage-score {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: none;
+    font-feature-settings: normal;
+  }
+
+  .memo-stage-bar-track {
+    height: 4px;
+    background: var(--stone);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.9rem;
+  }
+
+  .memo-stage-bar-fill {
+    height: 100%;
+    background: var(--sage);
+    border-radius: 2px;
+  }
+
+  .memo-stage-meta {
+    font-size: 0.78rem;
+    color: rgba(26,39,68,0.55);
+    line-height: 1.5;
+  }
+
+  .memo-stage-meta div + div { margin-top: 0.25rem; }
+
+  .memo-stage-meta strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .memo-sub-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .memo-sub-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 60px 80px;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.7rem 0.9rem;
+    background: rgba(26,39,68,0.025);
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+
+  .memo-sub-stage {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sage);
+  }
+
+  .memo-sub-name {
+    color: var(--navy);
+  }
+
+  .memo-sub-score {
+    font-weight: 700;
+    color: var(--navy);
+    text-align: right;
+  }
+
+  .memo-sub-priority {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .priority-High   { background: rgba(232,107,107,0.15); color: #c64545; }
+  .priority-Medium { background: rgba(232,179,71,0.18);  color: #a06c10; }
+  .priority-Low    { background: rgba(156,175,136,0.18); color: #5a7449; }
+
+  .memo-resources-intro {
+    font-size: 0.88rem;
+    color: rgba(26,39,68,0.6);
+    line-height: 1.55;
+    margin: -0.4rem 0 1.2rem;
+  }
+
+  .memo-resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .memo-resource-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem 1.2rem;
+    background: white;
+    border: 1px solid var(--stone);
+    border-left: 3px solid var(--sage);
+    border-radius: 6px;
+  }
+
+  .memo-resource-tag {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sage);
+    margin-bottom: 0.3rem;
+  }
+
+  .memo-resource-stem {
+    font-size: 0.92rem;
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 0.4rem;
+  }
+
+  .memo-resource-type {
+    font-size: 0.78rem;
+    color: rgba(26,39,68,0.55);
+  }
+
+  .memo-resource-meta {
+    font-size: 0.72rem;
+    color: rgba(26,39,68,0.4);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .memo-retake p {
+    font-size: 0.88rem;
+    color: rgba(26,39,68,0.55);
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .memo-actions {
+    max-width: 860px;
     margin: 0 auto;
     display: flex;
     gap: 0.8rem;
@@ -883,256 +909,251 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .intro-hero { padding: 8rem 1.5rem 4rem; }
     .intro-stages { padding: 3rem 1.5rem; }
     .intro-stages-inner { grid-template-columns: 1fr; }
+
+    .q-chrome { padding: 4rem 1.5rem 1.3rem; }
+    .q-stage-segments { gap: 0.7rem; }
+    .q-seg-label { font-size: 0.62rem; letter-spacing: 0.08em; }
     .q-body { padding: 2.5rem 1.5rem 4rem; }
-    .q-chrome { padding: 4rem 1.5rem 1.2rem; }
-    .results-hero { padding: 8rem 1.5rem 3rem; }
-    .results-body { padding: 3rem 1.5rem; }
-    .results-pattern { grid-template-columns: 1fr; }
-    .passport-wrapper { padding: 3rem 1.5rem; }
-    .passport-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
-    .passport-title-block { text-align: left; }
-    .passport-overview { grid-template-columns: 1fr; gap: 1.2rem; }
-    .passport-stages, .passport-next { padding: 1.5rem; }
+
+    .q-meta { flex-direction: column; gap: 0.6rem; }
+    .q-counter { align-self: flex-start; }
+    .q-option { padding: 0.9rem 1.1rem 0.9rem 1.2rem; }
+
+    .interstitial-wrapper { padding: 6rem 1.5rem 4rem; }
+
+    .memo-wrapper { padding: 6rem 1.2rem 4rem; }
+    .memo-header { flex-direction: column; gap: 1rem; align-items: flex-start; padding: 1.6rem 1.5rem; }
+    .memo-title-block { text-align: left; }
+    .memo-overview { grid-template-columns: 1fr; gap: 1.2rem; padding: 1.6rem 1.5rem; }
+    .memo-section { padding: 1.6rem 1.5rem; }
+    .memo-stage-grid { grid-template-columns: 1fr; }
+    .memo-sub-row { grid-template-columns: 70px 1fr 50px 70px; gap: 0.6rem; font-size: 0.8rem; padding: 0.6rem 0.7rem; }
+    .memo-resource-card { grid-template-columns: 1fr; }
+    .memo-resource-meta { text-align: left; }
   }
 
   /* ── print ────────────────────────────────── */
   @media print {
-    #view-intro, #view-questions, #view-results { display: none !important; }
-    #view-passport { display: block !important; }
-    .passport-actions { display: none !important; }
+    #view-intro, #view-questions, #view-interstitial { display: none !important; }
+    #view-memo { display: block !important; }
+    .memo-actions { display: none !important; }
     nav, footer { display: none !important; }
-    .passport-wrapper { padding: 0; background: white; }
-    .passport {
+    .memo-wrapper { padding: 0; background: white; }
+    .memo {
       border: none;
       border-radius: 0;
       max-width: 100%;
       box-shadow: none;
     }
-    .pst-bar-fill, .rsc-bar-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .memo-stage-bar-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   }
 </style>
 
-<script>
+<script define:vars={{ rawQuestions, rawSubdomains, rawStages, rawPatterns }}>
 // ─────────────────────────────────────────────────────────────────
-// DATA
+// DATA — Makers Memo v3 (loaded from /src/content/memo/*.json)
 // ─────────────────────────────────────────────────────────────────
-const STAGES = {
-  download: { name: 'Download', weight: 0.33 },
-  idea:     { name: 'Idea',     weight: 0.33 },
-  creation: { name: 'Creation', weight: 0.34 },
+const STAGE_ID = { Download: 'download', Idea: 'idea', Creation: 'creation' };
+const SUB_ID = {
+  'Capture habit': 'capture',
+  'Pattern awareness': 'pattern',
+  'Organisation': 'organisation',
+  'Selection': 'selection',
+  'Concept formation': 'concept',
+  'Pressure testing': 'pressure',
+  'Purpose clarity': 'purpose',
+  'Decision making': 'decision',
+  'Translation into action': 'translation',
+  'Tool fluency': 'tools',
+  'Completion and release': 'completion',
+  'Iteration': 'iteration',
+};
+const PATTERN_KEY = {
+  'Even Maker': 'even',
+  'The Collector': 'collector',
+  'The Thinker': 'thinker',
+  'The Builder': 'builder',
+  'Stuck Upstream': 'stuckUpstream',
+  'Stuck Midstream': 'stuckMidstream',
+  'Rushed Maker': 'rushed',
+  'Developing Maker': 'developing',
 };
 
-const SCALE = [
-  { score: 1, label: 'Not true yet' },
-  { score: 2, label: 'Rarely' },
-  { score: 3, label: 'Sometimes' },
-  { score: 4, label: 'Mostly' },
-  { score: 5, label: 'Consistently' },
-];
+const STAGES = rawStages.map(s => ({
+  id: STAGE_ID[s.id],
+  label: s.id,
+  weight: s.weight,
+  shape: 'Diverge → Converge',
+}));
 
-const QUESTIONS = [
-  // ── Download: Capture habit ──────────────────
-  { id: 'HD01', stage: 'download', subdomain: 'Capture habit',     text: 'I capture useful ideas before they vanish.' },
-  { id: 'HD02', stage: 'download', subdomain: 'Capture habit',     text: 'I notice when something is worth writing down.' },
-  { id: 'HD03', stage: 'download', subdomain: 'Capture habit',     text: 'I have a dependable place to put raw ideas.' },
-  { id: 'HD04', stage: 'download', subdomain: 'Capture habit',     text: 'I capture things in a way that makes sense later.' },
-  // ── Download: Pattern awareness ─────────────
-  { id: 'HD05', stage: 'download', subdomain: 'Pattern awareness', text: 'I can spot repeated themes in what I collect.' },
-  { id: 'HD06', stage: 'download', subdomain: 'Pattern awareness', text: 'I can tell the difference between noise and signal.' },
-  { id: 'HD07', stage: 'download', subdomain: 'Pattern awareness', text: 'I can recognise when several notes are pointing to one idea.' },
-  { id: 'HD08', stage: 'download', subdomain: 'Pattern awareness', text: 'I collect examples, not just abstract thoughts.' },
-  // ── Download: Organisation ───────────────────
-  { id: 'HD09', stage: 'download', subdomain: 'Organisation',      text: 'I can find old notes or prompts when I need them.' },
-  { id: 'HD10', stage: 'download', subdomain: 'Organisation',      text: 'My inputs are grouped or tagged in a usable way.' },
-  { id: 'HD11', stage: 'download', subdomain: 'Organisation',      text: 'My capture system does not feel chaotic or scattered.' },
-  { id: 'HD12', stage: 'download', subdomain: 'Organisation',      text: 'I revisit what I captured rather than leaving it buried.' },
-  // ── Download: Selection ─────────────────────
-  { id: 'HD13', stage: 'download', subdomain: 'Selection',         text: 'I know which ideas deserve another look.' },
-  { id: 'HD14', stage: 'download', subdomain: 'Selection',         text: 'I can choose one promising thread without losing everything else.' },
-  { id: 'HD15', stage: 'download', subdomain: 'Selection',         text: 'I do not confuse collecting with actual progress.' },
-  // ── Idea: Concept formation ─────────────────
-  { id: 'HI01', stage: 'idea',     subdomain: 'Concept formation', text: 'I can turn a rough thought into a clearer concept.' },
-  { id: 'HI02', stage: 'idea',     subdomain: 'Concept formation', text: 'I can explain what the idea is trying to do.' },
-  { id: 'HI03', stage: 'idea',     subdomain: 'Concept formation', text: 'I can identify the core problem underneath the idea.' },
-  { id: 'HI04', stage: 'idea',     subdomain: 'Concept formation', text: 'I can make the idea more specific without killing it.' },
-  // ── Idea: Pressure testing ──────────────────
-  { id: 'HI05', stage: 'idea',     subdomain: 'Pressure testing',  text: 'I test whether the idea is actually useful.' },
-  { id: 'HI06', stage: 'idea',     subdomain: 'Pressure testing',  text: 'I can challenge my own assumptions about an idea.' },
-  { id: 'HI07', stage: 'idea',     subdomain: 'Pressure testing',  text: 'I compare the idea against alternatives before moving ahead.' },
-  { id: 'HI08', stage: 'idea',     subdomain: 'Pressure testing',  text: 'I can see where an idea is weak before I build.' },
-  // ── Idea: Purpose clarity ───────────────────
-  { id: 'HI09', stage: 'idea',     subdomain: 'Purpose clarity',   text: 'I can describe who or what the idea is for.' },
-  { id: 'HI10', stage: 'idea',     subdomain: 'Purpose clarity',   text: 'I can explain why this idea matters now.' },
-  { id: 'HI11', stage: 'idea',     subdomain: 'Purpose clarity',   text: 'I can state the value of the idea in plain language.' },
-  { id: 'HI12', stage: 'idea',     subdomain: 'Purpose clarity',   text: 'I can tell when an idea sounds interesting but lacks purpose.' },
-  // ── Idea: Decision making ───────────────────
-  { id: 'HI13', stage: 'idea',     subdomain: 'Decision making',   text: 'I know how to choose which idea gets time first.' },
-  { id: 'HI14', stage: 'idea',     subdomain: 'Decision making',   text: 'I can stop polishing an idea that is not strong enough.' },
-  { id: 'HI15', stage: 'idea',     subdomain: 'Decision making',   text: 'I can decide when an idea is ready to move into build.' },
-  // ── Creation: Translation into action ───────
-  { id: 'HC01', stage: 'creation', subdomain: 'Translation into action',  text: 'I can move from concept to a first practical step.' },
-  { id: 'HC02', stage: 'creation', subdomain: 'Translation into action',  text: 'I can break an idea into buildable parts.' },
-  { id: 'HC03', stage: 'creation', subdomain: 'Translation into action',  text: 'I know what the first version needs and what it does not.' },
-  { id: 'HC04', stage: 'creation', subdomain: 'Translation into action',  text: 'I can begin building without waiting for perfect clarity.' },
-  // ── Creation: Tool fluency ──────────────────
-  { id: 'HC05', stage: 'creation', subdomain: 'Tool fluency',      text: 'I know which tools suit the thing I am making.' },
-  { id: 'HC06', stage: 'creation', subdomain: 'Tool fluency',      text: 'I can use AI or other tools with enough confidence to make progress.' },
-  { id: 'HC07', stage: 'creation', subdomain: 'Tool fluency',      text: 'I do not get lost in tool-hopping once I start.' },
-  { id: 'HC08', stage: 'creation', subdomain: 'Tool fluency',      text: 'I can keep the build process simple enough to continue.' },
-  // ── Creation: Completion and release ────────
-  { id: 'HC09', stage: 'creation', subdomain: 'Completion and release', text: 'I finish useful outputs rather than leaving loose ends.' },
-  { id: 'HC10', stage: 'creation', subdomain: 'Completion and release', text: 'I can decide when something is ready to share.' },
-  { id: 'HC11', stage: 'creation', subdomain: 'Completion and release', text: 'I can release work without endless reworking.' },
-  { id: 'HC12', stage: 'creation', subdomain: 'Completion and release', text: 'I can make things that are usable, not just interesting.' },
-  // ── Creation: Iteration ─────────────────────
-  { id: 'HC13', stage: 'creation', subdomain: 'Iteration',         text: 'I learn from what I build.' },
-  { id: 'HC14', stage: 'creation', subdomain: 'Iteration',         text: 'I can improve a first version rather than abandoning it.' },
-  { id: 'HC15', stage: 'creation', subdomain: 'Iteration',         text: 'I can keep momentum after the first release.' },
-];
+const STAGE_WEIGHT = STAGES.reduce((acc, s) => { acc[s.id] = s.weight; return acc; }, {});
+
+const SUBDOMAINS = rawSubdomains.map(s => ({
+  id: SUB_ID[s.label],
+  stage: STAGE_ID[s.stage],
+  label: s.label,
+  desc: s.desc,
+}));
+
+const QUESTIONS = rawQuestions
+  .slice()
+  .sort((a, b) => a.order - b.order)
+  .map(q => ({
+    id: q.id,
+    stage: STAGE_ID[q.stage],
+    subdomain: SUB_ID[q.subdomain],
+    type: q.type,
+    comb: q.comb,
+    weight: q.weight,
+    stem: q.stem,
+    options: q.options,
+    resourceTag: q.resourceTag,
+  }));
+
+// ─────────────────────────────────────────────────────────────────
+// PATTERNS
+// ─────────────────────────────────────────────────────────────────
+const PATTERNS = rawPatterns.reduce((acc, p) => {
+  acc[PATTERN_KEY[p.label]] = {
+    label: p.label,
+    meaning: p.meaning,
+    bestNextMove: p.bestNextMove,
+  };
+  return acc;
+}, {});
+
+const COMB_TYPES = {
+  Capability:  'How-to guide, walkthrough, or framework',
+  Opportunity: 'Template, prompt pack, tool, or system',
+  Motivation:  'Reflection, reframe, or short essay',
+};
 
 // ─────────────────────────────────────────────────────────────────
 // SCORING ENGINE
 // ─────────────────────────────────────────────────────────────────
-function normalise(score) {
-  // Maps 1–5 to 0–100
-  return ((score - 1) / 4) * 100;
+function questionsBySubdomain(subId) {
+  return QUESTIONS.filter(q => q.subdomain === subId);
 }
 
-function calcStageScore(answers, stage) {
-  const qs = QUESTIONS.filter(q => q.stage === stage);
-  const scores = qs.map(q => answers[q.id] || 0).filter(s => s > 0);
-  if (scores.length === 0) return 0;
-  const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-  return normalise(avg);
+function questionsByStage(stageId) {
+  return QUESTIONS.filter(q => q.stage === stageId);
 }
 
-function calcOverall(stageScores) {
-  return (
-    stageScores.download * STAGES.download.weight +
-    stageScores.idea     * STAGES.idea.weight +
-    stageScores.creation * STAGES.creation.weight
+function calcSubdomainScore(answers, subId) {
+  const qs = questionsBySubdomain(subId);
+  const max = qs.reduce((s, q) => s + q.weight * 4, 0);
+  const actual = qs.reduce((s, q) => s + (answers[q.id] || 0) * q.weight, 0);
+  return max === 0 ? 0 : Math.round((actual / max) * 100);
+}
+
+function calcStageScore(answers, stageId) {
+  const subs = SUBDOMAINS.filter(s => s.stage === stageId);
+  const scores = subs.map(s => calcSubdomainScore(answers, s.id));
+  return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+}
+
+function calcOverallScore(stageScores) {
+  return Math.round(
+    stageScores.download * STAGE_WEIGHT.download +
+    stageScores.idea     * STAGE_WEIGHT.idea +
+    stageScores.creation * STAGE_WEIGHT.creation
   );
 }
 
 function getBand(score) {
-  if (score >= 75) return { name: 'Established Maker',  desc: 'You have strong, consistent habits across the making process. The work now is to refine and deepen.' };
-  if (score >= 55) return { name: 'Practising Maker',   desc: 'Your making process is developing well. There are clear strengths and one or two stages that need more consistent work.' };
-  if (score >= 35) return { name: 'Developing Maker',   desc: 'You are building the foundations. Progress is happening, but some stages are still inconsistent or underdeveloped.' };
-  return              { name: 'Emerging Maker',      desc: 'You are at the beginning of building a reliable making process. The most valuable work right now is establishing the basics.' };
+  if (score < 50) return { label: 'Foundation', desc: "You're building the foundations of a maker practice." };
+  if (score < 65) return { label: 'Developing', desc: 'Your practice is taking shape; some areas working, others not yet.' };
+  if (score < 80) return { label: 'Strong',     desc: 'Most of the moves are working; refinement is the next direction.' };
+  return              { label: 'Advanced',   desc: 'Practice runs cleanly across all three stages.' };
 }
 
-function getStageInterpretation(stage, score) {
-  const bands = {
-    download: {
-      high:   'Capture is working well. You bring in useful material and can find it again.',
-      mid:    'Your capture habit is developing. Some inputs get lost or stay unreviewed.',
-      low:    'Inputs are getting lost or staying buried. The capture system needs strengthening.',
-    },
-    idea: {
-      high:   'You shape ideas well — moving from rough to specific and knowing when to act.',
-      mid:    'Ideas are forming, but the pressure-testing and decision-making steps are inconsistent.',
-      low:    'Ideas tend to stay vague or drift. The shaping process is the main gap right now.',
-    },
-    creation: {
-      high:   'You build things and see them through. Completion and iteration are working.',
-      mid:    'You start well but finishing and releasing consistently needs more work.',
-      low:    'Work starts but rarely reaches a usable output. The build stage is where things stall.',
-    },
-  };
-  const b = bands[stage];
-  if (score >= 65) return b.high;
-  if (score >= 40) return b.mid;
-  return b.low;
+function getPriority(score) {
+  if (score < 50) return 'High';
+  if (score < 70) return 'Medium';
+  return 'Low';
 }
 
-function getStageMeaning(stage, score) {
-  const meanings = {
-    download: {
-      high:   'Useful material is captured and easy to return to.',
-      mid:    'Some useful material gets through, but the system is not yet reliable.',
-      low:    'Inputs get lost, buried, or never revisited.',
-    },
-    idea: {
-      high:   'Ideas become specific enough to judge and choose from.',
-      mid:    'Some ideas get clear, but many stay half-formed.',
-      low:    'Concepts stay vague or drift without resolution.',
-    },
-    creation: {
-      high:   'Ideas become things and keep improving after the first release.',
-      mid:    'Things get built, but not always finished or shared.',
-      low:    'Work starts but rarely becomes a useful output.',
-    },
-  };
-  const m = meanings[stage];
-  if (score >= 65) return m.high;
-  if (score >= 40) return m.mid;
-  return m.low;
+// ─────────────────────────────────────────────────────────────────
+// PATTERN DETECTION
+// ─────────────────────────────────────────────────────────────────
+function detectPatternKey(stageScores) {
+  const entries = Object.entries(stageScores).sort((a, b) => b[1] - a[1]);
+  const [hStage, H] = entries[0];
+  const [, M]       = entries[1];
+  const [lStage, L] = entries[2];
+
+  // 1. Even Maker
+  if (H - L <= 15) return 'even';
+
+  // 2. Dominant-stage profiles
+  if (H - M >= 12 && H - L >= 18) {
+    if (hStage === 'download') return 'collector';
+    if (hStage === 'idea')     return 'thinker';
+    if (hStage === 'creation') return 'builder';
+  }
+
+  // 3. Low-stage bottleneck profiles
+  if (L < 50 && (H + M) / 2 >= 60) {
+    if (lStage === 'creation') return 'stuckUpstream';
+    if (lStage === 'idea')     return 'stuckMidstream';
+    if (lStage === 'download') return 'rushed';
+  }
+
+  // 4. Fallback
+  return 'developing';
 }
 
-function getNextMove(weakestStage) {
-  const moves = {
-    download: 'Choose one capture tool and one review rhythm. Use them consistently for two weeks before changing anything.',
-    idea:     'Take one idea you have been sitting on and write a single paragraph: the problem, the user, and why it matters now.',
-    creation: 'Pick the smallest possible first version of your current idea. Build that first — before refining, before polishing, before sharing.',
-  };
-  return moves[weakestStage];
+// ─────────────────────────────────────────────────────────────────
+// SUBDOMAIN HELPERS
+// ─────────────────────────────────────────────────────────────────
+function getStrongestSubdomain(answers, stageId) {
+  const subs = SUBDOMAINS.filter(s => s.stage === stageId);
+  return subs.reduce((best, s) => calcSubdomainScore(answers, s.id) > calcSubdomainScore(answers, best.id) ? s : best);
 }
 
-function getStageRoute(stage) {
-  const routes = {
-    download: { label: 'Explore Download resources →', href: '/library?stage=download' },
-    idea:     { label: 'Explore Idea resources →',     href: '/library?stage=idea' },
-    creation: { label: 'Explore Creation resources →', href: '/library?stage=creation' },
-  };
-  return routes[stage];
+function getWeakestSubdomain(answers, stageId) {
+  const subs = SUBDOMAINS.filter(s => s.stage === stageId);
+  return subs.reduce((worst, s) => calcSubdomainScore(answers, s.id) < calcSubdomainScore(answers, worst.id) ? s : worst);
 }
 
-function computeResults(answers) {
-  const stageScores = {
-    download: calcStageScore(answers, 'download'),
-    idea:     calcStageScore(answers, 'idea'),
-    creation: calcStageScore(answers, 'creation'),
-  };
-  const overall = calcOverall(stageScores);
-  const band = getBand(overall);
+// ─────────────────────────────────────────────────────────────────
+// RESOURCE ROUTING
+// ─────────────────────────────────────────────────────────────────
+function getTopResources(answers, n = 5) {
+  const items = QUESTIONS.map(q => {
+    const r = answers[q.id] || 0;
+    if (r === 0 || r > 2) return null;
+    return { q, severity: (5 - r) * q.weight };
+  }).filter(Boolean);
 
-  const entries = Object.entries(stageScores);
-  const strongest = entries.reduce((a, b) => b[1] > a[1] ? b : a)[0];
-  const weakest   = entries.reduce((a, b) => b[1] < a[1] ? b : a)[0];
-
-  return {
-    stageScores,
-    overall,
-    band,
-    strongest,
-    weakest,
-    profileName: STAGES[strongest].name,
-    nextMove: getNextMove(weakest),
-  };
+  items.sort((a, b) => b.severity - a.severity);
+  return items.slice(0, n).map(i => i.q);
 }
 
 // ─────────────────────────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'hideaway_diag_v1';
+const STORAGE_KEY = 'hideaway_memo_v1';
 
 function loadState() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { answers: {}, currentQ: 0 }; }
   catch { return { answers: {}, currentQ: 0 }; }
 }
 
-function saveState(state) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+function saveState(s) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
 }
 
 function clearState() {
   localStorage.removeItem(STORAGE_KEY);
 }
 
+let state = loadState();
+
 // ─────────────────────────────────────────────────────────────────
 // VIEWS
 // ─────────────────────────────────────────────────────────────────
-const VIEWS = ['intro', 'questions', 'results', 'passport'];
+const VIEWS = ['intro', 'interstitial', 'questions', 'memo'];
 
 function showView(name) {
   VIEWS.forEach(v => {
@@ -1145,45 +1166,66 @@ function showView(name) {
 // ─────────────────────────────────────────────────────────────────
 // QUESTION RENDERER
 // ─────────────────────────────────────────────────────────────────
-let state = loadState();
+function getSubdomainObj(subId) {
+  return SUBDOMAINS.find(s => s.id === subId);
+}
+
+function updateStageProgress(currentIndex) {
+  const stageOrder = ['download', 'idea', 'creation'];
+  stageOrder.forEach(stage => {
+    const stageQs = questionsByStage(stage);
+    const startIdx = QUESTIONS.findIndex(q => q.stage === stage);
+    const endIdx = startIdx + stageQs.length - 1;
+    const seg = document.getElementById(`q-seg-${stage}`);
+    const fill = document.getElementById(`q-seg-fill-${stage}`);
+
+    seg.classList.remove('seg-active', 'seg-done', 'seg-future');
+
+    if (currentIndex > endIdx) {
+      fill.style.width = '100%';
+      seg.classList.add('seg-done');
+    } else if (currentIndex >= startIdx) {
+      const positionInStage = currentIndex - startIdx;
+      const pct = (positionInStage / stageQs.length) * 100;
+      fill.style.width = `${pct}%`;
+      seg.classList.add('seg-active');
+    } else {
+      fill.style.width = '0%';
+      seg.classList.add('seg-future');
+    }
+  });
+}
 
 function renderQuestion(index) {
   const q = QUESTIONS[index];
   if (!q) return;
 
-  // Progress
-  const pct = (index / QUESTIONS.length) * 100;
-  document.getElementById('q-progress-fill').style.width = `${pct}%`;
+  updateStageProgress(index);
 
-  // Stage pills
-  const stageOrder = ['download', 'idea', 'creation'];
-  const currentStageIndex = stageOrder.indexOf(q.stage);
-  document.querySelectorAll('.q-stage-pill').forEach((pill, i) => {
-    pill.classList.remove('active', 'done');
-    if (i < currentStageIndex) pill.classList.add('done');
-    if (i === currentStageIndex) pill.classList.add('active');
-  });
-
-  // Meta
-  const stageQs = QUESTIONS.filter(x => x.stage === q.stage);
+  const sub = getSubdomainObj(q.subdomain);
+  const stageQs = questionsByStage(q.stage);
   const stageQIndex = stageQs.findIndex(x => x.id === q.id) + 1;
-  document.getElementById('q-subdomain').textContent = q.subdomain;
-  document.getElementById('q-counter').textContent = `${STAGES[q.stage].name} · ${stageQIndex} of ${stageQs.length}`;
+  const stageLabel = STAGES.find(s => s.id === q.stage).label;
 
-  // Question text
-  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-subdomain').textContent = sub.label;
+  document.getElementById('q-subdomain-desc').textContent = sub.desc;
+  document.getElementById('q-counter').textContent = `${stageLabel} · ${stageQIndex} of ${stageQs.length}`;
+  document.getElementById('q-text').textContent = q.stem;
 
-  // Options
   const container = document.getElementById('q-options');
   const existing = state.answers[q.id];
-  container.innerHTML = SCALE.map(opt => `
-    <label class="q-option${existing === opt.score ? ' selected' : ''}">
-      <input type="radio" name="q-response" value="${opt.score}" ${existing === opt.score ? 'checked' : ''} />
-      <span class="q-option-label">${opt.label}</span>
-    </label>
-  `).join('');
 
-  // Wire up options
+  container.innerHTML = q.options.map((optText, i) => {
+    const score = i + 1;
+    const isSelected = existing === score;
+    return `
+      <label class="q-option${isSelected ? ' selected' : ''}">
+        <input type="radio" name="q-response" value="${score}" ${isSelected ? 'checked' : ''} />
+        <span class="q-option-label">${optText}</span>
+      </label>
+    `;
+  }).join('');
+
   container.querySelectorAll('input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', () => {
       state.answers[q.id] = parseInt(radio.value);
@@ -1194,66 +1236,123 @@ function renderQuestion(index) {
     });
   });
 
-  // Next button state
   document.getElementById('btn-next').disabled = !existing;
-
-  // Back button
   document.getElementById('btn-back').style.visibility = index === 0 ? 'hidden' : 'visible';
 }
 
 // ─────────────────────────────────────────────────────────────────
-// RESULTS RENDERER
+// INTERSTITIAL RENDERER
 // ─────────────────────────────────────────────────────────────────
-function renderResults() {
-  const r = computeResults(state.answers);
+const INTERSTITIALS = {
+  idea: {
+    badge: 'Download complete',
+    heading: 'Next: Idea.',
+    body: "You've mapped how you take material in. Next, we look at how you shape it into something specific.",
+  },
+  creation: {
+    badge: 'Idea complete',
+    heading: 'Next: Creation.',
+    body: "You've mapped how you shape ideas. Next, we look at how you move from concept to actual output.",
+  },
+};
 
-  // Hero
-  document.getElementById('res-band-heading').textContent = r.band.name;
-  document.getElementById('res-overall-score').textContent = `Overall score: ${Math.round(r.overall)}%`;
-  document.getElementById('res-band-desc').textContent = r.band.desc;
+let pendingNextIndex = 0;
 
-  // Stage cards
-  ['download', 'idea', 'creation'].forEach(stage => {
-    const score = Math.round(r.stageScores[stage]);
-    document.getElementById(`rsc-score-${stage}`).textContent = `${score}%`;
-    document.getElementById(`rsc-bar-${stage}`).style.width = `${score}%`;
-    document.getElementById(`rsc-interp-${stage}`).textContent = getStageInterpretation(stage, r.stageScores[stage]);
-  });
-
-  // Pattern
-  document.getElementById('res-strongest').textContent = STAGES[r.strongest].name;
-  document.getElementById('res-gap').textContent = STAGES[r.weakest].name;
-  document.getElementById('res-next-move').textContent = r.nextMove;
+function showInterstitial(nextStage, nextIndex) {
+  const data = INTERSTITIALS[nextStage];
+  if (!data) return false;
+  document.getElementById('int-badge').textContent = data.badge;
+  document.getElementById('int-heading').textContent = data.heading;
+  document.getElementById('int-body').textContent = data.body;
+  pendingNextIndex = nextIndex;
+  showView('interstitial');
+  return true;
 }
 
 // ─────────────────────────────────────────────────────────────────
-// PASSPORT RENDERER
+// MEMO RENDERER
 // ─────────────────────────────────────────────────────────────────
-function renderPassport() {
-  const r = computeResults(state.answers);
+function renderMemo() {
+  const stageScores = {
+    download: calcStageScore(state.answers, 'download'),
+    idea:     calcStageScore(state.answers, 'idea'),
+    creation: calcStageScore(state.answers, 'creation'),
+  };
+  const overall = calcOverallScore(stageScores);
+  const band = getBand(overall);
+  const patternKey = detectPatternKey(stageScores);
+  const pattern = PATTERNS[patternKey];
 
   // Date
-  document.getElementById('passport-date').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('memo-date').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
   // Overview
-  document.getElementById('pp-overall-score').textContent = `${Math.round(r.overall)}%`;
-  document.getElementById('pp-band-name').textContent = r.band.name;
-  document.getElementById('pp-band-desc').textContent = r.band.desc;
-  document.getElementById('pp-profile-name').textContent = r.profileName;
+  document.getElementById('memo-overall-score').textContent = `${overall}%`;
+  document.getElementById('memo-band').textContent = band.label;
+  document.getElementById('memo-pattern-label').textContent = pattern.label;
 
-  // Stages
-  ['download', 'idea', 'creation'].forEach(stage => {
-    const score = Math.round(r.stageScores[stage]);
-    const route = getStageRoute(stage);
-    document.getElementById(`pp-score-${stage}`).textContent = `${score}%`;
-    document.getElementById(`pp-bar-${stage}`).style.width = `${score}%`;
-    document.getElementById(`pp-meaning-${stage}`).textContent = getStageMeaning(stage, r.stageScores[stage]);
-    document.getElementById(`pp-route-${stage}`).innerHTML = `<a href="${route.href}">${route.label}</a>`;
-  });
+  // Pattern
+  document.getElementById('memo-pattern-meaning').textContent = pattern.meaning;
+  document.getElementById('memo-pattern-next').textContent = pattern.bestNextMove;
 
-  // Next move
-  document.getElementById('pp-gap').textContent = STAGES[r.weakest].name;
-  document.getElementById('pp-next-move').textContent = r.nextMove;
+  // Stage cards
+  const stageGrid = document.getElementById('memo-stage-grid');
+  stageGrid.innerHTML = STAGES.map(stage => {
+    const score = stageScores[stage.id];
+    const strongest = getStrongestSubdomain(state.answers, stage.id);
+    const weakest = getWeakestSubdomain(state.answers, stage.id);
+    return `
+      <div class="memo-stage-card">
+        <span class="memo-stage-name">${stage.label}.</span>
+        <div class="memo-stage-score">${score}%</div>
+        <div class="memo-stage-bar-track"><div class="memo-stage-bar-fill" style="width:${score}%"></div></div>
+        <div class="memo-stage-meta">
+          <div><strong>Strongest:</strong> ${strongest.label}</div>
+          <div><strong>Weakest:</strong> ${weakest.label}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Subdomain table
+  const subTable = document.getElementById('memo-sub-table');
+  subTable.innerHTML = SUBDOMAINS.map(sub => {
+    const score = calcSubdomainScore(state.answers, sub.id);
+    const priority = getPriority(score);
+    const stageLabel = STAGES.find(s => s.id === sub.stage).label;
+    return `
+      <div class="memo-sub-row">
+        <span class="memo-sub-stage">${stageLabel}</span>
+        <span class="memo-sub-name">${sub.label}</span>
+        <span class="memo-sub-score">${score}%</span>
+        <span class="memo-sub-priority priority-${priority}">${priority}</span>
+      </div>
+    `;
+  }).join('');
+
+  // Resources
+  const resources = getTopResources(state.answers, 5);
+  const resList = document.getElementById('memo-resource-list');
+  if (resources.length === 0) {
+    resList.innerHTML = `<p style="font-size: 0.92rem; color: rgba(26,39,68,0.6); margin: 0;">No urgent gaps surfaced. Browse the Library when you're ready to refine.</p>`;
+  } else {
+    resList.innerHTML = resources.map(q => {
+      const sub = getSubdomainObj(q.subdomain);
+      const stageLabel = STAGES.find(s => s.id === q.stage).label;
+      return `
+        <div class="memo-resource-card">
+          <div>
+            <span class="memo-resource-tag">${stageLabel} · ${sub.label}</span>
+            <p class="memo-resource-stem">${q.stem}</p>
+            <span class="memo-resource-type">${COMB_TYPES[q.comb]}</span>
+          </div>
+          <div class="memo-resource-meta">
+            ${q.comb}<br>${q.resourceTag}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -1265,14 +1364,22 @@ document.getElementById('btn-begin').addEventListener('click', () => {
 });
 
 document.getElementById('btn-next').addEventListener('click', () => {
-  const next = state.currentQ + 1;
-  if (next >= QUESTIONS.length) {
-    renderResults();
-    showView('results');
+  const currentQ = QUESTIONS[state.currentQ];
+  const nextIndex = state.currentQ + 1;
+
+  if (nextIndex >= QUESTIONS.length) {
+    renderMemo();
+    showView('memo');
+    return;
+  }
+
+  const nextQ = QUESTIONS[nextIndex];
+  if (nextQ.stage !== currentQ.stage) {
+    showInterstitial(nextQ.stage, nextIndex);
   } else {
-    state.currentQ = next;
+    state.currentQ = nextIndex;
     saveState(state);
-    renderQuestion(next);
+    renderQuestion(nextIndex);
   }
 });
 
@@ -1284,14 +1391,11 @@ document.getElementById('btn-back').addEventListener('click', () => {
   }
 });
 
-document.getElementById('btn-view-passport').addEventListener('click', () => {
-  renderPassport();
-  showView('passport');
-});
-
-document.getElementById('btn-back-results').addEventListener('click', () => {
-  renderResults();
-  showView('results');
+document.getElementById('btn-continue').addEventListener('click', () => {
+  state.currentQ = pendingNextIndex;
+  saveState(state);
+  showView('questions');
+  renderQuestion(pendingNextIndex);
 });
 
 function retake() {
@@ -1300,15 +1404,16 @@ function retake() {
   showView('intro');
 }
 
-document.getElementById('btn-retake').addEventListener('click', retake);
-document.getElementById('btn-retake-2').addEventListener('click', retake);
+document.getElementById('btn-retake-memo').addEventListener('click', retake);
 
-// Restore in-progress session
+// ─────────────────────────────────────────────────────────────────
+// RESTORE
+// ─────────────────────────────────────────────────────────────────
 if (state.currentQ > 0 || Object.keys(state.answers).length > 0) {
   const allDone = Object.keys(state.answers).length === QUESTIONS.length;
   if (allDone) {
-    renderResults();
-    showView('results');
+    renderMemo();
+    showView('memo');
   } else {
     showView('questions');
     renderQuestion(state.currentQ);

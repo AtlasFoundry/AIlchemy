@@ -1,0 +1,32 @@
+[
+  {
+    "id": "Download",
+    "weight": 0.33,
+    "subdomains": [
+      "download_capture_habit",
+      "download_pattern_awareness",
+      "download_organisation",
+      "download_selection"
+    ]
+  },
+  {
+    "id": "Idea",
+    "weight": 0.33,
+    "subdomains": [
+      "idea_concept_formation",
+      "idea_pressure_testing",
+      "idea_purpose_clarity",
+      "idea_decision_making"
+    ]
+  },
+  {
+    "id": "Creation",
+    "weight": 0.34,
+    "subdomains": [
+      "creation_translation_into_action",
+      "creation_tool_fluency",
+      "creation_completion_and_release",
+      "creation_iteration"
+    ]
+  }
+]

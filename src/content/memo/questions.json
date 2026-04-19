@@ -1,0 +1,614 @@
+[
+  {
+    "id": "D01",
+    "stage": "Download",
+    "subdomain": "Capture habit",
+    "type": "Reflective",
+    "comb": "Capability",
+    "weight": 0.8,
+    "stem": "Think about the last time a useful idea showed up — in conversation, reading, on a walk. What happened to it?",
+    "options": [
+      "It came and went; I didn't catch it",
+      "I remembered roughly what it was but not the specifics",
+      "I captured the gist somewhere but it's probably lost its edge",
+      "I captured it cleanly, in a form I can still return to and understand"
+    ],
+    "resourceTag": "capture-101",
+    "order": 1
+  },
+  {
+    "id": "D02",
+    "stage": "Download",
+    "subdomain": "Capture habit",
+    "type": "Direct",
+    "comb": "Opportunity",
+    "weight": 1.0,
+    "stem": "Where raw ideas actually go when you have them.",
+    "options": [
+      "There's no real place — they stay in my head or get lost",
+      "They land in several scattered places I rarely consolidate",
+      "They mostly go to one place, though sometimes I default to another",
+      "One dependable place I trust to find them in again"
+    ],
+    "resourceTag": "capture-system",
+    "order": 2
+  },
+  {
+    "id": "D03",
+    "stage": "Download",
+    "subdomain": "Capture habit",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.2,
+    "stem": "When something worth capturing slips past you, the usual reason is:",
+    "options": [
+      "I didn't notice it was worth capturing until later",
+      "I noticed but told myself I'd remember — and didn't",
+      "I noticed but capturing in the moment felt like too much friction",
+      "This doesn't really happen; capture is a reflex now"
+    ],
+    "resourceTag": "capture-practice",
+    "order": 3
+  },
+  {
+    "id": "D04",
+    "stage": "Download",
+    "subdomain": "Pattern awareness",
+    "type": "Reflective",
+    "comb": "Capability",
+    "weight": 0.8,
+    "stem": "Looking across what you've captured recently — notes, voice memos, fragments:",
+    "options": [
+      "I can't really look; it's too scattered or I haven't opened it",
+      "I can see it but it's a jumble; nothing stands out as connected",
+      "I can spot a few themes when I look carefully",
+      "I can name the threads that keep appearing and point to where"
+    ],
+    "resourceTag": "pattern-spotting",
+    "order": 4
+  },
+  {
+    "id": "D05",
+    "stage": "Download",
+    "subdomain": "Pattern awareness",
+    "type": "Direct",
+    "comb": "Opportunity",
+    "weight": 1.0,
+    "stem": "How often you actually revisit what you've captured.",
+    "options": [
+      "Almost never — things go in and stay there",
+      "Only when I'm looking for something specific",
+      "Occasionally, without a real rhythm",
+      "On a regular rhythm I return to — weekly or similar"
+    ],
+    "resourceTag": "review-rhythm",
+    "order": 5
+  },
+  {
+    "id": "D06",
+    "stage": "Download",
+    "subdomain": "Pattern awareness",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.2,
+    "stem": "When you spot the same idea appearing in several of your notes:",
+    "options": [
+      "I leave it alone — it feels like extra work",
+      "I notice it but don't do anything with it",
+      "I sometimes pull the threads together when the mood strikes",
+      "I treat it as a signal worth working on and refine it into something new"
+    ],
+    "resourceTag": "synthesis-practice",
+    "order": 6
+  },
+  {
+    "id": "D07",
+    "stage": "Download",
+    "subdomain": "Organisation",
+    "type": "Reflective",
+    "comb": "Opportunity",
+    "weight": 0.8,
+    "stem": "When you go looking for something you captured three months ago:",
+    "options": [
+      "I usually can't find it — or don't bother trying",
+      "I can sometimes find it if I remember roughly where I put it",
+      "I can find it, though it takes some digging",
+      "I can find it in under a minute because my system supports it"
+    ],
+    "resourceTag": "findability",
+    "order": 7
+  },
+  {
+    "id": "D08",
+    "stage": "Download",
+    "subdomain": "Organisation",
+    "type": "Direct",
+    "comb": "Capability",
+    "weight": 1.0,
+    "stem": "The way your captured material is grouped or tagged.",
+    "options": [
+      "It isn't — everything sits in one undifferentiated pile",
+      "Some of it is grouped loosely but inconsistently",
+      "Most of it is grouped in a way that mostly works",
+      "Grouped deliberately, in a way that makes retrieval and connection easier"
+    ],
+    "resourceTag": "grouping-taxonomy",
+    "order": 8
+  },
+  {
+    "id": "D09",
+    "stage": "Download",
+    "subdomain": "Organisation",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.2,
+    "stem": "Your relationship to your capture system right now.",
+    "options": [
+      "It feels chaotic and I avoid looking at it",
+      "It's functional but I'm aware it's drifting",
+      "It works well enough that I keep using it",
+      "I actively maintain it because I know its value compounds"
+    ],
+    "resourceTag": "system-maintenance",
+    "order": 9
+  },
+  {
+    "id": "D10",
+    "stage": "Download",
+    "subdomain": "Selection",
+    "type": "Reflective",
+    "comb": "Capability",
+    "weight": 0.8,
+    "stem": "When you look at a month of captured ideas and have to choose which deserves real work:",
+    "options": [
+      "I can't tell which matter most; they all feel equivalent",
+      "I pick based on what excites me most in that moment",
+      "I can usually identify two or three with more weight than the others",
+      "I can name why each promising one is promising, and why the others aren't"
+    ],
+    "resourceTag": "selection-criteria",
+    "order": 10
+  },
+  {
+    "id": "D11",
+    "stage": "Download",
+    "subdomain": "Selection",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.0,
+    "stem": "The gap between what you've captured and what you've actually pursued.",
+    "options": [
+      "Vast — collection is easier than pursuit, and I feel the weight of it",
+      "Large — I have a backlog of ideas I've never touched again",
+      "Moderate — I pursue some, let most rest",
+      "Deliberate — I let ideas rest on purpose, and return to some with clearer intent"
+    ],
+    "resourceTag": "backlog-management",
+    "order": 11
+  },
+  {
+    "id": "D12",
+    "stage": "Download",
+    "subdomain": "Selection",
+    "type": "Direct",
+    "comb": "Opportunity",
+    "weight": 1.2,
+    "stem": "The way you move from many captured ideas to the one that gets worked on.",
+    "options": [
+      "No process — I pick whatever's loudest on the day",
+      "I pick but often regret the pick later",
+      "I have a rough way of working through candidates",
+      "I have a method I trust, and I use it regularly"
+    ],
+    "resourceTag": "selection-method",
+    "order": 12
+  },
+  {
+    "id": "I01",
+    "stage": "Idea",
+    "subdomain": "Concept formation",
+    "type": "Reflective",
+    "comb": "Capability",
+    "weight": 0.8,
+    "stem": "Think of a recent idea of yours. Could you describe what it actually is to someone outside your head?",
+    "options": [
+      "Not really — it's still a feeling or a flash",
+      "Roughly, but I'd struggle to make it specific",
+      "Yes, with some effort and a few false starts",
+      "Yes, in a way they'd recognise and could question"
+    ],
+    "resourceTag": "concept-articulation",
+    "order": 13
+  },
+  {
+    "id": "I02",
+    "stage": "Idea",
+    "subdomain": "Concept formation",
+    "type": "Direct",
+    "comb": "Capability",
+    "weight": 1.0,
+    "stem": "Turning a rough thought into something specific.",
+    "options": [
+      "It tends to stay rough; I'm not sure how to sharpen it",
+      "I can sharpen it but it loses something in the process",
+      "I can sharpen it while keeping what made it interesting",
+      "Sharpening is part of how I develop ideas; I do it as I go"
+    ],
+    "resourceTag": "concept-sharpening",
+    "order": 14
+  },
+  {
+    "id": "I03",
+    "stage": "Idea",
+    "subdomain": "Concept formation",
+    "type": "Direct",
+    "comb": "Capability",
+    "weight": 1.2,
+    "stem": "Finding the real problem underneath an idea.",
+    "options": [
+      "I'm usually working with the surface version of the problem",
+      "I can see there's something deeper but can't quite get to it",
+      "I can dig under the surface with effort and time",
+      "I instinctively look for the problem underneath, not the brief on top"
+    ],
+    "resourceTag": "problem-excavation",
+    "order": 15
+  },
+  {
+    "id": "I04",
+    "stage": "Idea",
+    "subdomain": "Pressure testing",
+    "type": "Reflective",
+    "comb": "Motivation",
+    "weight": 0.8,
+    "stem": "Think about the last idea you got excited about. How soon did you try to find what was wrong with it?",
+    "options": [
+      "I didn't — challenging it felt like spoiling it",
+      "Much later, after I'd already sunk time into it",
+      "At some point, once the excitement settled",
+      "Early — finding the weaknesses is how I know whether it's real"
+    ],
+    "resourceTag": "pressure-test-practice",
+    "order": 16
+  },
+  {
+    "id": "I05",
+    "stage": "Idea",
+    "subdomain": "Pressure testing",
+    "type": "Direct",
+    "comb": "Opportunity",
+    "weight": 1.0,
+    "stem": "The methods you have for testing whether an idea is actually useful.",
+    "options": [
+      "None really — I just keep thinking about it",
+      "I ask a few people I know, informally",
+      "I've got a couple of go-to ways to get external input",
+      "I have a toolkit I use — examples, tests, people, evidence paths"
+    ],
+    "resourceTag": "validation-frameworks",
+    "order": 17
+  },
+  {
+    "id": "I06",
+    "stage": "Idea",
+    "subdomain": "Pressure testing",
+    "type": "Direct",
+    "comb": "Opportunity",
+    "weight": 1.2,
+    "stem": "The way you compare your idea against alternatives that already exist.",
+    "options": [
+      "I don't really compare — I focus on my own version",
+      "I do a quick search if I remember",
+      "I have a habit of scanning the landscape before committing",
+      "I use a repeatable method — tools, lists, examples — to map what's out there"
+    ],
+    "resourceTag": "competitive-mapping",
+    "order": 18
+  },
+  {
+    "id": "I07",
+    "stage": "Idea",
+    "subdomain": "Purpose clarity",
+    "type": "Reflective",
+    "comb": "Capability",
+    "weight": 0.8,
+    "stem": "If someone asks who your idea is for, can you answer without hedging?",
+    "options": [
+      "Not really — I tend to say it's for a lot of people",
+      "I can name a broad group but not a specific person",
+      "I can describe a specific kind of person clearly",
+      "I can name the person, their situation, and why they'd care"
+    ],
+    "resourceTag": "audience-specificity",
+    "order": 19
+  },
+  {
+    "id": "I08",
+    "stage": "Idea",
+    "subdomain": "Purpose clarity",
+    "type": "Direct",
+    "comb": "Capability",
+    "weight": 1.0,
+    "stem": "Explaining the value of the idea in plain language.",
+    "options": [
+      "Mine comes out tangled or abstract",
+      "It's okay but uses language that loses most people",
+      "I can say it plainly but it still feels incomplete",
+      "I can say it plainly and it lands — people recognise the problem"
+    ],
+    "resourceTag": "plain-language-value",
+    "order": 20
+  },
+  {
+    "id": "I09",
+    "stage": "Idea",
+    "subdomain": "Purpose clarity",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.2,
+    "stem": "An idea that sounds interesting but doesn't have a clear purpose.",
+    "options": [
+      "I tend to build it anyway because it's interesting",
+      "I build it but start doubting halfway through",
+      "I notice the purpose problem and try to locate it before building",
+      "I hold it as unfinished thinking and don't confuse it with a buildable idea"
+    ],
+    "resourceTag": "interest-vs-purpose",
+    "order": 21
+  },
+  {
+    "id": "I10",
+    "stage": "Idea",
+    "subdomain": "Decision making",
+    "type": "Reflective",
+    "comb": "Capability",
+    "weight": 0.8,
+    "stem": "The last time you had to pick between two ideas worth doing:",
+    "options": [
+      "I kept deferring the decision and nothing moved",
+      "I picked the one that felt easier or louder in the moment",
+      "I picked based on rough reasoning I could articulate afterwards",
+      "I picked using a clear set of criteria I trust"
+    ],
+    "resourceTag": "decision-criteria",
+    "order": 22
+  },
+  {
+    "id": "I11",
+    "stage": "Idea",
+    "subdomain": "Decision making",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.0,
+    "stem": "Stopping work on an idea that isn't strong enough.",
+    "options": [
+      "I struggle to stop — I keep trying to rescue it",
+      "I stop eventually but it costs me more time than it should",
+      "I can stop when I see it clearly, even if reluctantly",
+      "I treat stopping as part of the work; the sunk time isn't wasted"
+    ],
+    "resourceTag": "sunk-cost-release",
+    "order": 23
+  },
+  {
+    "id": "I12",
+    "stage": "Idea",
+    "subdomain": "Decision making",
+    "type": "Direct",
+    "comb": "Capability",
+    "weight": 1.2,
+    "stem": "Knowing when an idea is ready to move into building.",
+    "options": [
+      "I'm never sure; I tend to keep thinking or just launch anyway",
+      "I move when I feel ready, which is sometimes too early or too late",
+      "I have rough markers I look for before I commit to building",
+      "I have clear criteria for readiness and trust them"
+    ],
+    "resourceTag": "readiness-criteria",
+    "order": 24
+  },
+  {
+    "id": "C01",
+    "stage": "Creation",
+    "subdomain": "Translation into action",
+    "type": "Reflective",
+    "comb": "Capability",
+    "weight": 0.8,
+    "stem": "When a developed idea needs to become a first practical step:",
+    "options": [
+      "I stall — I can think about it but can't find where to start",
+      "I find a start, but often the wrong one, and loop back",
+      "I can usually find a reasonable first step",
+      "I find the smallest useful first step and commit to it quickly"
+    ],
+    "resourceTag": "first-step-design",
+    "order": 25
+  },
+  {
+    "id": "C02",
+    "stage": "Creation",
+    "subdomain": "Translation into action",
+    "type": "Direct",
+    "comb": "Capability",
+    "weight": 1.0,
+    "stem": "Breaking an idea into buildable parts.",
+    "options": [
+      "I can't see the parts — it still feels like one big thing",
+      "I can break it down but the parts feel arbitrary",
+      "I can break it into a rough sequence that works",
+      "I break it into parts where each one is buildable and testable on its own"
+    ],
+    "resourceTag": "breakdown-frameworks",
+    "order": 26
+  },
+  {
+    "id": "C03",
+    "stage": "Creation",
+    "subdomain": "Translation into action",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.2,
+    "stem": "Starting to build before every detail is clear.",
+    "options": [
+      "I wait for clarity that rarely arrives",
+      "I start but get stuck at the first ambiguity",
+      "I can start with partial clarity and figure it out as I go",
+      "Starting with partial clarity is how I get clarity"
+    ],
+    "resourceTag": "momentum-over-certainty",
+    "order": 27
+  },
+  {
+    "id": "C04",
+    "stage": "Creation",
+    "subdomain": "Tool fluency",
+    "type": "Reflective",
+    "comb": "Opportunity",
+    "weight": 0.8,
+    "stem": "The tools you have at your disposal for making:",
+    "options": [
+      "Limited — I work with what I have, and it often doesn't quite fit",
+      "Enough for basics but I'm often reaching for something I don't have",
+      "Mostly good — I have what I need for the work I do",
+      "Well-stocked and deliberate — my tools actively support what I make"
+    ],
+    "resourceTag": "tool-selection",
+    "order": 28
+  },
+  {
+    "id": "C05",
+    "stage": "Creation",
+    "subdomain": "Tool fluency",
+    "type": "Direct",
+    "comb": "Capability",
+    "weight": 1.0,
+    "stem": "Using AI tools to make real progress on what you're building.",
+    "options": [
+      "I've barely used them or don't know where to start",
+      "I use them for small bits but don't trust them for the real work",
+      "I use them confidently for parts of the build",
+      "I direct them — they work to my instructions and I can tell when they're off"
+    ],
+    "resourceTag": "ai-confidence",
+    "order": 29
+  },
+  {
+    "id": "C06",
+    "stage": "Creation",
+    "subdomain": "Tool fluency",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.2,
+    "stem": "When a new tool promises to help but you're already mid-build.",
+    "options": [
+      "I drop what I'm doing to try it",
+      "I get distracted often enough that builds stall",
+      "I can bookmark it and stay with the build most of the time",
+      "I stay with the build; new tools wait until there's a reason to switch"
+    ],
+    "resourceTag": "tool-discipline",
+    "order": 30
+  },
+  {
+    "id": "C07",
+    "stage": "Creation",
+    "subdomain": "Completion and release",
+    "type": "Reflective",
+    "comb": "Motivation",
+    "weight": 0.8,
+    "stem": "Think about what you've made in the last few months. What's the ratio of finished to unfinished?",
+    "options": [
+      "Mostly unfinished; I have more starts than endings",
+      "About half and half; finishing is a struggle",
+      "I finish more than I don't, though often later than I meant to",
+      "I finish regularly; finishing is part of the practice, not the exception"
+    ],
+    "resourceTag": "completion-practice",
+    "order": 31
+  },
+  {
+    "id": "C08",
+    "stage": "Creation",
+    "subdomain": "Completion and release",
+    "type": "Direct",
+    "comb": "Capability",
+    "weight": 1.0,
+    "stem": "Deciding when something is ready to share.",
+    "options": [
+      "I never feel it's ready; I keep polishing or hide it",
+      "I decide based on whether I'm tired of it, which isn't the same thing",
+      "I decide when it does what it needs to do, even if it could be better",
+      "I have a clear definition of done for each thing and ship at that point"
+    ],
+    "resourceTag": "definition-of-done",
+    "order": 32
+  },
+  {
+    "id": "C09",
+    "stage": "Creation",
+    "subdomain": "Completion and release",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.2,
+    "stem": "Releasing work into the world.",
+    "options": [
+      "It stays in my drafts; release feels exposing",
+      "I release sometimes but with significant reluctance",
+      "I release when things are ready, without dragging it out",
+      "I release consistently; each release teaches me something for the next"
+    ],
+    "resourceTag": "release-readiness",
+    "order": 33
+  },
+  {
+    "id": "C10",
+    "stage": "Creation",
+    "subdomain": "Iteration",
+    "type": "Reflective",
+    "comb": "Capability",
+    "weight": 0.8,
+    "stem": "Think about the last thing you released. What did you learn from it?",
+    "options": [
+      "I haven't really thought about it — I moved on",
+      "A vague sense of what worked or didn't, but nothing specific",
+      "Two or three specific things I'd do differently",
+      "Clear learning I've already applied to what I'm making now"
+    ],
+    "resourceTag": "post-release-reflection",
+    "order": 34
+  },
+  {
+    "id": "C11",
+    "stage": "Creation",
+    "subdomain": "Iteration",
+    "type": "Direct",
+    "comb": "Opportunity",
+    "weight": 1.0,
+    "stem": "The systems you have for getting feedback on what you've made.",
+    "options": [
+      "I don't seek it out; feedback arrives by chance or not at all",
+      "I ask a few friends or people I trust, informally",
+      "I have one or two reliable places I can test something",
+      "I use a range of feedback channels deliberately for different kinds of work"
+    ],
+    "resourceTag": "feedback-systems",
+    "order": 35
+  },
+  {
+    "id": "C12",
+    "stage": "Creation",
+    "subdomain": "Iteration",
+    "type": "Direct",
+    "comb": "Motivation",
+    "weight": 1.2,
+    "stem": "Keeping momentum after the first release.",
+    "options": [
+      "I rarely come back; the energy dissipates",
+      "I come back if something pulls me — feedback, external need",
+      "I plan the return before releasing, so momentum carries",
+      "Release is mid-cycle, not the end; momentum is built in"
+    ],
+    "resourceTag": "sustained-momentum",
+    "order": 36
+  }
+]

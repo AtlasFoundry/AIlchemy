@@ -1,0 +1,290 @@
+[
+  {
+    "questionId": "D01",
+    "stage": "Download",
+    "subdomain": "Capture habit",
+    "comb": "Capability",
+    "resourceTag": "capture-101",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "D02",
+    "stage": "Download",
+    "subdomain": "Capture habit",
+    "comb": "Opportunity",
+    "resourceTag": "capture-system",
+    "resourceTypeNeeded": "Build a template, prompt pack, tool, or system. User needs infrastructure in place."
+  },
+  {
+    "questionId": "D03",
+    "stage": "Download",
+    "subdomain": "Capture habit",
+    "comb": "Motivation",
+    "resourceTag": "capture-practice",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "D04",
+    "stage": "Download",
+    "subdomain": "Pattern awareness",
+    "comb": "Capability",
+    "resourceTag": "pattern-spotting",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "D05",
+    "stage": "Download",
+    "subdomain": "Pattern awareness",
+    "comb": "Opportunity",
+    "resourceTag": "review-rhythm",
+    "resourceTypeNeeded": "Build a template, prompt pack, tool, or system. User needs infrastructure in place."
+  },
+  {
+    "questionId": "D06",
+    "stage": "Download",
+    "subdomain": "Pattern awareness",
+    "comb": "Motivation",
+    "resourceTag": "synthesis-practice",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "D07",
+    "stage": "Download",
+    "subdomain": "Organisation",
+    "comb": "Opportunity",
+    "resourceTag": "findability",
+    "resourceTypeNeeded": "Build a template, prompt pack, tool, or system. User needs infrastructure in place."
+  },
+  {
+    "questionId": "D08",
+    "stage": "Download",
+    "subdomain": "Organisation",
+    "comb": "Capability",
+    "resourceTag": "grouping-taxonomy",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "D09",
+    "stage": "Download",
+    "subdomain": "Organisation",
+    "comb": "Motivation",
+    "resourceTag": "system-maintenance",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "D10",
+    "stage": "Download",
+    "subdomain": "Selection",
+    "comb": "Capability",
+    "resourceTag": "selection-criteria",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "D11",
+    "stage": "Download",
+    "subdomain": "Selection",
+    "comb": "Motivation",
+    "resourceTag": "backlog-management",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "D12",
+    "stage": "Download",
+    "subdomain": "Selection",
+    "comb": "Opportunity",
+    "resourceTag": "selection-method",
+    "resourceTypeNeeded": "Build a template, prompt pack, tool, or system. User needs infrastructure in place."
+  },
+  {
+    "questionId": "I01",
+    "stage": "Idea",
+    "subdomain": "Concept formation",
+    "comb": "Capability",
+    "resourceTag": "concept-articulation",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "I02",
+    "stage": "Idea",
+    "subdomain": "Concept formation",
+    "comb": "Capability",
+    "resourceTag": "concept-sharpening",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "I03",
+    "stage": "Idea",
+    "subdomain": "Concept formation",
+    "comb": "Capability",
+    "resourceTag": "problem-excavation",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "I04",
+    "stage": "Idea",
+    "subdomain": "Pressure testing",
+    "comb": "Motivation",
+    "resourceTag": "pressure-test-practice",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "I05",
+    "stage": "Idea",
+    "subdomain": "Pressure testing",
+    "comb": "Opportunity",
+    "resourceTag": "validation-frameworks",
+    "resourceTypeNeeded": "Build a template, prompt pack, tool, or system. User needs infrastructure in place."
+  },
+  {
+    "questionId": "I06",
+    "stage": "Idea",
+    "subdomain": "Pressure testing",
+    "comb": "Opportunity",
+    "resourceTag": "competitive-mapping",
+    "resourceTypeNeeded": "Build a template, prompt pack, tool, or system. User needs infrastructure in place."
+  },
+  {
+    "questionId": "I07",
+    "stage": "Idea",
+    "subdomain": "Purpose clarity",
+    "comb": "Capability",
+    "resourceTag": "audience-specificity",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "I08",
+    "stage": "Idea",
+    "subdomain": "Purpose clarity",
+    "comb": "Capability",
+    "resourceTag": "plain-language-value",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "I09",
+    "stage": "Idea",
+    "subdomain": "Purpose clarity",
+    "comb": "Motivation",
+    "resourceTag": "interest-vs-purpose",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "I10",
+    "stage": "Idea",
+    "subdomain": "Decision making",
+    "comb": "Capability",
+    "resourceTag": "decision-criteria",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "I11",
+    "stage": "Idea",
+    "subdomain": "Decision making",
+    "comb": "Motivation",
+    "resourceTag": "sunk-cost-release",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "I12",
+    "stage": "Idea",
+    "subdomain": "Decision making",
+    "comb": "Capability",
+    "resourceTag": "readiness-criteria",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "C01",
+    "stage": "Creation",
+    "subdomain": "Translation into action",
+    "comb": "Capability",
+    "resourceTag": "first-step-design",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "C02",
+    "stage": "Creation",
+    "subdomain": "Translation into action",
+    "comb": "Capability",
+    "resourceTag": "breakdown-frameworks",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "C03",
+    "stage": "Creation",
+    "subdomain": "Translation into action",
+    "comb": "Motivation",
+    "resourceTag": "momentum-over-certainty",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "C04",
+    "stage": "Creation",
+    "subdomain": "Tool fluency",
+    "comb": "Opportunity",
+    "resourceTag": "tool-selection",
+    "resourceTypeNeeded": "Build a template, prompt pack, tool, or system. User needs infrastructure in place."
+  },
+  {
+    "questionId": "C05",
+    "stage": "Creation",
+    "subdomain": "Tool fluency",
+    "comb": "Capability",
+    "resourceTag": "ai-confidence",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "C06",
+    "stage": "Creation",
+    "subdomain": "Tool fluency",
+    "comb": "Motivation",
+    "resourceTag": "tool-discipline",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "C07",
+    "stage": "Creation",
+    "subdomain": "Completion and release",
+    "comb": "Motivation",
+    "resourceTag": "completion-practice",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "C08",
+    "stage": "Creation",
+    "subdomain": "Completion and release",
+    "comb": "Capability",
+    "resourceTag": "definition-of-done",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "C09",
+    "stage": "Creation",
+    "subdomain": "Completion and release",
+    "comb": "Motivation",
+    "resourceTag": "release-readiness",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  },
+  {
+    "questionId": "C10",
+    "stage": "Creation",
+    "subdomain": "Iteration",
+    "comb": "Capability",
+    "resourceTag": "post-release-reflection",
+    "resourceTypeNeeded": "Build a how-to, walkthrough, or framework. User needs knowledge or skill scaffolding."
+  },
+  {
+    "questionId": "C11",
+    "stage": "Creation",
+    "subdomain": "Iteration",
+    "comb": "Opportunity",
+    "resourceTag": "feedback-systems",
+    "resourceTypeNeeded": "Build a template, prompt pack, tool, or system. User needs infrastructure in place."
+  },
+  {
+    "questionId": "C12",
+    "stage": "Creation",
+    "subdomain": "Iteration",
+    "comb": "Motivation",
+    "resourceTag": "sustained-momentum",
+    "resourceTypeNeeded": "Build a reflection, reframe, or short essay. User needs a shift in how they relate to the behaviour."
+  }
+]
