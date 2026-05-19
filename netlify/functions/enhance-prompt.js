@@ -457,7 +457,7 @@ The build prompt is the hero artefact. It must be complete: role for the AI, con
 
 ## CONCISION
 
-Keep list items concise. Each array item should be one sentence. The \`build_prompt\` may be longer if the idea warrants it, but every other field should stay practical and skimmable. A brief is not a deck.
+Keep the entire response under 1,200 words total. The \`build_prompt\` itself should be 200–400 words for software ideas and 150–350 words for non-software ideas. List items should each be one short sentence. A brief is not a deck.
 
 ## OUTPUT SECTIONS — WHAT EACH MUST BE
 
