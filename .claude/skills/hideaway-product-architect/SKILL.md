@@ -62,7 +62,7 @@ Default position: most new resources start as free guides or paid packs. Tools a
 Every user-facing tool must be traceable to a routing node it serves:
 
 - **Prompt Lab** — general-purpose, serves the broad "sharpen what you ask AI" job. Loosely anchored to Translation Into Action and Tool Fluency.
-- **Builder Brief Generator (planned)** — serves Translation Into Action directly. Takes a rough idea and produces a structured build brief.
+- **Builder Brief Generator** — shipped. Serves Translation Into Action as the felt user-facing friction, anchored on Tool Fluency as the secondary Opportunity gap that justifies the tool format. Takes a rough idea and produces a structured build brief with an AI-build-ready prompt as the headline artefact.
 - **Future tools** — must name the subdomain they serve before being built.
 
 If a proposed tool cannot be traced to a routing node, it does not belong in Hideaway.
@@ -101,6 +101,8 @@ The Skill is the source of truth. Tools follow.
 ## Open product decisions
 
 Decisions reasoned through against the doctrine but not yet shipped. Append-only. Remove an entry when the work ships, or promote it into the Skill as embedded doctrine if it set a precedent.
+
+**Shipped:** Builder Brief Generator — 2026-05-19. First signature-tool projection of the Translation Into Action / Tool Fluency pathway. The Builder Brief dependency referenced in the Pressure-Test decision is now resolved; the Pressure-Test Pack remains queued as a paid-pack decision.
 
 ### Pressure-Test (Idea → Pressure Testing)
 
