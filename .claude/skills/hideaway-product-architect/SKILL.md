@@ -57,9 +57,31 @@ Resources sit on a commercial ladder:
 
 Default position: most new resources start as free guides or paid packs. Tools and pathways are earned, not assumed.
 
+## The Kitchen
+
+The Kitchen is the soft-entry workspace where Hideaway's tools live. Operators arrive here when they already have something to work on and want the right next tool. Tools sit inside it as stations.
+
+The Kitchen is not a replacement for the Makers Memo. The two serve different jobs:
+
+- **Makers Memo** — the formal diagnostic. For operators who want to understand the whole pattern of how they work.
+- **The Kitchen** — the soft entry. For operators who have rough material in hand and want to act on it. Routes them to the relevant tool.
+
+Both are valid entry routes into Hideaway. They do not compete.
+
+### Soft-routing questions
+
+The Kitchen routes operators in maker language rather than diagnostic language. The four entry questions map to diagnostic stages:
+
+- **What have you got cooking?** → Download / raw capture / early material
+- **What's half-baked?** → Idea / pressure-testing / shaping
+- **What's ready to build?** → Creation / Translation Into Action / Builder Brief
+- **What needs tasting?** → Completion, release, iteration / future critique tools
+
+These are not a second diagnostic. They are an operator-voice surface over the same routing logic already encoded in `src/content/memo/`. The Kitchen should make routing feel natural, not analytical.
+
 ## Tools as projections
 
-Every user-facing tool must be traceable to a routing node it serves:
+Every user-facing tool must be traceable to a routing node it serves. Tools are also stations inside The Kitchen — they remain productised projections of diagnostic routing nodes, but The Kitchen makes that routing visible and usable for operators.
 
 - **Prompt Lab** — general-purpose, serves the broad "sharpen what you ask AI" job. Loosely anchored to Translation Into Action and Tool Fluency.
 - **Builder Brief Generator** — shipped. Serves Translation Into Action as the felt user-facing friction, anchored on Tool Fluency as the secondary Opportunity gap that justifies the tool format. Takes a rough idea and produces a structured build brief with an AI-build-ready prompt as the headline artefact.
