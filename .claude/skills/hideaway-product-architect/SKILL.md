@@ -97,3 +97,16 @@ System prompts for user-facing tools (Prompt Lab, Builder Brief, future) must:
 3. Be updated *after* the Skill, not before — if doctrine shifts, the Skill changes first, then the tool's system prompt.
 
 The Skill is the source of truth. Tools follow.
+
+## Open product decisions
+
+Decisions reasoned through against the doctrine but not yet shipped. Append-only. Remove an entry when the work ships, or promote it into the Skill as embedded doctrine if it set a precedent.
+
+### Pressure-Test (Idea → Pressure Testing)
+
+- **Subdomain served:** `idea_pressure_testing`.
+- **Format:** Paid pack first, not a signature tool.
+- **Scope:** Three structured lenses — validation, competitive mapping, purpose challenge. Plus a short written reframe to cover the I04 motivation gap, which a tool alone cannot serve.
+- **Sequencing:** Do not build before Builder Brief ships. Builder Brief is the next signature tool commitment (Translation Into Action) and must be completed first to honour the planned roadmap and avoid feature inflation.
+- **Future upgrade path:** Promote to a signature tool only if pack demand justifies it. The tool version would extend `enhance-prompt.js` via a `mode` parameter.
+- **Logged:** 2026-05-19
