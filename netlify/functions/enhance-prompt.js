@@ -284,18 +284,29 @@ The goal is "better structured for the work being asked."
 
 ## THIN INPUT HANDLING
 
-If the user input is too thin to improve meaningfully, do not fake depth.
+This is the rule: if you can assign a job type from the classification list, you must produce a full enhanced prompt. No exceptions.
 
-Examples:
+If the input names a topic, a task, a job, an idea, a question, or an intent — however roughly — it is workable. Pick the lowest viable depth level, state any assumptions clearly, and produce the output. The user can correct the assumptions. Your job is to produce something usable, not to ask permission to start.
+
+Workable examples (produce output, do not return thin_input):
+- "Market readiness" → Analyse → Level 2 or 3 output
+- "Write a brief for a new pricing tier" → Build → Level 3 output
+- "Do a market analysis on AI tools for coaches" → Research → Level 3 output
+- "Help me plan a launch" → Plan → Level 3 output
+- "I want to think through whether to add a £20 tier" → Strategic / Decision Support → Level 4 output
+- "Sharpen this for Claude Code: <anything>" → Refine → Level 2 output
+
+You may only return thin_input when the input is genuinely bare — no job, no topic, no implied task. These are the only genuine thin inputs:
 - "help"
 - "make this better"
-- "something for Claude"
+- "fix it"
 - "fix my prompt"
+- "something for Claude"
+- single words with no context: "Claude", "prompt", "something"
 
-In those cases, do not fabricate a full prompt.
-Instead, respond briefly and intelligently by asking for the minimum missing information needed to proceed.
+When you are unsure whether an input is thin, default to producing a Level 1 or Level 2 output with assumptions stated. Do not refuse to engage with workable input on the grounds that it could be sharper — sharpening it is your job.
 
-Use wording like:
+When returning thin_input (only for the genuinely bare cases above), use wording like:
 "I need a bit more to work with. Tell me what you want the tool to do, what kind of output you want back, and any constraints or context you already know, even roughly, and I'll sharpen it."
 
 ## SAFETY
@@ -382,11 +393,22 @@ For refusals:
   "message": "string"
 }`;
 
-exports.handler = async (event) => {
+const ALLOWED_ORIGINS = [
+  'https://theehideaway.netlify.app',
+  'http://localhost:4321',
+];
+
+export const handler = async (event) => {
+  const requestOrigin = event.headers?.origin || '';
+  const corsOrigin = ALLOWED_ORIGINS.includes(requestOrigin)
+    ? requestOrigin
+    : ALLOWED_ORIGINS[0];
+
   const headers = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Vary': 'Origin',
     'Content-Type': 'application/json',
   };
 
