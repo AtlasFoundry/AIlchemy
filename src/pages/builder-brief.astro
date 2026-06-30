@@ -20,11 +20,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Input -->
       <div class="input-panel">
         <label for="prompt-input" class="input-label">Your rough idea</label>
-        <div class="starters">
-          <span class="starters-label">Try:</span>
-          <button class="starter-chip" data-text="A tool that turns customer interview notes into structured insight clusters for solo founders">An AI tool for insight clustering</button>
-          <button class="starter-chip" data-text="A weekly newsletter that pressure-tests one indie maker's idea, written for other makers">A newsletter for indie makers</button>
-          <button class="starter-chip" data-text="A diagnostic that helps freelance consultants find the right starting price for a new offer">A pricing diagnostic for consultants</button>
+        <div class="example-bubbles" aria-label="Example inputs">
+          <p class="example-kicker">Use Builder Brief for rough ideas.</p>
+          <p class="example-helper">Bring the thing you want to make. We'll turn it into a scoped first version with a build-ready prompt.</p>
+          <div class="bubble-row">
+            <button type="button" class="starter-chip example-bubble" data-text="I want to build a tool that helps people choose what to work on.">"I want to build a tool that helps people choose what to work on."</button>
+            <button type="button" class="starter-chip example-bubble" data-text="I've got an idea for a small course but don't know the structure.">"I've got an idea for a small course but don't know the structure."</button>
+            <button type="button" class="starter-chip example-bubble" data-text="I want to turn this messy process into a product.">"I want to turn this messy process into a product."</button>
+            <button type="button" class="starter-chip example-bubble" data-text="Help me shape this into a first version.">"Help me shape this into a first version."</button>
+          </div>
         </div>
         <textarea
           id="prompt-input"
@@ -292,6 +296,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-color: var(--sage);
     color: var(--navy);
     background: rgba(156,175,136,0.08);
+  }
+
+  /* Example bubbles card */
+  .example-bubbles {
+    margin: 0 0 1rem;
+    padding: 1.1rem 1.2rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--frosted);
+  }
+
+  .example-kicker {
+    margin: 0 0 0.3rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--navy);
+  }
+
+  .example-helper {
+    margin: 0 0 0.9rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-light);
+    max-width: 42rem;
+  }
+
+  .bubble-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  /* extends .starter-chip; the starter-chip class keeps the click-to-fill hook */
+  .example-bubble {
+    font-size: 0.85rem;
+    padding: 0.55rem 0.85rem;
+    text-align: left;
   }
 
   /* Input */

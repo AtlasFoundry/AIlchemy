@@ -20,11 +20,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Input -->
       <div class="input-panel">
         <label for="prompt-input" class="input-label">Your rough prompt</label>
-        <div class="starters">
-          <span class="starters-label">Try:</span>
-          <button class="starter-chip" data-text="Take this vague request and turn it into a precise prompt an AI can act on">Tighten a vague request</button>
-          <button class="starter-chip" data-text="Improve this Claude Code prompt so it gives me a cleaner, more structured output">Sharpen a Claude Code prompt</button>
-          <button class="starter-chip" data-text="Sharpen this research prompt so the AI returns specific, structured findings">Sharpen a research prompt</button>
+        <div class="example-bubbles" aria-label="Example inputs">
+          <p class="example-kicker">Use Prompt Lab for messy asks.</p>
+          <p class="example-helper">Bring the instruction you were about to give AI. We'll make it clearer, tighter, and easier to act on.</p>
+          <div class="bubble-row">
+            <button type="button" class="starter-chip example-bubble" data-text="Can you make this email sound better?">"Can you make this email sound better?"</button>
+            <button type="button" class="starter-chip example-bubble" data-text="Help me research this market.">"Help me research this market."</button>
+            <button type="button" class="starter-chip example-bubble" data-text="Turn this vague instruction into a better prompt.">"Turn this vague instruction into a better prompt."</button>
+            <button type="button" class="starter-chip example-bubble" data-text="Summarise this report and pull out the risks.">"Summarise this report and pull out the risks."</button>
+          </div>
         </div>
         <textarea
           id="prompt-input"
@@ -264,6 +268,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-color: var(--sage);
     color: var(--navy);
     background: rgba(156,175,136,0.08);
+  }
+
+  /* Example bubbles card */
+  .example-bubbles {
+    margin: 0 0 1rem;
+    padding: 1.1rem 1.2rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--frosted);
+  }
+
+  .example-kicker {
+    margin: 0 0 0.3rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--navy);
+  }
+
+  .example-helper {
+    margin: 0 0 0.9rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-light);
+    max-width: 42rem;
+  }
+
+  .bubble-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  /* extends .starter-chip; the starter-chip class keeps the click-to-fill hook */
+  .example-bubble {
+    font-size: 0.85rem;
+    padding: 0.55rem 0.85rem;
+    text-align: left;
   }
 
   /* Input */
