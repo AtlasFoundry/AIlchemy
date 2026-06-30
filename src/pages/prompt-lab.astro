@@ -957,12 +957,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     currentEnhanced = data.enhanced_prompt || '';
     enhancedText.textContent = currentEnhanced;
 
-    if (data.prompt_level) {
-      levelBadge.textContent = data.prompt_level;
-      levelBadge.style.display = 'inline-block';
-    } else {
-      levelBadge.style.display = 'none';
-    }
+    // Static label — Prompt Lab always outputs a ready-to-run prompt.
+    // prompt_level is still returned by the API, just no longer displayed.
+    levelBadge.textContent = 'READY PROMPT';
+    levelBadge.style.display = 'inline-block';
 
     weaknessesList.innerHTML = (data.why_it_was_weak || [])
       .map(w => `<li>${escapeHtml(w)}</li>`).join('');

@@ -364,6 +364,17 @@ Do not leave complex prompts underpowered.
 
 Return one best prompt only.
 
+## FORMATTING
+
+Do not use markdown formatting in the improved prompt. Use plain numbered sections and clear labels instead. No **bold**, no # headings, no backticks — just clean plain text.
+
+## CONCISION
+
+Prompt Lab should feel fast and sharp, not like a report.
+- Keep why_it_was_weak, what_changed, best_used_when, and assumptions concise.
+- Use short paragraphs or short bullets.
+- Do not turn the explanation into a consulting note.
+
 ---
 
 ## OUTPUT FORMAT
@@ -377,7 +388,7 @@ For successful enhancements:
   "enhanced_prompt": "string — the sharpened prompt, ready to use, built at the chosen depth level",
   "why_it_was_weak": ["string — failure mode, not a missing-fields list. Max 3 items."],
   "what_changed": ["string — leverage points only, not an edit log. Max 3 items."],
-  "best_used_when": "string — one or two sentences on where this prompt works best",
+  "best_used_when": "string — one or two sentences describing the kind of task the prompt is best suited for, without over-assuming the user's business model, intent, or commercial situation",
   "assumptions": ["string — only include if assumption materially shaped the output. Empty array if none."]
 }
 
