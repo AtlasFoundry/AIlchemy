@@ -9,7 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="hero-inner">
       <div class="hero-tag">Tool</div>
       <h1>Prompt<span class="accent"> Lab.</span></h1>
-      <p class="hero-sub">Prompt Lab helps people turn rough instructions into usable prompts for building, refining, researching, and working effectively with AI tools.</p>
+      <p class="hero-sub">Prompt Lab sharpens a messy ask into a clear, specific prompt. Use it when you already know what you want from AI — the wording just isn't there yet.</p>
     </div>
   </section>
 
@@ -22,9 +22,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <label for="prompt-input" class="input-label">Your rough prompt</label>
         <div class="starters">
           <span class="starters-label">Try:</span>
-          <button class="starter-chip" data-text="Turn these rough notes into a builder brief for Claude">Turn rough notes into a builder brief</button>
+          <button class="starter-chip" data-text="Take this vague request and turn it into a precise prompt an AI can act on">Tighten a vague request</button>
           <button class="starter-chip" data-text="Improve this Claude Code prompt so it gives me a cleaner, more structured output">Sharpen a Claude Code prompt</button>
-          <button class="starter-chip" data-text="Help me structure this idea so an AI tool can actually work with it">Structure an idea for a tool</button>
+          <button class="starter-chip" data-text="Sharpen this research prompt so the AI returns specific, structured findings">Sharpen a research prompt</button>
         </div>
         <textarea
           id="prompt-input"
@@ -81,8 +81,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="output-header">
             <div>
               <span class="level-badge" id="level-badge" style="display:none;"></span>
-              <h2>Builder-Ready Prompt</h2>
-              <p class="output-desc">Scoped, structured, and ready to run.</p>
+              <h2>AI-Ready Prompt</h2>
+              <p class="output-desc">Clearer, more specific, and ready to run.</p>
             </div>
             <button class="copy-btn" id="copy-btn" title="Copy to clipboard">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -148,13 +148,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="steps-grid">
         <div class="step">
           <span class="step-num">01</span>
-          <h3>Scopes the job</h3>
-          <p>Identifies what the tool is actually being asked to do — and where the original instruction would have failed or drifted.</p>
+          <h3>Reads the real ask</h3>
+          <p>Identifies what you're actually trying to get the AI to do — and where the original wording would have drifted or fallen short.</p>
         </div>
         <div class="step">
           <span class="step-num">02</span>
           <h3>Sharpens for the task</h3>
-          <p>Returns a structured, builder-ready version — same intent, cleaner scope, clearer output criteria.</p>
+          <p>Returns a clearer, more specific prompt — same intent, tighter ask, clearer output criteria.</p>
         </div>
         <div class="step">
           <span class="step-num">03</span>
