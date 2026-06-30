@@ -1,0 +1,39 @@
+[
+  {
+    "resourceTag": "first-step-design",
+    "label": "Builder Brief",
+    "description": "Turn this into a structured build brief with an AI-ready prompt.",
+    "href": "/builder-brief",
+    "status": "live",
+    "toolName": "Builder Brief"
+  },
+  {
+    "resourceTag": "breakdown-frameworks",
+    "label": "Builder Brief",
+    "description": "Break the build into a scoped first version you can actually start.",
+    "href": "/builder-brief",
+    "status": "live",
+    "toolName": "Builder Brief"
+  },
+  {
+    "resourceTag": "pressure-test-practice",
+    "label": "Pressure-Test Pack",
+    "description": "A structured pack to pressure-test the idea honestly before you commit.",
+    "href": null,
+    "status": "coming-soon"
+  },
+  {
+    "resourceTag": "validation-frameworks",
+    "label": "Pressure-Test Pack",
+    "description": "Validation lenses to check whether the idea holds up before you build.",
+    "href": null,
+    "status": "coming-soon"
+  },
+  {
+    "resourceTag": "competitive-mapping",
+    "label": "Pressure-Test Pack",
+    "description": "Map the idea against what already exists, so you commit with clear eyes.",
+    "href": null,
+    "status": "coming-soon"
+  }
+]
