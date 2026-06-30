@@ -21,13 +21,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="input-panel">
         <label for="prompt-input" class="input-label">Your rough idea</label>
         <div class="example-bubbles" aria-label="Example inputs">
-          <p class="example-kicker">Use Builder Brief for rough ideas.</p>
-          <p class="example-helper">Bring the thing you want to make. We'll turn it into a scoped first version with a build-ready prompt.</p>
+          <span class="example-label">Try saying</span>
+          <button type="button" class="starter-chip example-main-bubble" data-text="I want to build a small tool that helps people choose which idea to work on first.">"I want to build a small tool that helps people choose which idea to work on first."</button>
           <div class="bubble-row">
-            <button type="button" class="starter-chip example-bubble" data-text="I want to build a tool that helps people choose what to work on.">"I want to build a tool that helps people choose what to work on."</button>
-            <button type="button" class="starter-chip example-bubble" data-text="I've got an idea for a small course but don't know the structure.">"I've got an idea for a small course but don't know the structure."</button>
-            <button type="button" class="starter-chip example-bubble" data-text="I want to turn this messy process into a product.">"I want to turn this messy process into a product."</button>
-            <button type="button" class="starter-chip example-bubble" data-text="Help me shape this into a first version.">"Help me shape this into a first version."</button>
+            <button type="button" class="starter-chip example-bubble" data-text="Shape this course idea.">"Shape this course idea."</button>
+            <button type="button" class="starter-chip example-bubble" data-text="Turn this process into a product.">"Turn this process into a product."</button>
+            <button type="button" class="starter-chip example-bubble" data-text="Help me define a first version.">"Help me define a first version."</button>
           </div>
         </div>
         <textarea
@@ -41,7 +40,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- Email gate (shown before first use) -->
-      <div class="email-gate" id="email-gate">
+      <div class="email-gate" id="email-gate" style="display:none;">
         <div class="gate-inner">
           <p class="gate-prompt">You get <strong>3 free runs</strong> across Prompt Lab and Builder Brief. After that, you'll need to subscribe.</p>
           <form class="gate-form" id="gate-form" name="builder-brief-signups" method="POST" data-netlify="true" netlify-honeypot="bot-field">
@@ -62,7 +61,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- Enhance button (shown after email captured) -->
-      <div class="enhance-actions" id="enhance-actions" style="display:none;">
+      <div class="enhance-actions" id="enhance-actions" style="display:flex;">
         <button class="btn-yellow btn-enhance" id="enhance-btn">Run it →</button>
         <span class="usage-counter" id="usage-counter"></span>
       </div>
@@ -298,37 +297,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background: rgba(156,175,136,0.08);
   }
 
-  /* Example bubbles card */
+  /* Example bubbles — one dominant speech bubble + small chips */
   .example-bubbles {
     margin: 0 0 1rem;
-    padding: 1.1rem 1.2rem 1.2rem;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    background: var(--frosted);
   }
 
-  .example-kicker {
-    margin: 0 0 0.3rem;
+  .example-label {
+    display: inline-block;
+    font-size: 0.7rem;
     font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--navy);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.55rem;
   }
 
-  .example-helper {
-    margin: 0 0 0.9rem;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--text-light);
-    max-width: 42rem;
+  /* dominant speech bubble — .starter-chip class keeps the click-to-fill hook */
+  .example-main-bubble {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: #fff;
+    border: 1px solid var(--stone);
+    border-radius: 16px;
+    padding: 1.1rem 1.3rem;
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-optical-sizing: none;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(26,39,68,0.04);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .example-main-bubble:hover {
+    border-color: var(--sage);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(26,39,68,0.08);
+  }
+
+  .example-main-bubble::after {
+    content: '';
+    position: absolute;
+    left: 28px;
+    bottom: -8px;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-right: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+    transform: rotate(45deg);
   }
 
   .bubble-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
+    margin-top: 1.1rem;
   }
 
-  /* extends .starter-chip; the starter-chip class keeps the click-to-fill hook */
+  /* small alternative chips — .starter-chip keeps the click-to-fill hook */
   .example-bubble {
     font-size: 0.85rem;
     padding: 0.55rem 0.85rem;
@@ -950,11 +980,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 
-  function updateCounter(count) {
-    const remaining = FREE_LIMIT - count;
-    usageCounter.textContent = remaining > 0
-      ? `${remaining} free run${remaining !== 1 ? 's' : ''} remaining`
-      : '';
+  function updateCounter() {
+    // Usage counter display intentionally blanked while the paywall is lifted.
+    // Shared count/localStorage logic is retained for future use.
+    usageCounter.textContent = '';
   }
 
   function init() {

@@ -21,12 +21,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="input-panel">
         <label for="prompt-input" class="input-label">Your rough prompt</label>
         <div class="example-bubbles" aria-label="Example inputs">
-          <p class="example-kicker">Use Prompt Lab for messy asks.</p>
-          <p class="example-helper">Bring the instruction you were about to give AI. We'll make it clearer, tighter, and easier to act on.</p>
+          <span class="example-label">Try saying</span>
+          <button type="button" class="starter-chip example-main-bubble" data-text="Can you turn this vague instruction into a clearer prompt I can give to AI?">"Can you turn this vague instruction into a clearer prompt I can give to AI?"</button>
           <div class="bubble-row">
-            <button type="button" class="starter-chip example-bubble" data-text="Can you make this email sound better?">"Can you make this email sound better?"</button>
+            <button type="button" class="starter-chip example-bubble" data-text="Make this email sharper.">"Make this email sharper."</button>
             <button type="button" class="starter-chip example-bubble" data-text="Help me research this market.">"Help me research this market."</button>
-            <button type="button" class="starter-chip example-bubble" data-text="Turn this vague instruction into a better prompt.">"Turn this vague instruction into a better prompt."</button>
             <button type="button" class="starter-chip example-bubble" data-text="Summarise this report and pull out the risks.">"Summarise this report and pull out the risks."</button>
           </div>
         </div>
@@ -40,8 +39,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- Email gate (shown before first use) -->
-      <div class="email-gate" id="email-gate">
+      <!-- Email gate (hidden for now — non-blocking, tool use prioritised) -->
+      <div class="email-gate" id="email-gate" style="display:none;">
         <div class="gate-inner">
           <p class="gate-prompt">You get <strong>3 free runs</strong>. After that, you'll need to sign up.</p>
           <form class="gate-form" id="gate-form" name="prompt-lab-signups" method="POST" data-netlify="true" netlify-honeypot="bot-field">
@@ -61,8 +60,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- Enhance button (shown after email captured) -->
-      <div class="enhance-actions" id="enhance-actions" style="display:none;">
+      <!-- Run button (shown by default — no email gate) -->
+      <div class="enhance-actions" id="enhance-actions" style="display:flex;">
         <button class="btn-yellow btn-enhance" id="enhance-btn">Run it →</button>
         <span class="usage-counter" id="usage-counter"></span>
       </div>
@@ -270,37 +269,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background: rgba(156,175,136,0.08);
   }
 
-  /* Example bubbles card */
+  /* Example bubbles — one dominant speech bubble + small chips */
   .example-bubbles {
     margin: 0 0 1rem;
-    padding: 1.1rem 1.2rem 1.2rem;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    background: var(--frosted);
   }
 
-  .example-kicker {
-    margin: 0 0 0.3rem;
+  .example-label {
+    display: inline-block;
+    font-size: 0.7rem;
     font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--navy);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.55rem;
   }
 
-  .example-helper {
-    margin: 0 0 0.9rem;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--text-light);
-    max-width: 42rem;
+  /* dominant speech bubble — .starter-chip class keeps the click-to-fill hook */
+  .example-main-bubble {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: #fff;
+    border: 1px solid var(--stone);
+    border-radius: 16px;
+    padding: 1.1rem 1.3rem;
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-optical-sizing: none;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(26,39,68,0.04);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .example-main-bubble:hover {
+    border-color: var(--sage);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(26,39,68,0.08);
+  }
+
+  .example-main-bubble::after {
+    content: '';
+    position: absolute;
+    left: 28px;
+    bottom: -8px;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-right: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+    transform: rotate(45deg);
   }
 
   .bubble-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
+    margin-top: 1.1rem;
   }
 
-  /* extends .starter-chip; the starter-chip class keeps the click-to-fill hook */
+  /* small alternative chips — .starter-chip keeps the click-to-fill hook */
   .example-bubble {
     font-size: 0.85rem;
     padding: 0.55rem 0.85rem;
@@ -812,11 +842,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 
-  function updateCounter(count) {
-    const remaining = FREE_LIMIT - count;
-    usageCounter.textContent = remaining > 0
-      ? `${remaining} free run${remaining !== 1 ? 's' : ''} remaining`
-      : '';
+  function updateCounter() {
+    // Usage counter display intentionally blanked while the paywall is lifted.
+    // Shared count/localStorage logic is retained for future use.
+    usageCounter.textContent = '';
   }
 
   function init() {
