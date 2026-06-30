@@ -583,6 +583,36 @@ const SYSTEM_PROMPTS = {
   'builder-brief': BUILDER_BRIEF_SYSTEM,
 };
 
+// The model is instructed to return raw JSON, but can occasionally wrap it in
+// markdown fences or add stray prose. Try a strict parse first, then progressively
+// looser recovery. Returns the parsed object, or null if nothing usable is found.
+function parseModelJson(text) {
+  const candidates = [text.trim()];
+
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fenced) {
+    candidates.push(fenced[1].trim());
+  }
+
+  const braces = text.match(/\{[\s\S]*\}/);
+  if (braces) {
+    candidates.push(braces[0]);
+  }
+
+  for (const candidate of candidates) {
+    try {
+      const parsed = JSON.parse(candidate);
+      if (parsed && typeof parsed === 'object') {
+        return parsed;
+      }
+    } catch {
+      // try the next candidate
+    }
+  }
+
+  return null;
+}
+
 const ALLOWED_ORIGINS = [
   'https://theehideaway.netlify.app',
   'http://localhost:4321',
@@ -637,7 +667,7 @@ export const handler = async (event) => {
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'Service not configured.' }) };
   }
 
-  const model = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5';
+  const model = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-6';
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -668,16 +698,9 @@ export const handler = async (event) => {
       return { statusCode: 502, headers, body: JSON.stringify({ error: 'Empty response from enhancement service.' }) };
     }
 
-    let result;
-    try {
-      result = JSON.parse(text);
-    } catch {
-      const match = text.match(/\{[\s\S]*\}/);
-      if (match) {
-        result = JSON.parse(match[0]);
-      } else {
-        return { statusCode: 502, headers, body: JSON.stringify({ error: 'Could not parse enhancement result.' }) };
-      }
+    const result = parseModelJson(text);
+    if (!result) {
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Could not parse enhancement result.' }) };
     }
 
     return { statusCode: 200, headers, body: JSON.stringify(result) };
