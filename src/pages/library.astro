@@ -26,6 +26,7 @@ const postData = posts.map((p) => ({
         <div class="library-tag">Library</div>
         <h1>Everything in one place.</h1>
         <p>Filter by stage or format. Take what you need.</p>
+        <p class="library-resistance">Meeting resistance? Visit <a href="/spiral">The Spiral</a>.</p>
       </div>
     </div>
 
@@ -207,6 +208,22 @@ const postData = posts.map((p) => ({
   .library-header p {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.5);
+  }
+
+  .library-resistance {
+    margin-top: 0.7rem;
+  }
+
+  .library-resistance a {
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: border-color 0.2s;
+  }
+
+  .library-resistance a:hover {
+    border-bottom-color: var(--sage);
   }
 
   .library-body {
